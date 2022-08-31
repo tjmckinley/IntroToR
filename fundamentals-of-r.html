@@ -1,0 +1,1629 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>3 Fundamentals of R | Introduction to R</title>
+  <meta name="description" content="3 Fundamentals of R | Introduction to R Tutorial" />
+  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="3 Fundamentals of R | Introduction to R" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="3 Fundamentals of R | Introduction to R Tutorial" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="3 Fundamentals of R | Introduction to R" />
+  
+  <meta name="twitter:description" content="3 Fundamentals of R | Introduction to R Tutorial" />
+  
+
+<meta name="author" content="TJ McKinley" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="getting-started-in-r.html"/>
+<link rel="next" href="programming-in-r.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script language="javascript"> 
+    function toggle(id) {
+        var ele = document.getElementById("toggleText" + id);
+        var text = document.getElementById("displayText" + id);
+        var buttonText = text.innerHTML.replace("Show: ", "");
+        buttonText = buttonText.replace("Hide: ", "");
+        if(ele.style.display == "block") {
+            ele.style.display = "none";
+            text.innerHTML = "Show: " + buttonText;
+        } else {
+            ele.style.display = "block";
+            text.innerHTML = "Hide: " + buttonText;
+        }
+    } 
+</script>
+
+<script language="javascript">
+    function openCode(evt, codeName, id) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent" + id);
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablinks" + id);
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        document.getElementById(codeName).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
+</script>
+
+<script language="javascript">
+    function hide(id){
+        document.getElementById(id).style.display = "none";
+    }
+</script>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i>Acknowledgements</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#recommended-reading"><i class="fa fa-check"></i>Recommended reading</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#structure-of-this-workshop"><i class="fa fa-check"></i>Structure of this workshop</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#tasks"><i class="fa fa-check"></i>Tasks</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="whatIsR.html"><a href="whatIsR.html"><i class="fa fa-check"></i><b>1</b> What is R?</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="whatIsR.html"><a href="whatIsR.html#installing-r-and-rstudio"><i class="fa fa-check"></i><b>1.1</b> Installing R and RStudio</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="getting-started-in-r.html"><a href="getting-started-in-r.html"><i class="fa fa-check"></i><b>2</b> Getting Started in R</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="getting-started-in-r.html"><a href="getting-started-in-r.html#rstudio"><i class="fa fa-check"></i><b>2.1</b> RStudio</a></li>
+<li class="chapter" data-level="2.2" data-path="getting-started-in-r.html"><a href="getting-started-in-r.html#cheat-sheets"><i class="fa fa-check"></i><b>2.2</b> Cheat Sheets</a></li>
+<li class="chapter" data-level="2.3" data-path="getting-started-in-r.html"><a href="getting-started-in-r.html#setup"><i class="fa fa-check"></i><b>2.3</b> Setting up an R session</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="getting-started-in-r.html"><a href="getting-started-in-r.html#console-pane"><i class="fa fa-check"></i><b>2.3.1</b> Console Pane</a></li>
+<li class="chapter" data-level="2.3.2" data-path="getting-started-in-r.html"><a href="getting-started-in-r.html#script"><i class="fa fa-check"></i><b>2.3.2</b> Script pane and R scripts</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="getting-started-in-r.html"><a href="getting-started-in-r.html#packages"><i class="fa fa-check"></i><b>2.4</b> R packages</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="getting-started-in-r.html"><a href="getting-started-in-r.html#installing-archived-versions-of-a-package"><i class="fa fa-check"></i><b>2.4.1</b> Installing archived versions of a package</a></li>
+<li class="chapter" data-level="2.4.2" data-path="getting-started-in-r.html"><a href="getting-started-in-r.html#development-packages"><i class="fa fa-check"></i><b>2.4.2</b> Development packages</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="fundamentals-of-r.html"><a href="fundamentals-of-r.html"><i class="fa fa-check"></i><b>3</b> Fundamentals of R</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="fundamentals-of-r.html"><a href="fundamentals-of-r.html#variables-in-r"><i class="fa fa-check"></i><b>3.1</b> Variables in R</a></li>
+<li class="chapter" data-level="3.2" data-path="fundamentals-of-r.html"><a href="fundamentals-of-r.html#functions-in-r"><i class="fa fa-check"></i><b>3.2</b> Functions in R</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="fundamentals-of-r.html"><a href="fundamentals-of-r.html#nested"><i class="fa fa-check"></i><b>3.2.1</b> Nesting functions</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="fundamentals-of-r.html"><a href="fundamentals-of-r.html#help"><i class="fa fa-check"></i><b>3.3</b> Help files</a></li>
+<li class="chapter" data-level="3.4" data-path="fundamentals-of-r.html"><a href="fundamentals-of-r.html#objects-in-r"><i class="fa fa-check"></i><b>3.4</b> Objects in R</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="fundamentals-of-r.html"><a href="fundamentals-of-r.html#vectors"><i class="fa fa-check"></i><b>3.4.1</b> Vectors</a></li>
+<li class="chapter" data-level="3.4.2" data-path="fundamentals-of-r.html"><a href="fundamentals-of-r.html#convert"><i class="fa fa-check"></i><b>3.4.2</b> Conversions between object types</a></li>
+<li class="chapter" data-level="3.4.3" data-path="fundamentals-of-r.html"><a href="fundamentals-of-r.html#matrix"><i class="fa fa-check"></i><b>3.4.3</b> Matrices</a></li>
+<li class="chapter" data-level="3.4.4" data-path="fundamentals-of-r.html"><a href="fundamentals-of-r.html#lists"><i class="fa fa-check"></i><b>3.4.4</b> Lists</a></li>
+<li class="chapter" data-level="3.4.5" data-path="fundamentals-of-r.html"><a href="fundamentals-of-r.html#dataframes"><i class="fa fa-check"></i><b>3.4.5</b> Data frames</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="fundamentals-of-r.html"><a href="fundamentals-of-r.html#save"><i class="fa fa-check"></i><b>3.5</b> Saving outputs</a></li>
+<li class="chapter" data-level="3.6" data-path="fundamentals-of-r.html"><a href="fundamentals-of-r.html#reading-in-data"><i class="fa fa-check"></i><b>3.6</b> Reading in data</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="programming-in-r.html"><a href="programming-in-r.html"><i class="fa fa-check"></i><b>4</b> Programming in R</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="programming-in-r.html"><a href="programming-in-r.html#loops"><i class="fa fa-check"></i><b>4.1</b> Loops</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="programming-in-r.html"><a href="programming-in-r.html#for-loops"><i class="fa fa-check"></i><b>4.1.1</b> <code>for</code> loops</a></li>
+<li class="chapter" data-level="4.1.2" data-path="programming-in-r.html"><a href="programming-in-r.html#while-loops"><i class="fa fa-check"></i><b>4.1.2</b> <code>while</code> loops</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="programming-in-r.html"><a href="programming-in-r.html#conditional-statements"><i class="fa fa-check"></i><b>4.2</b> Conditional statements</a></li>
+<li class="chapter" data-level="4.3" data-path="programming-in-r.html"><a href="programming-in-r.html#user-defined-functions"><i class="fa fa-check"></i><b>4.3</b> User defined functions</a></li>
+<li class="chapter" data-level="4.4" data-path="programming-in-r.html"><a href="programming-in-r.html#using-apply-functions"><i class="fa fa-check"></i><b>4.4</b> Using <code>apply()</code> functions</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="programming-in-r.html"><a href="programming-in-r.html#apply"><i class="fa fa-check"></i><b>4.4.1</b> <code>apply()</code></a></li>
+<li class="chapter" data-level="4.4.2" data-path="programming-in-r.html"><a href="programming-in-r.html#lapply-and-sapply"><i class="fa fa-check"></i><b>4.4.2</b> <code>lapply()</code> and <code>sapply()</code></a></li>
+<li class="chapter" data-level="4.4.3" data-path="programming-in-r.html"><a href="programming-in-r.html#tapply"><i class="fa fa-check"></i><b>4.4.3</b> <code>tapply()</code></a></li>
+</ul></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introduction to R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="fundamentals-of-r" class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number">3</span> Fundamentals of R<a href="fundamentals-of-r.html#fundamentals-of-r" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="variables-in-r" class="section level2 hasAnchor" number="3.1">
+<h2><span class="header-section-number">3.1</span> Variables in R<a href="fundamentals-of-r.html#variables-in-r" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>R makes use of symbolic variables, i.e. words or letters that can be used to represent or store other values or objects. We will use the assignment operator <code>&lt;-</code> to ‘assign’ a value (or object) to a given word (or letter). Run the following commands to see how this works (don’t worry about the comments, these are for your understanding):</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="fundamentals-of-r.html#cb20-1" aria-hidden="true"></a><span class="co">## assign to x the value 5</span></span>
+<span id="cb20-2"><a href="fundamentals-of-r.html#cb20-2" aria-hidden="true"></a>x &lt;-<span class="st"> </span><span class="dv">5</span> </span>
+<span id="cb20-3"><a href="fundamentals-of-r.html#cb20-3" aria-hidden="true"></a></span>
+<span id="cb20-4"><a href="fundamentals-of-r.html#cb20-4" aria-hidden="true"></a><span class="co">## print the value assigned to the </span></span>
+<span id="cb20-5"><a href="fundamentals-of-r.html#cb20-5" aria-hidden="true"></a><span class="co">## variable x to the screen</span></span>
+<span id="cb20-6"><a href="fundamentals-of-r.html#cb20-6" aria-hidden="true"></a>x </span></code></pre></div>
+<pre><code>## [1] 5</code></pre>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="fundamentals-of-r.html#cb22-1" aria-hidden="true"></a><span class="co">## we can also assign text to a variable</span></span>
+<span id="cb22-2"><a href="fundamentals-of-r.html#cb22-2" aria-hidden="true"></a>y &lt;-<span class="st"> &quot;Hello There&quot;</span> </span>
+<span id="cb22-3"><a href="fundamentals-of-r.html#cb22-3" aria-hidden="true"></a></span>
+<span id="cb22-4"><a href="fundamentals-of-r.html#cb22-4" aria-hidden="true"></a><span class="co">## print y</span></span>
+<span id="cb22-5"><a href="fundamentals-of-r.html#cb22-5" aria-hidden="true"></a>y</span></code></pre></div>
+<pre><code>## [1] &quot;Hello There&quot;</code></pre>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="fundamentals-of-r.html#cb24-1" aria-hidden="true"></a><span class="co">## we can re-assign variables</span></span>
+<span id="cb24-2"><a href="fundamentals-of-r.html#cb24-2" aria-hidden="true"></a>y &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="dv">10</span>)</span>
+<span id="cb24-3"><a href="fundamentals-of-r.html#cb24-3" aria-hidden="true"></a></span>
+<span id="cb24-4"><a href="fundamentals-of-r.html#cb24-4" aria-hidden="true"></a><span class="co">## or assign a variable in terms </span></span>
+<span id="cb24-5"><a href="fundamentals-of-r.html#cb24-5" aria-hidden="true"></a><span class="co">## of other variables</span></span>
+<span id="cb24-6"><a href="fundamentals-of-r.html#cb24-6" aria-hidden="true"></a>ziggy &lt;-<span class="st"> </span>x <span class="op">+</span><span class="st"> </span>y</span>
+<span id="cb24-7"><a href="fundamentals-of-r.html#cb24-7" aria-hidden="true"></a></span>
+<span id="cb24-8"><a href="fundamentals-of-r.html#cb24-8" aria-hidden="true"></a><span class="co">## print variable &quot;ziggy&quot;</span></span>
+<span id="cb24-9"><a href="fundamentals-of-r.html#cb24-9" aria-hidden="true"></a>ziggy</span></code></pre></div>
+<pre><code>## [1] 8.162278</code></pre>
+<p>You will notice that as we create each of these variables, they begin to appear in the <strong>environment</strong> pane in the top right-hand side of the RStudio window. This shows the current R <strong>workspace</strong>, which is a collection of objects that R stores in memory. We can remove objects from the workspace using the <code>rm()</code> function e.g.</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="fundamentals-of-r.html#cb26-1" aria-hidden="true"></a><span class="co">## remove the variables x and y</span></span>
+<span id="cb26-2"><a href="fundamentals-of-r.html#cb26-2" aria-hidden="true"></a><span class="kw">rm</span>(x, y)</span></code></pre></div>
+<p>Notice that <code>x</code> and <code>y</code> have now disappeared from the workspace. The variable <code>ziggy</code> still contains the correct answer though (these are not <strong><em>relative</em></strong> objects, such as the macros assigned in a program like Excel).</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="fundamentals-of-r.html#cb27-1" aria-hidden="true"></a>ziggy</span></code></pre></div>
+<pre><code>## [1] 8.162278</code></pre>
+<p>Another way of visualising the working directory is to use the <code>ls()</code> function, which lists all objects currently in the workspace e.g.</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="fundamentals-of-r.html#cb29-1" aria-hidden="true"></a><span class="kw">ls</span>()</span></code></pre></div>
+<pre><code>## [1] &quot;ziggy&quot;</code></pre>
+<blockquote>
+<p>Names of variables can be chosen quite freely in R. They can be built from letters, digits and other characters, such as <code>_</code>. They can’t, however, start with a digit or a <code>.</code> followed by a digit. Names are <strong>case sensitive</strong> and so <code>height</code> is a different variable from <code>Height</code>. Try to choose <strong>informative</strong> variable names where possible (<code>height</code> is more informative than <code>x</code> when talking about heights for example).</p>
+</blockquote>
+<blockquote>
+<p>Try to use avoid spaces between words in your variable names. Underscores are much safer<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>. Try to avoid using long words (since you will have to type them out each time you want to access the corresponding elements—although RStudio does have <em>autocomplete</em> functionality). Often I will try to convert as much to lower case as possible. If you do need to include multiple words try to use an underscore <code>_</code> (e.g. <code>child_heights</code>), or some people prefer to use something like <a href="https://en.wikipedia.org/wiki/Camel_case">CamelCase</a> (e.g. <code>childHeights</code> or <code>ChildHeights</code>). Use whatever you prefer but try to be <strong>consistent</strong>.</p>
+</blockquote>
+</div>
+<div id="functions-in-r" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> Functions in R<a href="fundamentals-of-r.html#functions-in-r" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Next we need to understand how to do more complicated things in R. For this we need functions. This section illustrates how R’s inbuilt functions work. Most commands that are used in R require the use of functions. These are very similar to mathematical functions (such as <code>log(x)</code>), in that they require both the name of the function (i.e. <code>log</code>) and some <strong>arguments</strong> (i.e. <code>x</code>). However a lot of functions in R have multiple arguments which can be of completely different types.</p>
+<p>The format is that a function name is followed by a set of parentheses containing the arguments. For example, if we type <code>seq(0, 3, 0.5)</code>, the function name is <code>seq</code> and the specified arguments are <code>0</code>, <code>3</code> and <code>0.5</code>. <code>seq()</code> is an inbuilt R function that generates sequences of numbers, and we’re going to continue to use it to illustrate how functions work. Try typing in the command:</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="fundamentals-of-r.html#cb31-1" aria-hidden="true"></a><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">3</span>, <span class="fl">0.5</span>)</span></code></pre></div>
+<pre><code>## [1] 0.0 0.5 1.0 1.5 2.0 2.5 3.0</code></pre>
+<p>You can see that this function produces a sequence that starts at 0, ends at 3 and has steps of 0.5. Spaces before the parentheses or between the arguments are not important when writing functions so <code>seq(0,3,0.5)</code> will work just as well as <code>seq    (0,    3,    0.5)</code>. However, as stated <a href="getting-started-in-r.html#legible">earlier</a>, I think spaces in sensible places can make the code much more legible i.e. <code>seq(0, 3, 0.5)</code> is better than either of the above options.</p>
+<p>All functions in R have <strong>defaults</strong> for the majority of their arguments (some functions have dozens of arguments, and having default values avoids you having to specify them all every time you use the function). For example, the <code>seq()</code> function has the following four main arguments (in this order):</p>
+<table>
+<colgroup>
+<col width="4%" />
+<col width="95%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Argument</th>
+<th align="center">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><code>from, to</code></td>
+<td align="center">the starting and (maximal) end values of the sequence. Of length 1 unless just <code>from</code> is supplied as an unnamed argument.</td>
+</tr>
+<tr class="even">
+<td align="center"><code>by</code></td>
+<td align="center">number: increment of the sequence.</td>
+</tr>
+<tr class="odd">
+<td align="center"><code>length.out</code></td>
+<td align="center">desired length of the sequence. A non-negative number, which for seq and seq.int will be rounded up if fractional.</td>
+</tr>
+<tr class="even">
+<td align="center"><code>along.with</code></td>
+<td align="center">take the length from the length of this argument.</td>
+</tr>
+</tbody>
+</table>
+<p>When we write <code>seq(0, 3, 0.5)</code> R assumes that the first argument corresponds to <code>from</code>, the second argument corresponds to <code>to</code> and the third argument corresponds to <code>by</code>. This is known as <strong>positional matching</strong>. This means that <code>seq(0, 3, 0.5)</code> will produce a vector consisting of the sequence of numbers starting at 0, ending at 3 by adding 0.5 each time. If we write <code>seq(10, 0, 0.5)</code>, then R will attempt to create a sequence starting at 10, ending at 0 by adding 0.5 each time.</p>
+<div class="panel panel-default">
+<div class="panel-heading">
+Task
+</div>
+<div class="panel-body">
+Try typing <code>seq(10, 0, 0.5)</code>. R returns an error. Why?
+</div>
+</div>
+<button id="displayTextunnamed-chunk-26" onclick="javascript:toggle(&#39;unnamed-chunk-26&#39;);">
+Show: Solution
+</button>
+<div id="toggleTextunnamed-chunk-26" style="display: none">
+<div class="panel panel-default">
+<div class="panel-heading panel-heading1">
+Solution
+</div>
+<div class="panel-body">
+R returns an error because you’ve asked the <code>seq()</code> function to move from 10 to 0 by adding 0.5 each time, which it clearly can’t do. The step size would have to be -0.5 in order to generate decreasing numbers.
+</div>
+</div>
+</div>
+<p>The other type of matching is called <strong>named matching</strong> and this would allow you to write <code>seq(from = 0, to = 3, by = 0.5)</code> or <code>seq(to = 3, from = 0, by = 0.5)</code> as equivalent function commands (i.e. the <strong>order</strong> of the arguments <strong>doesn’t matter</strong> if using <em>named</em> matching).</p>
+<p>Using named matching also allows us to access the other argument: <code>length.out</code> if we wanted to use it, though you should recognise that you cannot, in general, use all four arguments in this case to specify a vector. Why not?</p>
+<p>In fact, this command needs three arguments to work, and it doesn’t matter which three of the four arguments you use. To find out what arguments a function can take and what they mean use the <code>?FUNCTION</code> syntax (where you replace <code>FUNCTION</code> with whichever function you’re interested in e.g. <code>?seq</code> or <code>?atan</code>). This will open the internal R help file for the function. The <a href="fundamentals-of-r.html#help">Help</a> section of this workshop contains detailed information on these help files.</p>
+<p>Being able to access these internal help files will be of particular help for all of the statistical functions we will want to use which generally have many arguments.</p>
+<div class="panel panel-default">
+<div class="panel-heading">
+Task
+</div>
+<div class="panel-body">
+<p>Use the R function <code>seq()</code> to create the following sequences:</p>
+<ol style="list-style-type: decimal">
+<li>2, 4, 6, …, 30.</li>
+<li>A sequence of 14 numbers starting at -2.5 and ending at 15.34.</li>
+<li>A sequence of 7 numbers starting at 0, increasing in increments of 0.04.</li>
+<li>A sequence starting at 101, ending at -20, in decrements of 11.
+</div>
+</div></li>
+</ol>
+<button id="displayTextunnamed-chunk-28" onclick="javascript:toggle(&#39;unnamed-chunk-28&#39;);">
+Show: Solution
+</button>
+<div id="toggleTextunnamed-chunk-28" style="display: none">
+<div class="panel panel-default">
+<div class="panel-heading panel-heading1">
+Solution
+</div>
+<div class="panel-body">
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="fundamentals-of-r.html#cb33-1" aria-hidden="true"></a><span class="kw">seq</span>(<span class="dv">2</span>, <span class="dv">30</span>, <span class="dt">by =</span> <span class="dv">2</span>)</span>
+<span id="cb33-2"><a href="fundamentals-of-r.html#cb33-2" aria-hidden="true"></a><span class="co">## 2.</span></span>
+<span id="cb33-3"><a href="fundamentals-of-r.html#cb33-3" aria-hidden="true"></a><span class="kw">seq</span>(<span class="op">-</span><span class="fl">2.5</span>, <span class="fl">15.34</span>, <span class="dt">length.out =</span> <span class="dv">14</span>)</span>
+<span id="cb33-4"><a href="fundamentals-of-r.html#cb33-4" aria-hidden="true"></a><span class="co">## 3.</span></span>
+<span id="cb33-5"><a href="fundamentals-of-r.html#cb33-5" aria-hidden="true"></a><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dt">by =</span> <span class="fl">0.04</span>, <span class="dt">length.out =</span> <span class="dv">7</span>)</span>
+<span id="cb33-6"><a href="fundamentals-of-r.html#cb33-6" aria-hidden="true"></a><span class="co">## 4.</span></span>
+<span id="cb33-7"><a href="fundamentals-of-r.html#cb33-7" aria-hidden="true"></a><span class="kw">seq</span>(<span class="dv">101</span>, <span class="dv">-20</span>, <span class="dt">by =</span> <span class="dv">-11</span>)</span></code></pre></div>
+</div>
+</div>
+</div>
+<div id="nested" class="section level3 hasAnchor" number="3.2.1">
+<h3><span class="header-section-number">3.2.1</span> Nesting functions<a href="fundamentals-of-r.html#nested" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>A useful feature of R is its ability to <strong>nest</strong> functions. This can help make the code more concise and avoids the need to create lots of temporary variables. Nonetheless, if used too extensively then this can render code difficult to interpret, so a balance is necessary. For example,</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="fundamentals-of-r.html#cb34-1" aria-hidden="true"></a><span class="kw">exp</span>(<span class="kw">sqrt</span>(<span class="dv">10</span>))</span></code></pre></div>
+<pre><code>## [1] 23.62434</code></pre>
+<p>This is a simple nested function, since <code>sqrt(10)</code> produces a single number, which is then used as an argument to the <code>exp()</code> function. Mathematically, this gives <span class="math inline">\(e^{\sqrt{10}}\)</span>. We could have also done this in two steps, but this would have involved creating a temporary variable to store the result of the sum:</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="fundamentals-of-r.html#cb36-1" aria-hidden="true"></a>x &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="dv">10</span>)</span>
+<span id="cb36-2"><a href="fundamentals-of-r.html#cb36-2" aria-hidden="true"></a><span class="kw">exp</span>(x)</span></code></pre></div>
+<pre><code>## [1] 23.62434</code></pre>
+<p>To understand nested functions, think about evaluating the <strong>inner</strong> functions first, seeing what they output and then how that slots into the next function. We will see an example of this <a href="fundamentals-of-r.html#nestex">later</a>.</p>
+</div>
+</div>
+<div id="help" class="section level2 hasAnchor" number="3.3">
+<h2><span class="header-section-number">3.3</span> Help files<a href="fundamentals-of-r.html#help" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>It is a requirement of R packages that any function made available to an end user as part of a package must be documented in a <strong>help file</strong>. As such, the <code>?</code> command is simply a way to get more information on any given function.
+For example, if you wanted to know more about how to use the <code>hist</code> function (this function is used for plotting histograms), then you could type:</p>
+<pre><code>?hist</code></pre>
+<p>This will produce something like Figure <a href="fundamentals-of-r.html#fig:histhelp">3.1</a> to appear in the in the bottom-right pane.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:histhelp"></span>
+<img src="images/histhelp.png" alt="Help file for the `hist()` function" width="60%" />
+<p class="caption">
+Figure 3.1: Help file for the <code>hist()</code> function
+</p>
+</div>
+<p>This new window contains all of the information you need to understand how to use the <code>hist()</code> function. Although these help files can seem daunting (and not particularly helpful) at first, once you get used to them they will provide the route for your continued exploration of R. Help files provide all of the details that the author of the command saw fit to include. They all aim to be comprehensive but some authors assume that you are more
+familiar with what’s going on than others. Most help files will have the following sections:</p>
+<table>
+<caption><span id="tab:helpfile">Table 3.1: </span> General structure of R helpfiles</caption>
+<colgroup>
+<col width="16%" />
+<col width="83%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Section</th>
+<th align="center">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Usage:</td>
+<td align="center">This will show you the minimum required arguments and also what the default value are for each of the optional arguments. In this case only <code>x</code> is a required argument and all of the others are optional.</td>
+</tr>
+<tr class="even">
+<td align="center">Arguments:</td>
+<td align="center">This gives an explanation of what each argument does and what sort of data type it should be. In this case the argument <code>x</code> needs to be a numerical vector.</td>
+</tr>
+<tr class="odd">
+<td align="center">Details:</td>
+<td align="center">This section tells you what the function should do along with any subtleties in its usage or clarifications.</td>
+</tr>
+<tr class="even">
+<td align="center">Value:</td>
+<td align="center">This tells you what actually happens when you run the function and specifically what sort of R object the function produces. In this case it produces a special <code>histogram</code> object (which is actually just a normal list with certain specific components).</td>
+</tr>
+<tr class="odd">
+<td align="center">References:</td>
+<td align="center">This gives you some selected text books that the author feels explains the theory behind the function in greater detail.</td>
+</tr>
+<tr class="even">
+<td align="center">See Also:</td>
+<td align="center">This should be a list of other R commands that are related to the current function. They might be of more use to you, or their help files might be better written and clarify what you’re trying to do.</td>
+</tr>
+<tr class="odd">
+<td align="center">Examples:</td>
+<td align="center">This should be a set of R commands that you can copy-and-paste into either a script file or the console pane. These should give you a practical example of how to use the function in several different settings.</td>
+</tr>
+</tbody>
+</table>
+<p>If you’re really stuck, there is an international community of R users who regularly post questions and answers on advanced topics. In the Help menu, choose ‘search r-project.org’ and work through the search pages. Beware though, these are busy people who will often ignore directly emailed requests for help. Ask your resident experts first, before e-mailing the R-search email lists!</p>
+<p>I also tend to succeed mostly by Googling the problem. For example, Googling ‘R importing data’ finds me this rather excellent tutorial: <a href="http://www.r-tutor.com/r-introduction/data-frame/data-import">http://www.r-tutor.com/r-introduction/data-frame/data-import</a>.</p>
+<div style="page-break-after: always;"></div>
+</div>
+<div id="objects-in-r" class="section level2 hasAnchor" number="3.4">
+<h2><span class="header-section-number">3.4</span> Objects in R<a href="fundamentals-of-r.html#objects-in-r" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>R defines various types of object (and allows you to define your own if you so wish). We will explore the most common object types below.</p>
+<div id="vectors" class="section level3 hasAnchor" number="3.4.1">
+<h3><span class="header-section-number">3.4.1</span> Vectors<a href="fundamentals-of-r.html#vectors" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong>Vectors</strong> are fundamental R objects. In fact, we have already seen them at work in earlier examples. For instance, notice that if we type the number <code>10</code> into the command prompt, the output when R prints this to the screen is prefixed with a <code>[1]</code>:</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="fundamentals-of-r.html#cb39-1" aria-hidden="true"></a><span class="dv">10</span></span></code></pre></div>
+<pre><code>## [1] 10</code></pre>
+<p>This shows that the output is a <strong>vector</strong> of length 1. The <code>ziggy</code> variable we created earlier is also a vector of length 1:</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="fundamentals-of-r.html#cb41-1" aria-hidden="true"></a>ziggy</span></code></pre></div>
+<pre><code>## [1] 8.162278</code></pre>
+<p>Note that vectors do not have to be numerical in value e.g.</p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="fundamentals-of-r.html#cb43-1" aria-hidden="true"></a><span class="st">&quot;somewords&quot;</span></span></code></pre></div>
+<pre><code>## [1] &quot;somewords&quot;</code></pre>
+<p>is also a vector of length 1. R distinguishes between different ‘types’ of vector, with the four main types being:</p>
+<ul>
+<li><code>numeric</code> where each element is a number (either integer or decimal),</li>
+<li><code>character</code> where each element is a word or letter, and</li>
+<li><code>factor</code> where each element is a word or letter, but with some additional “grouping” information, and</li>
+<li><code>logical</code> where each element is either <code>TRUE</code> or <code>FALSE</code> (equivalently coded as <code>T</code> or <code>F</code>).</li>
+</ul>
+<p>In this section we will look at several different commands which produce vectors and then see how we can manipulate these objects in R.</p>
+<div id="creating-vectors" class="section level4 hasAnchor" number="3.4.1.1">
+<h4><span class="header-section-number">3.4.1.1</span> Creating vectors<a href="fundamentals-of-r.html#creating-vectors" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Probably the most common ways of creating vectors are to use the <code>c()</code>, <code>seq()</code> and <code>:</code> commands. Of these, <code>:</code> creates integer sequences, <code>seq()</code> creates structured sequences (only useful for numeric vectors), and <code>c()</code> is short-hand for <em>concatenate</em>, and it binds together all of the elements that you put inside the brackets to make a single vector.</p>
+<p>Run the following commands to see how we can create different types of vectors:</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="fundamentals-of-r.html#cb45-1" aria-hidden="true"></a><span class="dv">1</span><span class="op">:</span><span class="dv">5</span></span>
+<span id="cb45-2"><a href="fundamentals-of-r.html#cb45-2" aria-hidden="true"></a><span class="dv">6</span><span class="op">:</span><span class="dv">2</span></span></code></pre></div>
+<pre><code>## [1] 1 2 3 4 5
+## [1] 6 5 4 3 2</code></pre>
+<p>Notice that brackets can be important, for example, note the differences below.</p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="fundamentals-of-r.html#cb47-1" aria-hidden="true"></a><span class="dv">-4</span><span class="op">:</span><span class="dv">1</span></span>
+<span id="cb47-2"><a href="fundamentals-of-r.html#cb47-2" aria-hidden="true"></a><span class="op">-</span>(<span class="dv">4</span><span class="op">:</span><span class="dv">1</span>)</span></code></pre></div>
+<pre><code>## [1] -4 -3 -2 -1  0  1
+## [1] -4 -3 -2 -1</code></pre>
+<p>The first line above creates an integer sequence from -4 to 1, and the second creates one from -4 to -1. The <code>seq()</code> command we saw earlier, and here are some more examples:</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="fundamentals-of-r.html#cb49-1" aria-hidden="true"></a><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dt">by =</span> <span class="fl">0.1</span>)</span>
+<span id="cb49-2"><a href="fundamentals-of-r.html#cb49-2" aria-hidden="true"></a><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dt">length =</span> <span class="dv">6</span>)</span>
+<span id="cb49-3"><a href="fundamentals-of-r.html#cb49-3" aria-hidden="true"></a><span class="kw">seq</span>(<span class="dv">10</span>, <span class="dv">5</span>, <span class="dt">by =</span> <span class="fl">-0.5</span>)</span></code></pre></div>
+<pre><code>##  [1] 0.0 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1.0
+## [1] 0.0 0.2 0.4 0.6 0.8 1.0
+##  [1] 10.0  9.5  9.0  8.5  8.0  7.5  7.0  6.5  6.0  5.5  5.0</code></pre>
+<p>The <code>c()</code> function is very useful for concatenating non-sequential numbers or vectors of other data types e.g.</p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="fundamentals-of-r.html#cb51-1" aria-hidden="true"></a><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>)</span>
+<span id="cb51-2"><a href="fundamentals-of-r.html#cb51-2" aria-hidden="true"></a><span class="kw">c</span>(<span class="fl">0.1</span>, <span class="dv">-6</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb51-3"><a href="fundamentals-of-r.html#cb51-3" aria-hidden="true"></a><span class="kw">c</span>(<span class="st">&quot;bob&quot;</span>, <span class="st">&quot;sam&quot;</span>, <span class="st">&quot;ted&quot;</span>)</span></code></pre></div>
+<pre><code>## [1] 1 3 5 7
+## [1]  0.1 -6.0  1.0  0.0
+## [1] &quot;bob&quot; &quot;sam&quot; &quot;ted&quot;</code></pre>
+<blockquote>
+<p>Notice that we needed to use double-quotes to signify <code>character</code> types e.g. <code>c("bob", "sam", "ted")</code>. Note that R does not distinguish between single or double-quotes, so <code>c('bob', 'sam', 'ted')</code> would have worked equally well.</p>
+</blockquote>
+<p>If you forget the quotes (e.g. <code>c(bob, sam, ted)</code>) then R would instead have looked for three <strong>objects</strong> called <code>bob</code>, <code>sam</code> and <code>ted</code> and tried to concatenate these together. If these objects do not exist, then R will return an error:</p>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="fundamentals-of-r.html#cb53-1" aria-hidden="true"></a><span class="kw">c</span>(bob, sam, ted)</span></code></pre></div>
+<pre><code>## Error in eval(expr, envir, enclos): object &#39;bob&#39; not found</code></pre>
+<p>To this end, it is worth noting that we can also use <code>c()</code> to concatenate objects that are of the same type together. For example:</p>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="fundamentals-of-r.html#cb55-1" aria-hidden="true"></a><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">-6</span>, ziggy)</span></code></pre></div>
+<pre><code>## [1]  1.000000 -6.000000  8.162278</code></pre>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="fundamentals-of-r.html#cb57-1" aria-hidden="true"></a><span class="kw">c</span>(ziggy, <span class="kw">seq</span>(<span class="dv">3</span>, <span class="dv">6</span>, <span class="dt">length =</span> <span class="dv">5</span>))</span></code></pre></div>
+<pre><code>## [1] 8.162278 3.000000 3.750000 4.500000 5.250000 6.000000</code></pre>
+<p>(In the example above we have used <a href="fundamentals-of-r.html#nested"><strong>nested</strong></a> functions to make the code more concise.) If we try to concatenate objects of a different type, R will either return an error, or it will convert one of the objects into the same class as the other. For example,</p>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="fundamentals-of-r.html#cb59-1" aria-hidden="true"></a><span class="kw">c</span>(<span class="kw">c</span>(<span class="st">&quot;bob&quot;</span>, <span class="st">&quot;sam&quot;</span>, <span class="st">&quot;ted&quot;</span>), ziggy)</span></code></pre></div>
+<pre><code>## [1] &quot;bob&quot;              &quot;sam&quot;              &quot;ted&quot;              &quot;8.16227766016838&quot;</code></pre>
+<p>(Here we use <a href="fundamentals-of-r.html#nested"><strong>nested</strong></a> <code>c()</code> functions to first create a <code>character</code> vector out of the strings <code>"bob"</code>, <code>"sam"</code> and <code>"ted"</code>, and then to concatenate this with the object <code>ziggy</code>.) Notice that the concatenated vector is a <code>character</code> vector (notice the <strong>double-quotes</strong> around <code>"8.16227766016838"</code>), indicating that R has converted the elements of <code>ziggy</code> into <code>characters</code> in order to concatenate them with a <code>character</code> vector.</p>
+<blockquote>
+<p>R will always convert to the most complex object type: so a combination of <code>character</code> and <code>numeric</code> values will be converted to a <code>character</code>.</p>
+</blockquote>
+<p>Notice that R has not changed the value of the object <code>ziggy</code>—if we print <code>ziggy</code> to the screen we can see it is still a <code>numeric</code> vector:</p>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="fundamentals-of-r.html#cb61-1" aria-hidden="true"></a>ziggy</span></code></pre></div>
+<pre><code>## [1] 8.162278</code></pre>
+<p>Rather, it created a copy of <code>ziggy</code> which it converted into a <code>character</code> before concatenating. In order to change the value of an object permanently, we need to reassign the object. For example, the function <code>as.character()</code> will convert a <code>numeric</code> vector into a <code>character</code> vector without changing the object e.g.</p>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="fundamentals-of-r.html#cb63-1" aria-hidden="true"></a><span class="kw">as.character</span>(ziggy)</span></code></pre></div>
+<pre><code>## [1] &quot;8.16227766016838&quot;</code></pre>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="fundamentals-of-r.html#cb65-1" aria-hidden="true"></a>ziggy</span></code></pre></div>
+<pre><code>## [1] 8.162278</code></pre>
+<p>To reassign it we can pass the output of the function and overwrite the original object using the assignment operator <code>&lt;-</code> e.g.</p>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="fundamentals-of-r.html#cb67-1" aria-hidden="true"></a>ziggy &lt;-<span class="st"> </span><span class="kw">as.character</span>(ziggy)</span>
+<span id="cb67-2"><a href="fundamentals-of-r.html#cb67-2" aria-hidden="true"></a>ziggy</span></code></pre></div>
+<pre><code>## [1] &quot;8.16227766016838&quot;</code></pre>
+<p>We can see that now the object <code>ziggy</code> has been changed to a <code>character</code> permanently.</p>
+<div class="panel panel-default">
+<div class="panel-heading">
+Task
+</div>
+<div class="panel-body">
+<p>Use the various vector creation commands to create the following sequences:</p>
+<ol style="list-style-type: decimal">
+<li>1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11.</li>
+<li>2, 4, 6, 8, 10, … , 50.</li>
+<li>All of the odd numbers from 17 through to 33.</li>
+<li>The letters of the days of the week (i.e. M, T, W, T, F, S, S).
+</div>
+</div></li>
+</ol>
+<button id="displayTextunnamed-chunk-46" onclick="javascript:toggle(&#39;unnamed-chunk-46&#39;);">
+Show: Solution
+</button>
+<div id="toggleTextunnamed-chunk-46" style="display: none">
+<div class="panel panel-default">
+<div class="panel-heading panel-heading1">
+Solution
+</div>
+<div class="panel-body">
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="fundamentals-of-r.html#cb69-1" aria-hidden="true"></a><span class="co">## 1.</span></span>
+<span id="cb69-2"><a href="fundamentals-of-r.html#cb69-2" aria-hidden="true"></a><span class="dv">1</span><span class="op">:</span><span class="dv">11</span></span>
+<span id="cb69-3"><a href="fundamentals-of-r.html#cb69-3" aria-hidden="true"></a><span class="co">## 1. (alternative)</span></span>
+<span id="cb69-4"><a href="fundamentals-of-r.html#cb69-4" aria-hidden="true"></a><span class="kw">seq</span>(<span class="dv">1</span>, <span class="dv">11</span>, <span class="dt">by =</span> <span class="dv">1</span>)</span>
+<span id="cb69-5"><a href="fundamentals-of-r.html#cb69-5" aria-hidden="true"></a><span class="co">## 2.</span></span>
+<span id="cb69-6"><a href="fundamentals-of-r.html#cb69-6" aria-hidden="true"></a><span class="kw">seq</span>(<span class="dv">2</span>, <span class="dv">50</span>, <span class="dt">by =</span> <span class="dv">2</span>)</span>
+<span id="cb69-7"><a href="fundamentals-of-r.html#cb69-7" aria-hidden="true"></a><span class="co">## 3.</span></span>
+<span id="cb69-8"><a href="fundamentals-of-r.html#cb69-8" aria-hidden="true"></a><span class="kw">seq</span>(<span class="dv">17</span>, <span class="dv">33</span>, <span class="dt">by =</span> <span class="dv">2</span>)</span>
+<span id="cb69-9"><a href="fundamentals-of-r.html#cb69-9" aria-hidden="true"></a><span class="co">## 4.</span></span>
+<span id="cb69-10"><a href="fundamentals-of-r.html#cb69-10" aria-hidden="true"></a><span class="kw">c</span>(<span class="st">&quot;M&quot;</span>, <span class="st">&quot;T&quot;</span>, <span class="st">&quot;W&quot;</span>, <span class="st">&quot;T&quot;</span>, <span class="st">&quot;F&quot;</span>, <span class="st">&quot;S&quot;</span>, <span class="st">&quot;S&quot;</span>)</span></code></pre></div>
+</div>
+</div>
+</div>
+</div>
+<div id="subsetting-and-re-arranging-vectors" class="section level4 hasAnchor" number="3.4.1.2">
+<h4><span class="header-section-number">3.4.1.2</span> Subsetting and re-arranging vectors<a href="fundamentals-of-r.html#subsetting-and-re-arranging-vectors" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>If we only want to get at certain elements of a vector then we need to be able to subset the vector. In R, square brackets <code>[]</code> are used to get subsets of a vector.</p>
+<blockquote>
+<p><strong>IMPORTANT</strong>: In R, objects are <strong>indexed</strong> such that the <strong>first</strong> element is element <code>1</code> (unlike C or Python for example, which indexes relative to <code>0</code>). In R the first element of <code>x</code> is <code>x[1]</code>, whereas in Python it would be <code>x[0]</code>.</p>
+<p>Note also that in Python the command <code>x[-1]</code> would extract the <strong>last</strong> element of the vector <code>x</code>, whereas in R the <code>-</code> is used to <strong>remove</strong> elements; hence <code>x[-1]</code> would <strong><em>remove</em></strong> the first element of <code>x</code>.</p>
+</blockquote>
+<div class="panel panel-default">
+<div class="panel-heading">
+Task
+</div>
+<div class="panel-body">
+<p>Copy the following commands into your script file and then run them in order to see how this works. Annotate each line using comments to describe what it is doing.</p>
+<pre><code>x &lt;- 1:5
+x[3]
+x[c(2, 3, 4)]
+x[1] &lt;- 17
+x[-3]
+w &lt;- x[-3]
+y &lt;- c(1, 5, 2, 4, 7)
+y[-c(3, 5)]
+y[c(1, 4, 5)]
+i &lt;- 1:3
+y[i]
+z &lt;- c(9, 10, 11)
+y[i] &lt;- z</code></pre>
+</div>
+</div>
+<button id="displayTextunnamed-chunk-48" onclick="javascript:toggle(&#39;unnamed-chunk-48&#39;);">
+Show: Solution
+</button>
+<div id="toggleTextunnamed-chunk-48" style="display: none">
+<div class="panel panel-default">
+<div class="panel-heading panel-heading1">
+Solution
+</div>
+<div class="panel-body">
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="fundamentals-of-r.html#cb71-1" aria-hidden="true"></a><span class="co">## generate a vector x of five elements from 1 to 5</span></span>
+<span id="cb71-2"><a href="fundamentals-of-r.html#cb71-2" aria-hidden="true"></a>x &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">5</span></span>
+<span id="cb71-3"><a href="fundamentals-of-r.html#cb71-3" aria-hidden="true"></a></span>
+<span id="cb71-4"><a href="fundamentals-of-r.html#cb71-4" aria-hidden="true"></a><span class="co">## extract the third element of x</span></span>
+<span id="cb71-5"><a href="fundamentals-of-r.html#cb71-5" aria-hidden="true"></a>x[<span class="dv">3</span>]</span>
+<span id="cb71-6"><a href="fundamentals-of-r.html#cb71-6" aria-hidden="true"></a></span>
+<span id="cb71-7"><a href="fundamentals-of-r.html#cb71-7" aria-hidden="true"></a><span class="co">## extract the 2, 3 and 4th elements of x</span></span>
+<span id="cb71-8"><a href="fundamentals-of-r.html#cb71-8" aria-hidden="true"></a>x[<span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>)]</span>
+<span id="cb71-9"><a href="fundamentals-of-r.html#cb71-9" aria-hidden="true"></a></span>
+<span id="cb71-10"><a href="fundamentals-of-r.html#cb71-10" aria-hidden="true"></a><span class="co">## change the first element of x to 17</span></span>
+<span id="cb71-11"><a href="fundamentals-of-r.html#cb71-11" aria-hidden="true"></a>x[<span class="dv">1</span>] &lt;-<span class="st"> </span><span class="dv">17</span></span>
+<span id="cb71-12"><a href="fundamentals-of-r.html#cb71-12" aria-hidden="true"></a></span>
+<span id="cb71-13"><a href="fundamentals-of-r.html#cb71-13" aria-hidden="true"></a><span class="co">## extract all elements of x except the third</span></span>
+<span id="cb71-14"><a href="fundamentals-of-r.html#cb71-14" aria-hidden="true"></a>x[<span class="op">-</span><span class="dv">3</span>]</span>
+<span id="cb71-15"><a href="fundamentals-of-r.html#cb71-15" aria-hidden="true"></a></span>
+<span id="cb71-16"><a href="fundamentals-of-r.html#cb71-16" aria-hidden="true"></a><span class="co">## extract all elements of x except the third</span></span>
+<span id="cb71-17"><a href="fundamentals-of-r.html#cb71-17" aria-hidden="true"></a><span class="co">## and save to new object w</span></span>
+<span id="cb71-18"><a href="fundamentals-of-r.html#cb71-18" aria-hidden="true"></a>w &lt;-<span class="st"> </span>x[<span class="op">-</span><span class="dv">3</span>]</span>
+<span id="cb71-19"><a href="fundamentals-of-r.html#cb71-19" aria-hidden="true"></a></span>
+<span id="cb71-20"><a href="fundamentals-of-r.html#cb71-20" aria-hidden="true"></a><span class="co">## create a vector of length 5 called y with</span></span>
+<span id="cb71-21"><a href="fundamentals-of-r.html#cb71-21" aria-hidden="true"></a><span class="co">## corresponding entries below</span></span>
+<span id="cb71-22"><a href="fundamentals-of-r.html#cb71-22" aria-hidden="true"></a>y &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">7</span>)</span>
+<span id="cb71-23"><a href="fundamentals-of-r.html#cb71-23" aria-hidden="true"></a></span>
+<span id="cb71-24"><a href="fundamentals-of-r.html#cb71-24" aria-hidden="true"></a><span class="co">## extract all elements of y except the third</span></span>
+<span id="cb71-25"><a href="fundamentals-of-r.html#cb71-25" aria-hidden="true"></a><span class="co">## and fifth</span></span>
+<span id="cb71-26"><a href="fundamentals-of-r.html#cb71-26" aria-hidden="true"></a>y[<span class="op">-</span><span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">5</span>)]</span>
+<span id="cb71-27"><a href="fundamentals-of-r.html#cb71-27" aria-hidden="true"></a></span>
+<span id="cb71-28"><a href="fundamentals-of-r.html#cb71-28" aria-hidden="true"></a><span class="co">## extract elements 1, 4 and 5 from y</span></span>
+<span id="cb71-29"><a href="fundamentals-of-r.html#cb71-29" aria-hidden="true"></a>y[<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">5</span>)]</span>
+<span id="cb71-30"><a href="fundamentals-of-r.html#cb71-30" aria-hidden="true"></a></span>
+<span id="cb71-31"><a href="fundamentals-of-r.html#cb71-31" aria-hidden="true"></a><span class="co">## create a vector i containing three elements:</span></span>
+<span id="cb71-32"><a href="fundamentals-of-r.html#cb71-32" aria-hidden="true"></a><span class="co">## 1, 2 and 3</span></span>
+<span id="cb71-33"><a href="fundamentals-of-r.html#cb71-33" aria-hidden="true"></a>i &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">3</span></span>
+<span id="cb71-34"><a href="fundamentals-of-r.html#cb71-34" aria-hidden="true"></a></span>
+<span id="cb71-35"><a href="fundamentals-of-r.html#cb71-35" aria-hidden="true"></a><span class="co">## extract elements 1, 2 and 3 from y</span></span>
+<span id="cb71-36"><a href="fundamentals-of-r.html#cb71-36" aria-hidden="true"></a>y[i]</span>
+<span id="cb71-37"><a href="fundamentals-of-r.html#cb71-37" aria-hidden="true"></a></span>
+<span id="cb71-38"><a href="fundamentals-of-r.html#cb71-38" aria-hidden="true"></a><span class="co">## create a vector z of length 3 with elements</span></span>
+<span id="cb71-39"><a href="fundamentals-of-r.html#cb71-39" aria-hidden="true"></a><span class="co">## 9, 10 and 11</span></span>
+<span id="cb71-40"><a href="fundamentals-of-r.html#cb71-40" aria-hidden="true"></a>z &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">9</span>, <span class="dv">10</span>, <span class="dv">11</span>)</span>
+<span id="cb71-41"><a href="fundamentals-of-r.html#cb71-41" aria-hidden="true"></a></span>
+<span id="cb71-42"><a href="fundamentals-of-r.html#cb71-42" aria-hidden="true"></a><span class="co">## replace elements 1, 2 and 3 in y with z</span></span>
+<span id="cb71-43"><a href="fundamentals-of-r.html#cb71-43" aria-hidden="true"></a>y[i] &lt;-<span class="st"> </span>z</span></code></pre></div>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+Task
+</div>
+<div class="panel-body">
+<p>Can you work out what the following functions do?</p>
+<ol style="list-style-type: decimal">
+<li><code>order(y)</code></li>
+<li><code>rev(y)</code></li>
+<li><code>sort(y)</code></li>
+</ol>
+Can you work out a way to sort <code>y</code> into decreasing order?
+</div>
+</div>
+<button id="displayTextunnamed-chunk-50" onclick="javascript:toggle(&#39;unnamed-chunk-50&#39;);">
+Show: Solution
+</button>
+<div id="toggleTextunnamed-chunk-50" style="display: none">
+<div class="panel panel-default">
+<div class="panel-heading panel-heading1">
+Solution
+</div>
+<div class="panel-body">
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="fundamentals-of-r.html#cb72-1" aria-hidden="true"></a><span class="co">## 1. this sorts the vector y into increasing order.</span></span>
+<span id="cb72-2"><a href="fundamentals-of-r.html#cb72-2" aria-hidden="true"></a><span class="kw">order</span>(y)</span>
+<span id="cb72-3"><a href="fundamentals-of-r.html#cb72-3" aria-hidden="true"></a><span class="co">## 2. this reverses the order of y.</span></span>
+<span id="cb72-4"><a href="fundamentals-of-r.html#cb72-4" aria-hidden="true"></a><span class="kw">rev</span>(y)</span>
+<span id="cb72-5"><a href="fundamentals-of-r.html#cb72-5" aria-hidden="true"></a><span class="co">## 3. this sorts the vector y into increasing order.</span></span>
+<span id="cb72-6"><a href="fundamentals-of-r.html#cb72-6" aria-hidden="true"></a><span class="kw">sort</span>(y)</span>
+<span id="cb72-7"><a href="fundamentals-of-r.html#cb72-7" aria-hidden="true"></a></span>
+<span id="cb72-8"><a href="fundamentals-of-r.html#cb72-8" aria-hidden="true"></a><span class="co">## there are various ways to sort `y` into decreasing order e.g.</span></span>
+<span id="cb72-9"><a href="fundamentals-of-r.html#cb72-9" aria-hidden="true"></a><span class="kw">sort</span>(y, <span class="dt">decreasing =</span> T)</span>
+<span id="cb72-10"><a href="fundamentals-of-r.html#cb72-10" aria-hidden="true"></a><span class="kw">rev</span>(<span class="kw">sort</span>(y))</span>
+<span id="cb72-11"><a href="fundamentals-of-r.html#cb72-11" aria-hidden="true"></a><span class="kw">order</span>(<span class="op">-</span>y)</span></code></pre></div>
+</div>
+</div>
+</div>
+</div>
+<div id="vecrep" class="section level4 hasAnchor" number="3.4.1.3">
+<h4><span class="header-section-number">3.4.1.3</span> Element-wise (or vectorised) operations<a href="fundamentals-of-r.html#vecrep" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>R performs most operations on vectors <strong>element-wise</strong> , meaning that it performs each calculation on each element of a vector or array <strong>independently</strong> of the other elements. This can make for very fast manipulation of large data sets.</p>
+<blockquote>
+<p><strong>Aside</strong>: R is a <strong>high-level</strong> language, meaning that it is built on <strong>low-level</strong> languages, in this case C and Fortran. In C, if we wish to apply a function to each element of an array, we need to write a loop. In R there are so-called <strong>vectorised</strong> functions, that will apply a function to each element of a vector or array. We will cover loops in R later on, but generally they are much slower than the equivalent loops in C or Fortran. The source code for vectorised functions are often written in C or Fortran and hence run much faster than writing a loop in native R code. In addition they make the code more concise. For simple functions the difference in run time is often too small to really notice, but for more complex or large-scale functions the difference in run time can be large. To this end, R also offers various ways of using C code within R functions. But that is beyond the scope of this workshop…</p>
+</blockquote>
+<div class="panel panel-default">
+<div class="panel-heading">
+Task
+</div>
+<div class="panel-body">
+<p>Copy the following commands into your script file and then run them in order to see how this works. Annotate each line using comments to describe what it is doing.</p>
+<pre><code>y &lt;- 1:10
+y^2
+log(y)
+exp(y)
+x &lt;- c(5, 4, 3, 2, 1, 5, 4, 3, 2, 1)
+x + y
+x * y
+z &lt;- c(-1, 2.2, 10)
+z + y
+z * y</code></pre>
+</div>
+</div>
+<button id="displayTextunnamed-chunk-52" onclick="javascript:toggle(&#39;unnamed-chunk-52&#39;);">
+Show: Solution
+</button>
+<div id="toggleTextunnamed-chunk-52" style="display: none">
+<div class="panel panel-default">
+<div class="panel-heading panel-heading1">
+Solution
+</div>
+<div class="panel-body">
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="fundamentals-of-r.html#cb74-1" aria-hidden="true"></a><span class="co">## creates a vector y containing entries</span></span>
+<span id="cb74-2"><a href="fundamentals-of-r.html#cb74-2" aria-hidden="true"></a><span class="co">## 1, 2,  ..., 10</span></span>
+<span id="cb74-3"><a href="fundamentals-of-r.html#cb74-3" aria-hidden="true"></a>y &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span></span>
+<span id="cb74-4"><a href="fundamentals-of-r.html#cb74-4" aria-hidden="true"></a></span>
+<span id="cb74-5"><a href="fundamentals-of-r.html#cb74-5" aria-hidden="true"></a><span class="co">## squares each entry of y</span></span>
+<span id="cb74-6"><a href="fundamentals-of-r.html#cb74-6" aria-hidden="true"></a>y<span class="op">^</span><span class="dv">2</span></span>
+<span id="cb74-7"><a href="fundamentals-of-r.html#cb74-7" aria-hidden="true"></a></span>
+<span id="cb74-8"><a href="fundamentals-of-r.html#cb74-8" aria-hidden="true"></a><span class="co">## takes the natural log of each entry of y</span></span>
+<span id="cb74-9"><a href="fundamentals-of-r.html#cb74-9" aria-hidden="true"></a><span class="kw">log</span>(y)</span>
+<span id="cb74-10"><a href="fundamentals-of-r.html#cb74-10" aria-hidden="true"></a></span>
+<span id="cb74-11"><a href="fundamentals-of-r.html#cb74-11" aria-hidden="true"></a><span class="co">## takes the anti-log of each entry of y</span></span>
+<span id="cb74-12"><a href="fundamentals-of-r.html#cb74-12" aria-hidden="true"></a><span class="kw">exp</span>(y)</span>
+<span id="cb74-13"><a href="fundamentals-of-r.html#cb74-13" aria-hidden="true"></a></span>
+<span id="cb74-14"><a href="fundamentals-of-r.html#cb74-14" aria-hidden="true"></a><span class="co">## creates a vector called x containing </span></span>
+<span id="cb74-15"><a href="fundamentals-of-r.html#cb74-15" aria-hidden="true"></a><span class="co">## entries below</span></span>
+<span id="cb74-16"><a href="fundamentals-of-r.html#cb74-16" aria-hidden="true"></a>x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">1</span>)</span>
+<span id="cb74-17"><a href="fundamentals-of-r.html#cb74-17" aria-hidden="true"></a></span>
+<span id="cb74-18"><a href="fundamentals-of-r.html#cb74-18" aria-hidden="true"></a><span class="co">## adds each element of x to its corresponding</span></span>
+<span id="cb74-19"><a href="fundamentals-of-r.html#cb74-19" aria-hidden="true"></a><span class="co">## element in y</span></span>
+<span id="cb74-20"><a href="fundamentals-of-r.html#cb74-20" aria-hidden="true"></a>x <span class="op">+</span><span class="st"> </span>y</span>
+<span id="cb74-21"><a href="fundamentals-of-r.html#cb74-21" aria-hidden="true"></a></span>
+<span id="cb74-22"><a href="fundamentals-of-r.html#cb74-22" aria-hidden="true"></a><span class="co">## multiplies each element of x with its corresponding</span></span>
+<span id="cb74-23"><a href="fundamentals-of-r.html#cb74-23" aria-hidden="true"></a><span class="co">## element in y</span></span>
+<span id="cb74-24"><a href="fundamentals-of-r.html#cb74-24" aria-hidden="true"></a>x <span class="op">*</span><span class="st"> </span>y</span>
+<span id="cb74-25"><a href="fundamentals-of-r.html#cb74-25" aria-hidden="true"></a></span>
+<span id="cb74-26"><a href="fundamentals-of-r.html#cb74-26" aria-hidden="true"></a><span class="co">## creates a vector of length 3 called z</span></span>
+<span id="cb74-27"><a href="fundamentals-of-r.html#cb74-27" aria-hidden="true"></a><span class="co">## with entries below</span></span>
+<span id="cb74-28"><a href="fundamentals-of-r.html#cb74-28" aria-hidden="true"></a>z &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="fl">2.2</span>, <span class="dv">10</span>)</span>
+<span id="cb74-29"><a href="fundamentals-of-r.html#cb74-29" aria-hidden="true"></a></span>
+<span id="cb74-30"><a href="fundamentals-of-r.html#cb74-30" aria-hidden="true"></a><span class="co">## repeats z 4 times, and takes the first</span></span>
+<span id="cb74-31"><a href="fundamentals-of-r.html#cb74-31" aria-hidden="true"></a><span class="co">## 11 entries, which it then adds to</span></span>
+<span id="cb74-32"><a href="fundamentals-of-r.html#cb74-32" aria-hidden="true"></a><span class="co">## each corresponding entry of y</span></span>
+<span id="cb74-33"><a href="fundamentals-of-r.html#cb74-33" aria-hidden="true"></a>z <span class="op">+</span><span class="st"> </span>y</span>
+<span id="cb74-34"><a href="fundamentals-of-r.html#cb74-34" aria-hidden="true"></a></span>
+<span id="cb74-35"><a href="fundamentals-of-r.html#cb74-35" aria-hidden="true"></a><span class="co">## repeats z 4 times, and takes the first</span></span>
+<span id="cb74-36"><a href="fundamentals-of-r.html#cb74-36" aria-hidden="true"></a><span class="co">## 11 entries, which it then multiplies with</span></span>
+<span id="cb74-37"><a href="fundamentals-of-r.html#cb74-37" aria-hidden="true"></a><span class="co">## each corresponding entry of y</span></span>
+<span id="cb74-38"><a href="fundamentals-of-r.html#cb74-38" aria-hidden="true"></a>z <span class="op">*</span><span class="st"> </span>y</span></code></pre></div>
+</div>
+</div>
+</div>
+<p>If you add or multiply vectors of different lengths then R automatically repeats the smaller vector to make it bigger. This generates a warning if the length of the smaller vector is not a divisor of the length of the longer vector. Division and subtraction work in the same way e.g.</p>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="fundamentals-of-r.html#cb75-1" aria-hidden="true"></a><span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">6</span>) <span class="op">*</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>)</span></code></pre></div>
+<pre><code>## [1]  1  4  3  8  5 12</code></pre>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="fundamentals-of-r.html#cb77-1" aria-hidden="true"></a><span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>) <span class="op">*</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>)</span></code></pre></div>
+<pre><code>## Warning in c(1:3) * c(1:2): longer object length is not a multiple of shorter
+## object length</code></pre>
+<pre><code>## [1] 1 4 3</code></pre>
+<p>This is a useful property if the shorter vector is of length 1, in which case R multiplies each element of the longer vector by the scalar e.g.</p>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="fundamentals-of-r.html#cb80-1" aria-hidden="true"></a><span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>) <span class="op">*</span><span class="st"> </span><span class="dv">2</span></span></code></pre></div>
+<pre><code>## [1] 2 4 6</code></pre>
+<blockquote>
+<p>You must be <strong>very careful</strong> with this. I only use this feature when multiplying a vector by a scalar; otherwise I will always generate vectors of the same length, since I think this makes what you are trying to achieve explicit. Hence instead of writing <code>c(1:6) * c(1:2)</code>, I would write <code>c(1:6) * rep(1:2, 3)</code>. (I would personally rather that R did not allow elementwise operations on vectors that are of different lengths, but it does, and one should be careful…)</p>
+</blockquote>
+<p>R will also perform <strong>matrix multiplication</strong> (e.g. dot products) on vectors, and this is described in a <a href="fundamentals-of-r.html#matmult">later section</a>.</p>
+</div>
+<div id="logop" class="section level4 hasAnchor" number="3.4.1.4">
+<h4><span class="header-section-number">3.4.1.4</span> Logical vectors and conditional subsetting<a href="fundamentals-of-r.html#logop" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Vectors can be created according to logical criteria using the following comparison operators:</p>
+<table>
+<caption><span id="tab:logop">Table 3.2: </span> Logical operators</caption>
+<thead>
+<tr class="header">
+<th align="center">Operator</th>
+<th align="center">Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><code>!=</code></td>
+<td align="center">not equal</td>
+</tr>
+<tr class="even">
+<td align="center"><code>&lt;</code></td>
+<td align="center">less than</td>
+</tr>
+<tr class="odd">
+<td align="center"><code>&lt;=</code></td>
+<td align="center">less than or equal to</td>
+</tr>
+<tr class="even">
+<td align="center"><code>&gt;</code></td>
+<td align="center">greater than</td>
+</tr>
+<tr class="odd">
+<td align="center"><code>&gt;=</code></td>
+<td align="center">greater than or equal to</td>
+</tr>
+<tr class="even">
+<td align="center"><code>==</code></td>
+<td align="center">logical equals</td>
+</tr>
+<tr class="odd">
+<td align="center"><code>|</code></td>
+<td align="center">logical OR</td>
+</tr>
+<tr class="even">
+<td align="center"><code>&amp;</code></td>
+<td align="center">logical AND</td>
+</tr>
+<tr class="odd">
+<td align="center"><code>!</code></td>
+<td align="center">logical NOT</td>
+</tr>
+</tbody>
+</table>
+<div class="panel panel-default">
+<div class="panel-heading">
+Task
+</div>
+<div class="panel-body">
+<p>Copy the following commands into your script file and then run them in order to see how this works. Annotate each line using comments to describe what it is doing.</p>
+<pre><code>x &lt;- 1:10
+y &lt;- c(5, 4, 3, 2, 1, 5, 4, 3, 2, 1)
+x &lt; 4
+x[x &lt; 4]
+y[x &lt; 4]
+y &gt; 1 &amp; y &lt;= 4
+y[y &gt; 1 &amp; y &lt;= 4]
+z &lt;- y[y != 3]</code></pre>
+</div>
+</div>
+<button id="displayTextunnamed-chunk-56" onclick="javascript:toggle(&#39;unnamed-chunk-56&#39;);">
+Show: Solution
+</button>
+<div id="toggleTextunnamed-chunk-56" style="display: none">
+<div class="panel panel-default">
+<div class="panel-heading panel-heading1">
+Solution
+</div>
+<div class="panel-body">
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="fundamentals-of-r.html#cb83-1" aria-hidden="true"></a><span class="co">## create a vector x containing elements 1:10</span></span>
+<span id="cb83-2"><a href="fundamentals-of-r.html#cb83-2" aria-hidden="true"></a>x &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span></span>
+<span id="cb83-3"><a href="fundamentals-of-r.html#cb83-3" aria-hidden="true"></a></span>
+<span id="cb83-4"><a href="fundamentals-of-r.html#cb83-4" aria-hidden="true"></a><span class="co">## create a vector y containing the elements below</span></span>
+<span id="cb83-5"><a href="fundamentals-of-r.html#cb83-5" aria-hidden="true"></a>y &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">1</span>)</span>
+<span id="cb83-6"><a href="fundamentals-of-r.html#cb83-6" aria-hidden="true"></a></span>
+<span id="cb83-7"><a href="fundamentals-of-r.html#cb83-7" aria-hidden="true"></a><span class="co">## generate a logical vector where each</span></span>
+<span id="cb83-8"><a href="fundamentals-of-r.html#cb83-8" aria-hidden="true"></a><span class="co">## element denotes whether x is &lt; 4 (TRUE)</span></span>
+<span id="cb83-9"><a href="fundamentals-of-r.html#cb83-9" aria-hidden="true"></a><span class="co">## or &gt;= 4 (FALSE)</span></span>
+<span id="cb83-10"><a href="fundamentals-of-r.html#cb83-10" aria-hidden="true"></a>x <span class="op">&lt;</span><span class="st"> </span><span class="dv">4</span></span>
+<span id="cb83-11"><a href="fundamentals-of-r.html#cb83-11" aria-hidden="true"></a></span>
+<span id="cb83-12"><a href="fundamentals-of-r.html#cb83-12" aria-hidden="true"></a><span class="co">## extracts all elements of x that are &lt; 4</span></span>
+<span id="cb83-13"><a href="fundamentals-of-r.html#cb83-13" aria-hidden="true"></a>x[x <span class="op">&lt;</span><span class="st"> </span><span class="dv">4</span>]</span>
+<span id="cb83-14"><a href="fundamentals-of-r.html#cb83-14" aria-hidden="true"></a></span>
+<span id="cb83-15"><a href="fundamentals-of-r.html#cb83-15" aria-hidden="true"></a><span class="co">## extracts all elements of y where</span></span>
+<span id="cb83-16"><a href="fundamentals-of-r.html#cb83-16" aria-hidden="true"></a><span class="co">## x &lt; 4</span></span>
+<span id="cb83-17"><a href="fundamentals-of-r.html#cb83-17" aria-hidden="true"></a>y[x <span class="op">&lt;</span><span class="st"> </span><span class="dv">4</span>]</span>
+<span id="cb83-18"><a href="fundamentals-of-r.html#cb83-18" aria-hidden="true"></a></span>
+<span id="cb83-19"><a href="fundamentals-of-r.html#cb83-19" aria-hidden="true"></a><span class="co">## creates a logical vector where elements are TRUE</span></span>
+<span id="cb83-20"><a href="fundamentals-of-r.html#cb83-20" aria-hidden="true"></a><span class="co">## if the element of y is &gt; 1 AND &lt;= 4, and FALSE</span></span>
+<span id="cb83-21"><a href="fundamentals-of-r.html#cb83-21" aria-hidden="true"></a><span class="co">## otherwise</span></span>
+<span id="cb83-22"><a href="fundamentals-of-r.html#cb83-22" aria-hidden="true"></a>y <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span> <span class="op">&amp;</span><span class="st"> </span>y <span class="op">&lt;=</span><span class="st"> </span><span class="dv">4</span></span>
+<span id="cb83-23"><a href="fundamentals-of-r.html#cb83-23" aria-hidden="true"></a></span>
+<span id="cb83-24"><a href="fundamentals-of-r.html#cb83-24" aria-hidden="true"></a><span class="co">## extracts all elements of y that are &gt; 1 and</span></span>
+<span id="cb83-25"><a href="fundamentals-of-r.html#cb83-25" aria-hidden="true"></a><span class="co">## &lt;= 4</span></span>
+<span id="cb83-26"><a href="fundamentals-of-r.html#cb83-26" aria-hidden="true"></a>y[y <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span> <span class="op">&amp;</span><span class="st"> </span>y <span class="op">&lt;=</span><span class="st"> </span><span class="dv">4</span>]</span>
+<span id="cb83-27"><a href="fundamentals-of-r.html#cb83-27" aria-hidden="true"></a></span>
+<span id="cb83-28"><a href="fundamentals-of-r.html#cb83-28" aria-hidden="true"></a><span class="co">## extracts all elements of y that are not equal</span></span>
+<span id="cb83-29"><a href="fundamentals-of-r.html#cb83-29" aria-hidden="true"></a><span class="co">## to 3 and pass them into a new vector z</span></span>
+<span id="cb83-30"><a href="fundamentals-of-r.html#cb83-30" aria-hidden="true"></a>z &lt;-<span class="st"> </span>y[y <span class="op">!=</span><span class="st"> </span><span class="dv">3</span>]</span></code></pre></div>
+</div>
+</div>
+</div>
+<p>Finally there are many commands that are specifically aimed at vectors or sets of data. The following is a small selection for reference purposes:</p>
+<table>
+<caption><span id="tab:comfunc">Table 3.3: </span> Common R functions</caption>
+<colgroup>
+<col width="21%" />
+<col width="78%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Function</th>
+<th align="center">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><code>length(x)</code></td>
+<td align="center">returns the length of vector <code>x</code> (i.e. the number of elements in <code>x</code>)</td>
+</tr>
+<tr class="even">
+<td align="center"><code>names(x)</code></td>
+<td align="center">get or set names of <code>x</code> (i.e. we can give names to the individual elements of <code>x</code> as well as just having them numbered)</td>
+</tr>
+<tr class="odd">
+<td align="center"><code>min(x)</code></td>
+<td align="center">returns the smallest value in <code>x</code></td>
+</tr>
+<tr class="even">
+<td align="center"><code>max(x)</code></td>
+<td align="center">returns the largest value in <code>x</code></td>
+</tr>
+<tr class="odd">
+<td align="center"><code>median(x)</code></td>
+<td align="center">returns the median of <code>x</code></td>
+</tr>
+<tr class="even">
+<td align="center"><code>range(x)</code></td>
+<td align="center">returns a vector with the smallest and largest values in <code>x</code></td>
+</tr>
+<tr class="odd">
+<td align="center"><code>sum(x)</code></td>
+<td align="center">returns the sum of values in <code>x</code></td>
+</tr>
+<tr class="even">
+<td align="center"><code>mean(x)</code></td>
+<td align="center">returns the mean of values in <code>x</code></td>
+</tr>
+<tr class="odd">
+<td align="center"><code>sd(x)</code></td>
+<td align="center">returns the standard deviation of <code>x</code></td>
+</tr>
+<tr class="even">
+<td align="center"><code>var(x)</code></td>
+<td align="center">returns the variance of <code>x</code></td>
+</tr>
+<tr class="odd">
+<td align="center"><code>diff(x)</code></td>
+<td align="center">returns a vector with all of the differences between subsequent values of <code>x</code>. This vector is of length 1 less than the length of <code>x</code></td>
+</tr>
+<tr class="even">
+<td align="center"><code>summary(x)</code></td>
+<td align="center">returns different types of summary output depending on the type of variable stored in <code>x</code></td>
+</tr>
+</tbody>
+</table>
+<a id="nestex"></a>
+<div class="panel panel-default">
+<div class="panel-heading">
+Task
+</div>
+<div class="panel-body">
+Now that we know about <strong>elementwise</strong> operations, try to understand the <a href="fundamentals-of-r.html#nested">nested</a> function <code>sum(sqrt(log(seq(1, 10, by = 0.5))))</code>. To help with this, try to write this out in a series of steps and figure out what is returned at each stage of the nesting, and how this is passed to the next function.
+</div>
+</div>
+<button id="displayTextunnamed-chunk-58" onclick="javascript:toggle(&#39;unnamed-chunk-58&#39;);">
+Show: Solution
+</button>
+<div id="toggleTextunnamed-chunk-58" style="display: none">
+<div class="panel panel-default">
+<div class="panel-heading panel-heading1">
+Solution
+</div>
+<div class="panel-body">
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="fundamentals-of-r.html#cb84-1" aria-hidden="true"></a><span class="co">## Here are the steps:</span></span>
+<span id="cb84-2"><a href="fundamentals-of-r.html#cb84-2" aria-hidden="true"></a></span>
+<span id="cb84-3"><a href="fundamentals-of-r.html#cb84-3" aria-hidden="true"></a><span class="co">## 1. First create a sequence of numbers</span></span>
+<span id="cb84-4"><a href="fundamentals-of-r.html#cb84-4" aria-hidden="true"></a><span class="co">## from 1 to 10 in increments of 0.5</span></span>
+<span id="cb84-5"><a href="fundamentals-of-r.html#cb84-5" aria-hidden="true"></a><span class="co">## returns a vector</span></span>
+<span id="cb84-6"><a href="fundamentals-of-r.html#cb84-6" aria-hidden="true"></a><span class="kw">seq</span>(<span class="dv">1</span>, <span class="dv">10</span>, <span class="dt">by =</span> <span class="fl">0.5</span>)</span>
+<span id="cb84-7"><a href="fundamentals-of-r.html#cb84-7" aria-hidden="true"></a></span>
+<span id="cb84-8"><a href="fundamentals-of-r.html#cb84-8" aria-hidden="true"></a><span class="co">## 2. take the natural log of each </span></span>
+<span id="cb84-9"><a href="fundamentals-of-r.html#cb84-9" aria-hidden="true"></a><span class="co">## element of the vector - returns a vector</span></span>
+<span id="cb84-10"><a href="fundamentals-of-r.html#cb84-10" aria-hidden="true"></a><span class="kw">log</span>(<span class="kw">seq</span>(<span class="dv">1</span>, <span class="dv">10</span>, <span class="dt">by =</span> <span class="fl">0.5</span>))</span>
+<span id="cb84-11"><a href="fundamentals-of-r.html#cb84-11" aria-hidden="true"></a></span>
+<span id="cb84-12"><a href="fundamentals-of-r.html#cb84-12" aria-hidden="true"></a><span class="co">## 3. take the square root of each logged</span></span>
+<span id="cb84-13"><a href="fundamentals-of-r.html#cb84-13" aria-hidden="true"></a><span class="co">## element - returns a vector</span></span>
+<span id="cb84-14"><a href="fundamentals-of-r.html#cb84-14" aria-hidden="true"></a><span class="kw">sqrt</span>(<span class="kw">log</span>(<span class="kw">seq</span>(<span class="dv">1</span>, <span class="dv">10</span>, <span class="dt">by =</span> <span class="fl">0.5</span>)))</span>
+<span id="cb84-15"><a href="fundamentals-of-r.html#cb84-15" aria-hidden="true"></a></span>
+<span id="cb84-16"><a href="fundamentals-of-r.html#cb84-16" aria-hidden="true"></a><span class="co">## 4. sums all the elements of the</span></span>
+<span id="cb84-17"><a href="fundamentals-of-r.html#cb84-17" aria-hidden="true"></a><span class="co">## transformed vector - returns a single</span></span>
+<span id="cb84-18"><a href="fundamentals-of-r.html#cb84-18" aria-hidden="true"></a><span class="co">## number (a vector of length 1)</span></span>
+<span id="cb84-19"><a href="fundamentals-of-r.html#cb84-19" aria-hidden="true"></a><span class="kw">sum</span>(<span class="kw">sqrt</span>(<span class="kw">log</span>(<span class="kw">seq</span>(<span class="dv">1</span>, <span class="dv">10</span>, <span class="dt">by =</span> <span class="fl">0.5</span>))))</span></code></pre></div>
+</div>
+</div>
+</div>
+</div>
+<div id="factor" class="section level4 hasAnchor" number="3.4.1.5">
+<h4><span class="header-section-number">3.4.1.5</span> Factors<a href="fundamentals-of-r.html#factor" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>We have seen that we can create <code>character</code> vectors. These are collections of strings, but with no further information. For example, if I try to summarise a character vector, R returns no useful information:</p>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="fundamentals-of-r.html#cb85-1" aria-hidden="true"></a>x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;bob&quot;</span>, <span class="st">&quot;sam&quot;</span>, <span class="st">&quot;ted&quot;</span>)</span>
+<span id="cb85-2"><a href="fundamentals-of-r.html#cb85-2" aria-hidden="true"></a><span class="kw">summary</span>(x)</span></code></pre></div>
+<pre><code>##    Length     Class      Mode 
+##         3 character character</code></pre>
+<p>A <code>factor</code> is simply a character vector with some additional “grouping” information attached. For example,</p>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="fundamentals-of-r.html#cb87-1" aria-hidden="true"></a>x &lt;-<span class="st"> </span><span class="kw">factor</span>(<span class="kw">c</span>(<span class="st">&quot;bob&quot;</span>, <span class="st">&quot;sam&quot;</span>, <span class="st">&quot;ted&quot;</span>))</span>
+<span id="cb87-2"><a href="fundamentals-of-r.html#cb87-2" aria-hidden="true"></a>x</span></code></pre></div>
+<pre><code>## [1] bob sam ted
+## Levels: bob sam ted</code></pre>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="fundamentals-of-r.html#cb89-1" aria-hidden="true"></a><span class="kw">summary</span>(x)</span></code></pre></div>
+<pre><code>## bob sam ted 
+##   1   1   1</code></pre>
+<p>Now the <code>x</code> object has grouped together all elements of the vector that share the same name (called the <code>levels</code> of the factor), and the <code>summary()</code> function tells us how many entries there are for each level. The <code>levels()</code> function will return the levels of a factor:</p>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="fundamentals-of-r.html#cb91-1" aria-hidden="true"></a><span class="kw">levels</span>(x)</span></code></pre></div>
+<pre><code>## [1] &quot;bob&quot; &quot;sam&quot; &quot;ted&quot;</code></pre>
+<p>R coerces <code>characters</code> to <code>factors</code> in <a href="https://en.wikipedia.org/wiki/Lexicographical_order">lexicographical order</a>. If you wish to set specific <code>levels</code>, then you can add a <code>levels</code> argument to the <code>factor()</code> function.</p>
+<div class="panel panel-default">
+<div class="panel-heading">
+Task
+</div>
+<div class="panel-body">
+<p>Copy the following commands into your script file and then run them in order to see how this works. Annotate each line using comments to describe what it is doing.</p>
+<pre><code>y &lt;- c(5, 4, 3, 2, 10, 5, 4, 3, 2, 1)
+factor(y)
+factor(y, levels = 1:10)
+y &lt;- as.character(c(5, 4, 3, 2, 10, 5, 4, 3, 2, 1))
+factor(y)
+factor(y, levels = sort(unique(as.numeric(y))))
+y &lt;- c(&quot;low&quot;, &quot;mid&quot;, &quot;mid&quot;, &quot;high&quot;, &quot;low&quot;)
+factor(y)
+factor(y, levels = c(&quot;low&quot;, &quot;mid&quot;, &quot;high&quot;))</code></pre>
+</div>
+</div>
+<button id="displayTextunnamed-chunk-63" onclick="javascript:toggle(&#39;unnamed-chunk-63&#39;);">
+Show: Solution
+</button>
+<div id="toggleTextunnamed-chunk-63" style="display: none">
+<div class="panel panel-default">
+<div class="panel-heading panel-heading1">
+Solution
+</div>
+<div class="panel-body">
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="fundamentals-of-r.html#cb94-1" aria-hidden="true"></a><span class="co">## create a vector y containing the numbers below</span></span>
+<span id="cb94-2"><a href="fundamentals-of-r.html#cb94-2" aria-hidden="true"></a>y &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">10</span>, <span class="dv">5</span>, <span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">1</span>)</span>
+<span id="cb94-3"><a href="fundamentals-of-r.html#cb94-3" aria-hidden="true"></a></span>
+<span id="cb94-4"><a href="fundamentals-of-r.html#cb94-4" aria-hidden="true"></a><span class="co">## visualise y as a factor</span></span>
+<span id="cb94-5"><a href="fundamentals-of-r.html#cb94-5" aria-hidden="true"></a><span class="kw">factor</span>(y)</span>
+<span id="cb94-6"><a href="fundamentals-of-r.html#cb94-6" aria-hidden="true"></a></span>
+<span id="cb94-7"><a href="fundamentals-of-r.html#cb94-7" aria-hidden="true"></a><span class="co">## visualise y as a factor but set the levels</span></span>
+<span id="cb94-8"><a href="fundamentals-of-r.html#cb94-8" aria-hidden="true"></a><span class="co">## this means some levels will have zero</span></span>
+<span id="cb94-9"><a href="fundamentals-of-r.html#cb94-9" aria-hidden="true"></a><span class="co">## entries</span></span>
+<span id="cb94-10"><a href="fundamentals-of-r.html#cb94-10" aria-hidden="true"></a><span class="kw">factor</span>(y, <span class="dt">levels =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)</span>
+<span id="cb94-11"><a href="fundamentals-of-r.html#cb94-11" aria-hidden="true"></a></span>
+<span id="cb94-12"><a href="fundamentals-of-r.html#cb94-12" aria-hidden="true"></a><span class="co">## create a character vector y containing the numbers</span></span>
+<span id="cb94-13"><a href="fundamentals-of-r.html#cb94-13" aria-hidden="true"></a><span class="co">## below coded a strings</span></span>
+<span id="cb94-14"><a href="fundamentals-of-r.html#cb94-14" aria-hidden="true"></a>y &lt;-<span class="st"> </span><span class="kw">as.character</span>(<span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">10</span>, <span class="dv">5</span>, <span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">1</span>))</span>
+<span id="cb94-15"><a href="fundamentals-of-r.html#cb94-15" aria-hidden="true"></a></span>
+<span id="cb94-16"><a href="fundamentals-of-r.html#cb94-16" aria-hidden="true"></a><span class="co">## visualise y as a factor - sorts levels </span></span>
+<span id="cb94-17"><a href="fundamentals-of-r.html#cb94-17" aria-hidden="true"></a><span class="co">## lexicographically (hence 10 coded before 2 etc.)</span></span>
+<span id="cb94-18"><a href="fundamentals-of-r.html#cb94-18" aria-hidden="true"></a><span class="kw">factor</span>(y)</span>
+<span id="cb94-19"><a href="fundamentals-of-r.html#cb94-19" aria-hidden="true"></a></span>
+<span id="cb94-20"><a href="fundamentals-of-r.html#cb94-20" aria-hidden="true"></a><span class="co">## visualise y as a factor, but set levels that would</span></span>
+<span id="cb94-21"><a href="fundamentals-of-r.html#cb94-21" aria-hidden="true"></a><span class="co">## be equivalent to if y was numeric instead of</span></span>
+<span id="cb94-22"><a href="fundamentals-of-r.html#cb94-22" aria-hidden="true"></a><span class="co">## a character vector</span></span>
+<span id="cb94-23"><a href="fundamentals-of-r.html#cb94-23" aria-hidden="true"></a><span class="kw">factor</span>(y, <span class="dt">levels =</span> <span class="kw">sort</span>(<span class="kw">unique</span>(<span class="kw">as.numeric</span>(y))))</span>
+<span id="cb94-24"><a href="fundamentals-of-r.html#cb94-24" aria-hidden="true"></a></span>
+<span id="cb94-25"><a href="fundamentals-of-r.html#cb94-25" aria-hidden="true"></a><span class="co">## create a character vector y containing the strings below</span></span>
+<span id="cb94-26"><a href="fundamentals-of-r.html#cb94-26" aria-hidden="true"></a>y &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;low&quot;</span>, <span class="st">&quot;mid&quot;</span>, <span class="st">&quot;mid&quot;</span>, <span class="st">&quot;high&quot;</span>, <span class="st">&quot;low&quot;</span>)</span>
+<span id="cb94-27"><a href="fundamentals-of-r.html#cb94-27" aria-hidden="true"></a></span>
+<span id="cb94-28"><a href="fundamentals-of-r.html#cb94-28" aria-hidden="true"></a><span class="co">## visualise y as a factor - sorts levels </span></span>
+<span id="cb94-29"><a href="fundamentals-of-r.html#cb94-29" aria-hidden="true"></a><span class="co">## lexicographically (so alphabetically in this case)</span></span>
+<span id="cb94-30"><a href="fundamentals-of-r.html#cb94-30" aria-hidden="true"></a><span class="kw">factor</span>(y)</span>
+<span id="cb94-31"><a href="fundamentals-of-r.html#cb94-31" aria-hidden="true"></a></span>
+<span id="cb94-32"><a href="fundamentals-of-r.html#cb94-32" aria-hidden="true"></a><span class="co">## visualise y as a factor - sorts levels </span></span>
+<span id="cb94-33"><a href="fundamentals-of-r.html#cb94-33" aria-hidden="true"></a><span class="co">## into a more sensible ordering</span></span>
+<span id="cb94-34"><a href="fundamentals-of-r.html#cb94-34" aria-hidden="true"></a><span class="kw">factor</span>(y, <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;low&quot;</span>, <span class="st">&quot;mid&quot;</span>, <span class="st">&quot;high&quot;</span>))</span></code></pre></div>
+</div>
+</div>
+</div>
+<p><code>factor</code> objects are incredibly useful when working with data, since they essentially code up <strong>categorical</strong> variables, though care must be taken when manipulating them. We explore the use <code>factor</code> objects in more detail in a <a href="#data">later section</a> and care must be taken when <a href="fundamentals-of-r.html#convert">converting</a> between factors and other types.</p>
+</div>
+</div>
+<div id="convert" class="section level3 hasAnchor" number="3.4.2">
+<h3><span class="header-section-number">3.4.2</span> Conversions between object types<a href="fundamentals-of-r.html#convert" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Before we progress to other objects, we should have a brief aside to talk about conversion between types. So far we have introduced <code>numeric</code> vectors, which store numerical values (note that R makes no distinction between <code>integer</code>, <code>float</code> or <code>double</code> types, like C does). We have also seen <code>character</code> types, which store strings, and <code>factor</code> types that store strings with additional grouping information attached. We have also seen <code>logical</code> types, which simply store <code>TRUE</code> or <code>FALSE</code> values.</p>
+<p>It is possible to convert between these different forms, using an <code>as.TYPE()</code> function (where <code>TYPE</code> is replaced with the correct type of interest). For example, we can easily convert numbers to characters:</p>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="fundamentals-of-r.html#cb95-1" aria-hidden="true"></a>x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">10</span>, <span class="dv">0</span>, <span class="dv">4</span>)</span>
+<span id="cb95-2"><a href="fundamentals-of-r.html#cb95-2" aria-hidden="true"></a>x</span></code></pre></div>
+<pre><code>## [1]  0  1  3 10  0  4</code></pre>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="fundamentals-of-r.html#cb97-1" aria-hidden="true"></a><span class="kw">as.character</span>(x)</span></code></pre></div>
+<pre><code>## [1] &quot;0&quot;  &quot;1&quot;  &quot;3&quot;  &quot;10&quot; &quot;0&quot;  &quot;4&quot;</code></pre>
+<p>(Notice the double-quotes around the elements of the converted vectors.) They can also easily be converted into factors (if you want to set the levels of the factor specifically, then you can use the <code>factor()</code> function as described <a href="fundamentals-of-r.html#factor">earlier</a>):</p>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="fundamentals-of-r.html#cb99-1" aria-hidden="true"></a><span class="kw">factor</span>(x)</span></code></pre></div>
+<pre><code>## [1] 0  1  3  10 0  4 
+## Levels: 0 1 3 4 10</code></pre>
+<p>We can also convert numbers to logical strings, in which case R converts <code>0</code> values to <code>FALSE</code> and anything else to <code>TRUE</code>. Hence,</p>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="fundamentals-of-r.html#cb101-1" aria-hidden="true"></a><span class="kw">as.logical</span>(x)</span></code></pre></div>
+<pre><code>## [1] FALSE  TRUE  TRUE  TRUE FALSE  TRUE</code></pre>
+<p>Conversions of <code>logical</code> vectors to <code>numeric</code> vectors results in <code>TRUE</code> values becoming <code>1</code> and <code>FALSE</code> values becoming <code>0</code>.</p>
+<p>R can also convert characters to numbers, but only if the conversion makes sense. For example,</p>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="fundamentals-of-r.html#cb103-1" aria-hidden="true"></a>y &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;10&quot;</span>, <span class="st">&quot;2&quot;</span>, <span class="st">&quot;8&quot;</span>)</span>
+<span id="cb103-2"><a href="fundamentals-of-r.html#cb103-2" aria-hidden="true"></a>y</span></code></pre></div>
+<pre><code>## [1] &quot;10&quot; &quot;2&quot;  &quot;8&quot;</code></pre>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="fundamentals-of-r.html#cb105-1" aria-hidden="true"></a><span class="kw">as.numeric</span>(y)</span></code></pre></div>
+<pre><code>## [1] 10  2  8</code></pre>
+<p>If the conversion doesn’t make sense, then R will return a <strong>missing value</strong> (<code>NA</code>) and print a warning:</p>
+<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="fundamentals-of-r.html#cb107-1" aria-hidden="true"></a>y &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;10&quot;</span>, <span class="st">&quot;2&quot;</span>, <span class="st">&quot;bob&quot;</span>)</span>
+<span id="cb107-2"><a href="fundamentals-of-r.html#cb107-2" aria-hidden="true"></a><span class="kw">as.numeric</span>(y)</span></code></pre></div>
+<pre><code>## Warning: NAs introduced by coercion</code></pre>
+<pre><code>## [1] 10  2 NA</code></pre>
+<p><strong>Factors</strong> are tricky little blighters! Superficially they can look like <code>numeric</code> types when printed to the screen, but in fact they are named <strong>groups</strong>, and as such if we convert a <code>factor</code> to a <code>numeric</code>, then R converts according to the <strong>level</strong> of the factor:</p>
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="fundamentals-of-r.html#cb110-1" aria-hidden="true"></a>y &lt;-<span class="st"> </span><span class="kw">factor</span>(<span class="kw">c</span>(<span class="st">&quot;10&quot;</span>, <span class="st">&quot;2&quot;</span>, <span class="st">&quot;8&quot;</span>))</span>
+<span id="cb110-2"><a href="fundamentals-of-r.html#cb110-2" aria-hidden="true"></a>y</span></code></pre></div>
+<pre><code>## [1] 10 2  8 
+## Levels: 10 2 8</code></pre>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="fundamentals-of-r.html#cb112-1" aria-hidden="true"></a><span class="kw">as.numeric</span>(y)</span></code></pre></div>
+<pre><code>## [1] 1 2 3</code></pre>
+<p><strong>Notice</strong> that this returns 1, 2, 3 rather than 10, 2, 8.</p>
+<p>If a <code>factor</code> holds a numerical value you wish to convert directly, then you must convert the factor to a <code>character</code> first (for which you can often use nested functions to do) e.g.</p>
+<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="fundamentals-of-r.html#cb114-1" aria-hidden="true"></a>y &lt;-<span class="st"> </span><span class="kw">factor</span>(<span class="kw">c</span>(<span class="st">&quot;10&quot;</span>, <span class="st">&quot;2&quot;</span>, <span class="st">&quot;8&quot;</span>))</span>
+<span id="cb114-2"><a href="fundamentals-of-r.html#cb114-2" aria-hidden="true"></a><span class="kw">as.numeric</span>(y)</span></code></pre></div>
+<pre><code>## [1] 1 2 3</code></pre>
+<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="fundamentals-of-r.html#cb116-1" aria-hidden="true"></a><span class="kw">as.numeric</span>(<span class="kw">as.character</span>(y))</span></code></pre></div>
+<pre><code>## [1] 10  2  8</code></pre>
+<p>Conversions to <code>character</code> types are straightforward in any case, using <code>as.character()</code>. Conversions of <code>characters</code> or <code>factors</code> to <code>logical</code> types will produce missing values (<code>NA</code>).</p>
+</div>
+<div id="matrix" class="section level3 hasAnchor" number="3.4.3">
+<h3><span class="header-section-number">3.4.3</span> Matrices<a href="fundamentals-of-r.html#matrix" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Matrices are another way of storing data in R. They can be thought of as 2D versions of vectors; a single structured group of numbers or words arranged in both rows and columns. Each element of the matrix is numbered according to the row and column it is in (starting from the top-left corner). The size of the matrix is given as two numbers which specify the number of rows and columns it has. The size is referred to as the <strong>dimension</strong> of the matrix.</p>
+<p>The simplest way of creating a matrix in R is to use the <code>matrix()</code> function.</p>
+<div class="panel panel-default">
+<div class="panel-heading">
+Task
+</div>
+<div class="panel-body">
+<p>Copy the following commands into your script file and then run them in order to see how this works. Annotate each line using comments to describe what it is doing.</p>
+<pre><code>matrix(1:4, 2, 2)
+matrix(1:4, 2, 2, byrow = TRUE)
+matrix(0, 3, 4)</code></pre>
+</div>
+</div>
+<button id="displayTextunnamed-chunk-72" onclick="javascript:toggle(&#39;unnamed-chunk-72&#39;);">
+Show: Solution
+</button>
+<div id="toggleTextunnamed-chunk-72" style="display: none">
+<div class="panel panel-default">
+<div class="panel-heading panel-heading1">
+Solution
+</div>
+<div class="panel-body">
+<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="fundamentals-of-r.html#cb119-1" aria-hidden="true"></a><span class="co">## creates a (2 x 2) matrix with entries </span></span>
+<span id="cb119-2"><a href="fundamentals-of-r.html#cb119-2" aria-hidden="true"></a><span class="co">## 1:4 placed down the columns first</span></span>
+<span id="cb119-3"><a href="fundamentals-of-r.html#cb119-3" aria-hidden="true"></a><span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">2</span>)</span>
+<span id="cb119-4"><a href="fundamentals-of-r.html#cb119-4" aria-hidden="true"></a></span>
+<span id="cb119-5"><a href="fundamentals-of-r.html#cb119-5" aria-hidden="true"></a><span class="co">## creates a (2 x 2) matrix with entries</span></span>
+<span id="cb119-6"><a href="fundamentals-of-r.html#cb119-6" aria-hidden="true"></a><span class="co">## 1:4 placed across the rows first</span></span>
+<span id="cb119-7"><a href="fundamentals-of-r.html#cb119-7" aria-hidden="true"></a><span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dt">byrow =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb119-8"><a href="fundamentals-of-r.html#cb119-8" aria-hidden="true"></a></span>
+<span id="cb119-9"><a href="fundamentals-of-r.html#cb119-9" aria-hidden="true"></a><span class="co">## creates a (3 x 4) matrix filled with zeros</span></span>
+<span id="cb119-10"><a href="fundamentals-of-r.html#cb119-10" aria-hidden="true"></a><span class="kw">matrix</span>(<span class="dv">0</span>, <span class="dv">3</span>, <span class="dv">4</span>)</span></code></pre></div>
+</div>
+</div>
+</div>
+<p>Like vectors, matrices can also contain <code>character</code> values e.g.</p>
+<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="fundamentals-of-r.html#cb120-1" aria-hidden="true"></a><span class="kw">matrix</span>(letters[<span class="dv">1</span><span class="op">:</span><span class="dv">9</span>], <span class="dv">3</span>, <span class="dv">3</span>)</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,] &quot;a&quot;  &quot;d&quot;  &quot;g&quot; 
+## [2,] &quot;b&quot;  &quot;e&quot;  &quot;h&quot; 
+## [3,] &quot;c&quot;  &quot;f&quot;  &quot;i&quot;</code></pre>
+<p>However, all elements must be of the same type. You can have a <code>numeric</code> matrix, or a <code>character</code> matrix, but not a mixture. If you try to specify a mixture then R will convert all entries to the most complex type.</p>
+<div id="subsetting-matrices" class="section level4 hasAnchor" number="3.4.3.1">
+<h4><span class="header-section-number">3.4.3.1</span> Subsetting matrices<a href="fundamentals-of-r.html#subsetting-matrices" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Getting access to elements of a matrix follows on naturally from getting access to elements of a vector. In the case of a matrix though you must specify both the row and column of the element that you want, using the format <code>[ROW, COL]</code>.</p>
+<div class="panel panel-default">
+<div class="panel-heading">
+Task
+</div>
+<div class="panel-body">
+<p>Copy the following commands into your script file and then run them in order to see how this works. Annotate each line using comments to describe what it is doing.</p>
+<pre><code>vals &lt;- c(1, 2, 3, 4, 5, 0.5, 2, 6, 0, 1, 1, 0)
+mat &lt;- matrix(vals, 4, 3)
+mat[2, 3]
+mat[1, ]
+mat[, 3]
+mat[-2, ]
+mat[c(1, 3), c(2, 3)]</code></pre>
+</div>
+</div>
+<button id="displayTextunnamed-chunk-75" onclick="javascript:toggle(&#39;unnamed-chunk-75&#39;);">
+Show: Solution
+</button>
+<div id="toggleTextunnamed-chunk-75" style="display: none">
+<div class="panel panel-default">
+<div class="panel-heading panel-heading1">
+Solution
+</div>
+<div class="panel-body">
+<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="fundamentals-of-r.html#cb123-1" aria-hidden="true"></a><span class="co">## create a vector vals and fill with values</span></span>
+<span id="cb123-2"><a href="fundamentals-of-r.html#cb123-2" aria-hidden="true"></a>vals &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="fl">0.5</span>, <span class="dv">2</span>, <span class="dv">6</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb123-3"><a href="fundamentals-of-r.html#cb123-3" aria-hidden="true"></a></span>
+<span id="cb123-4"><a href="fundamentals-of-r.html#cb123-4" aria-hidden="true"></a><span class="co">## create a (4 x 3) matrix and fill with entries </span></span>
+<span id="cb123-5"><a href="fundamentals-of-r.html#cb123-5" aria-hidden="true"></a><span class="co">## from vals, filling down the columns first</span></span>
+<span id="cb123-6"><a href="fundamentals-of-r.html#cb123-6" aria-hidden="true"></a>mat &lt;-<span class="st"> </span><span class="kw">matrix</span>(vals, <span class="dv">4</span>, <span class="dv">3</span>)</span>
+<span id="cb123-7"><a href="fundamentals-of-r.html#cb123-7" aria-hidden="true"></a></span>
+<span id="cb123-8"><a href="fundamentals-of-r.html#cb123-8" aria-hidden="true"></a><span class="co">## extract the entry of mat in the </span></span>
+<span id="cb123-9"><a href="fundamentals-of-r.html#cb123-9" aria-hidden="true"></a><span class="co">## 2nd row and 3rd column</span></span>
+<span id="cb123-10"><a href="fundamentals-of-r.html#cb123-10" aria-hidden="true"></a>mat[<span class="dv">2</span>, <span class="dv">3</span>]</span>
+<span id="cb123-11"><a href="fundamentals-of-r.html#cb123-11" aria-hidden="true"></a></span>
+<span id="cb123-12"><a href="fundamentals-of-r.html#cb123-12" aria-hidden="true"></a><span class="co">## extract the first row of mat</span></span>
+<span id="cb123-13"><a href="fundamentals-of-r.html#cb123-13" aria-hidden="true"></a>mat[<span class="dv">1</span>, ]</span>
+<span id="cb123-14"><a href="fundamentals-of-r.html#cb123-14" aria-hidden="true"></a></span>
+<span id="cb123-15"><a href="fundamentals-of-r.html#cb123-15" aria-hidden="true"></a><span class="co">## extract the third column of mat</span></span>
+<span id="cb123-16"><a href="fundamentals-of-r.html#cb123-16" aria-hidden="true"></a>mat[, <span class="dv">3</span>]</span>
+<span id="cb123-17"><a href="fundamentals-of-r.html#cb123-17" aria-hidden="true"></a></span>
+<span id="cb123-18"><a href="fundamentals-of-r.html#cb123-18" aria-hidden="true"></a><span class="co">## extract all rows of mat except the second</span></span>
+<span id="cb123-19"><a href="fundamentals-of-r.html#cb123-19" aria-hidden="true"></a>mat[<span class="op">-</span><span class="dv">2</span>, ]</span>
+<span id="cb123-20"><a href="fundamentals-of-r.html#cb123-20" aria-hidden="true"></a></span>
+<span id="cb123-21"><a href="fundamentals-of-r.html#cb123-21" aria-hidden="true"></a><span class="co">## extract entries in the first and third row,</span></span>
+<span id="cb123-22"><a href="fundamentals-of-r.html#cb123-22" aria-hidden="true"></a><span class="co">## and second and third column</span></span>
+<span id="cb123-23"><a href="fundamentals-of-r.html#cb123-23" aria-hidden="true"></a>mat[<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>), <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">3</span>)]</span></code></pre></div>
+</div>
+</div>
+</div>
+</div>
+<div id="creating-matrices" class="section level4 hasAnchor" number="3.4.3.2">
+<h4><span class="header-section-number">3.4.3.2</span> Creating matrices<a href="fundamentals-of-r.html#creating-matrices" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>As well as using the <code>matrix()</code> function, we can also create matrices by binding together several vectors (or other matrices). We use two commands here: <code>cbind()</code> and <code>rbind()</code>.</p>
+<div class="panel panel-default">
+<div class="panel-heading">
+Task
+</div>
+<div class="panel-body">
+<p>Copy the following commands into your script file and then run them in order to see how this works. Annotate each line using comments to describe what it is doing.</p>
+<pre><code>x1 &lt;- 1:3
+x2 &lt;- c(7, 5, 6)
+x3 &lt;- c(12, 19, 25)
+cbind(x1, x2, x3)
+rbind(x1, x2, x3)</code></pre>
+</div>
+</div>
+<button id="displayTextunnamed-chunk-77" onclick="javascript:toggle(&#39;unnamed-chunk-77&#39;);">
+Show: Solution
+</button>
+<div id="toggleTextunnamed-chunk-77" style="display: none">
+<div class="panel panel-default">
+<div class="panel-heading panel-heading1">
+Solution
+</div>
+<div class="panel-body">
+<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="fundamentals-of-r.html#cb125-1" aria-hidden="true"></a><span class="co">## create a vector x1 containing the entries 1:3</span></span>
+<span id="cb125-2"><a href="fundamentals-of-r.html#cb125-2" aria-hidden="true"></a>x1 &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">3</span></span>
+<span id="cb125-3"><a href="fundamentals-of-r.html#cb125-3" aria-hidden="true"></a></span>
+<span id="cb125-4"><a href="fundamentals-of-r.html#cb125-4" aria-hidden="true"></a><span class="co">## create a vector x2 containing the entries below</span></span>
+<span id="cb125-5"><a href="fundamentals-of-r.html#cb125-5" aria-hidden="true"></a>x2 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">7</span>, <span class="dv">5</span>, <span class="dv">6</span>)</span>
+<span id="cb125-6"><a href="fundamentals-of-r.html#cb125-6" aria-hidden="true"></a></span>
+<span id="cb125-7"><a href="fundamentals-of-r.html#cb125-7" aria-hidden="true"></a><span class="co">## create a vector x3 containing the entries below</span></span>
+<span id="cb125-8"><a href="fundamentals-of-r.html#cb125-8" aria-hidden="true"></a>x3 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">12</span>, <span class="dv">19</span>, <span class="dv">25</span>)</span>
+<span id="cb125-9"><a href="fundamentals-of-r.html#cb125-9" aria-hidden="true"></a></span>
+<span id="cb125-10"><a href="fundamentals-of-r.html#cb125-10" aria-hidden="true"></a><span class="co">## bind x1, x2 and x3 together as columns </span></span>
+<span id="cb125-11"><a href="fundamentals-of-r.html#cb125-11" aria-hidden="true"></a><span class="co">## to form a (3 x 3) matrix</span></span>
+<span id="cb125-12"><a href="fundamentals-of-r.html#cb125-12" aria-hidden="true"></a><span class="kw">cbind</span>(x1, x2, x3)</span>
+<span id="cb125-13"><a href="fundamentals-of-r.html#cb125-13" aria-hidden="true"></a></span>
+<span id="cb125-14"><a href="fundamentals-of-r.html#cb125-14" aria-hidden="true"></a><span class="co">## bind x1, x2 and x3 together as rows</span></span>
+<span id="cb125-15"><a href="fundamentals-of-r.html#cb125-15" aria-hidden="true"></a><span class="co">## to form a (3 x 3) matrix</span></span>
+<span id="cb125-16"><a href="fundamentals-of-r.html#cb125-16" aria-hidden="true"></a><span class="kw">rbind</span>(x1, x2, x3)</span></code></pre></div>
+</div>
+</div>
+</div>
+<p>Some useful commands for matrices are listed in Table <a href="fundamentals-of-r.html#tab:matfunc">3.4</a>.</p>
+<table>
+<caption><span id="tab:matfunc">Table 3.4: </span> Useful <code>matrix</code> commands in R</caption>
+<colgroup>
+<col width="15%" />
+<col width="31%" />
+<col width="52%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Function</th>
+<th align="center">Example</th>
+<th align="center">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><code>matrix()</code></td>
+<td align="center"><code>matrix(0, 3, 4)</code></td>
+<td align="center">Creates a <span class="math inline">\((3 \times 4)\)</span> matrix filled with zeros</td>
+</tr>
+<tr class="even">
+<td align="center"><code>dim()</code></td>
+<td align="center"><code>dim(mat)</code></td>
+<td align="center">Returns the dimensions of a matrix <code>mat</code> in the form (rows <span class="math inline">\(\times\)</span> columns)</td>
+</tr>
+<tr class="odd">
+<td align="center"><code>t()</code></td>
+<td align="center"><code>t(mat)</code></td>
+<td align="center">Transpose a matrix <code>mat</code></td>
+</tr>
+<tr class="even">
+<td align="center"><code>rownames()</code></td>
+<td align="center"><code>rownames(mat)</code></td>
+<td align="center">Returns or sets a vector of row names for a matrix <code>mat</code></td>
+</tr>
+<tr class="odd">
+<td align="center"><code>colnames()</code></td>
+<td align="center"><code>colnames(mat)</code></td>
+<td align="center">Returns or sets a vector of column names for a matrix <code>mat</code></td>
+</tr>
+<tr class="even">
+<td align="center"><code>cbind()</code></td>
+<td align="center"><code>cbind(v1, v2)</code></td>
+<td align="center">Binds vectors or matrices together by column</td>
+</tr>
+<tr class="odd">
+<td align="center"><code>rbind()</code></td>
+<td align="center"><code>rbind(v1, v2)</code></td>
+<td align="center">Binds vectors or matrices together by row</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="elementwise-operations" class="section level4 hasAnchor" number="3.4.3.3">
+<h4><span class="header-section-number">3.4.3.3</span> Elementwise operations<a href="fundamentals-of-r.html#elementwise-operations" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Elementwise operations also work similarly to vectors, though even more care must be taken when the vectors have different lengths.</p>
+<div class="panel panel-default">
+<div class="panel-heading">
+Task
+</div>
+<div class="panel-body">
+<p>Copy the following commands into your script file and then run them in order to see how this works. Annotate each line using comments to describe what it is doing.</p>
+<pre><code>x &lt;- matrix(1:9, 3, 3)
+x
+x * 2
+x * c(1:3)</code></pre>
+</div>
+</div>
+<button id="displayTextunnamed-chunk-79" onclick="javascript:toggle(&#39;unnamed-chunk-79&#39;);">
+Show: Solution
+</button>
+<div id="toggleTextunnamed-chunk-79" style="display: none">
+<div class="panel panel-default">
+<div class="panel-heading panel-heading1">
+Solution
+</div>
+<div class="panel-body">
+<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="fundamentals-of-r.html#cb127-1" aria-hidden="true"></a><span class="co">## create a (3 x 3) matrix x containing</span></span>
+<span id="cb127-2"><a href="fundamentals-of-r.html#cb127-2" aria-hidden="true"></a><span class="co">## the numbers 1:9 down the columns</span></span>
+<span id="cb127-3"><a href="fundamentals-of-r.html#cb127-3" aria-hidden="true"></a>x &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">9</span>, <span class="dv">3</span>, <span class="dv">3</span>)</span>
+<span id="cb127-4"><a href="fundamentals-of-r.html#cb127-4" aria-hidden="true"></a></span>
+<span id="cb127-5"><a href="fundamentals-of-r.html#cb127-5" aria-hidden="true"></a><span class="co">## print x to the screen</span></span>
+<span id="cb127-6"><a href="fundamentals-of-r.html#cb127-6" aria-hidden="true"></a>x</span>
+<span id="cb127-7"><a href="fundamentals-of-r.html#cb127-7" aria-hidden="true"></a></span>
+<span id="cb127-8"><a href="fundamentals-of-r.html#cb127-8" aria-hidden="true"></a><span class="co">## mutliply each element of x by 2</span></span>
+<span id="cb127-9"><a href="fundamentals-of-r.html#cb127-9" aria-hidden="true"></a>x <span class="op">*</span><span class="st"> </span><span class="dv">2</span></span>
+<span id="cb127-10"><a href="fundamentals-of-r.html#cb127-10" aria-hidden="true"></a></span>
+<span id="cb127-11"><a href="fundamentals-of-r.html#cb127-11" aria-hidden="true"></a><span class="co">## multiply row 1 by 1, row 2 by 2 and row 3 by 3</span></span>
+<span id="cb127-12"><a href="fundamentals-of-r.html#cb127-12" aria-hidden="true"></a>x <span class="op">*</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>)</span></code></pre></div>
+</div>
+</div>
+</div>
+</div>
+<div id="matmult" class="section level4 hasAnchor" number="3.4.3.4">
+<h4><span class="header-section-number">3.4.3.4</span> Matrix multiplication<a href="fundamentals-of-r.html#matmult" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Another key aspect of matrix manipulation that is required for many algorithms is <strong>matrix multiplication</strong>. R does this by using the <code>%*%</code> syntax. Note the differences between <strong>matrix multiplication</strong> and <strong>elementwise multiplication</strong>:</p>
+<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="fundamentals-of-r.html#cb128-1" aria-hidden="true"></a>x &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">9</span>, <span class="dv">3</span>, <span class="dv">3</span>)</span>
+<span id="cb128-2"><a href="fundamentals-of-r.html#cb128-2" aria-hidden="true"></a></span>
+<span id="cb128-3"><a href="fundamentals-of-r.html#cb128-3" aria-hidden="true"></a><span class="co">## matrix multiplication</span></span>
+<span id="cb128-4"><a href="fundamentals-of-r.html#cb128-4" aria-hidden="true"></a>x <span class="op">%*%</span><span class="st"> </span>x</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]   30   66  102
+## [2,]   36   81  126
+## [3,]   42   96  150</code></pre>
+<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="fundamentals-of-r.html#cb130-1" aria-hidden="true"></a><span class="co">## elementwise multiplication</span></span>
+<span id="cb130-2"><a href="fundamentals-of-r.html#cb130-2" aria-hidden="true"></a>x <span class="op">*</span><span class="st"> </span>x</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    1   16   49
+## [2,]    4   25   64
+## [3,]    9   36   81</code></pre>
+<p>Matrix multiplication also works with vectors. In this case the vector will be promoted to either a row or column matrix to make the two arguments conformable. If two vectors are of the same length, it will return the inner (or dot) product (as a matrix). Compare the following (taking note of the comments):</p>
+<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="fundamentals-of-r.html#cb132-1" aria-hidden="true"></a><span class="co">## setup a vector of length 3 </span></span>
+<span id="cb132-2"><a href="fundamentals-of-r.html#cb132-2" aria-hidden="true"></a>x &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">3</span></span>
+<span id="cb132-3"><a href="fundamentals-of-r.html#cb132-3" aria-hidden="true"></a></span>
+<span id="cb132-4"><a href="fundamentals-of-r.html#cb132-4" aria-hidden="true"></a><span class="co">## conduct elementwise multiplication</span></span>
+<span id="cb132-5"><a href="fundamentals-of-r.html#cb132-5" aria-hidden="true"></a>x <span class="op">*</span><span class="st"> </span>x</span></code></pre></div>
+<pre><code>## [1] 1 4 9</code></pre>
+<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="fundamentals-of-r.html#cb134-1" aria-hidden="true"></a><span class="co">## return matrix multiplication of (1 x 3) and (3 x 1) matrix</span></span>
+<span id="cb134-2"><a href="fundamentals-of-r.html#cb134-2" aria-hidden="true"></a><span class="kw">t</span>(x) <span class="op">%*%</span><span class="st"> </span>x</span></code></pre></div>
+<pre><code>##      [,1]
+## [1,]   14</code></pre>
+<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="fundamentals-of-r.html#cb136-1" aria-hidden="true"></a><span class="co">## matrix multiplication of (3 x 1) and (1 x 3) matrix</span></span>
+<span id="cb136-2"><a href="fundamentals-of-r.html#cb136-2" aria-hidden="true"></a>x <span class="op">%*%</span><span class="st"> </span><span class="kw">t</span>(x)</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    1    2    3
+## [2,]    2    4    6
+## [3,]    3    6    9</code></pre>
+<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="fundamentals-of-r.html#cb138-1" aria-hidden="true"></a><span class="co">## create new vector</span></span>
+<span id="cb138-2"><a href="fundamentals-of-r.html#cb138-2" aria-hidden="true"></a>y &lt;-<span class="st"> </span><span class="dv">5</span><span class="op">:</span><span class="dv">6</span></span>
+<span id="cb138-3"><a href="fundamentals-of-r.html#cb138-3" aria-hidden="true"></a></span>
+<span id="cb138-4"><a href="fundamentals-of-r.html#cb138-4" aria-hidden="true"></a><span class="co">## return matrix multiplication of (3 x 1) and (1 x 2) matrix</span></span>
+<span id="cb138-5"><a href="fundamentals-of-r.html#cb138-5" aria-hidden="true"></a>x <span class="op">%*%</span><span class="st"> </span><span class="kw">t</span>(y)</span></code></pre></div>
+<pre><code>##      [,1] [,2]
+## [1,]    5    6
+## [2,]   10   12
+## [3,]   15   18</code></pre>
+<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="fundamentals-of-r.html#cb140-1" aria-hidden="true"></a><span class="co">## set up some new matrices</span></span>
+<span id="cb140-2"><a href="fundamentals-of-r.html#cb140-2" aria-hidden="true"></a>x &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">6</span>, <span class="dv">3</span>, <span class="dv">2</span>)</span>
+<span id="cb140-3"><a href="fundamentals-of-r.html#cb140-3" aria-hidden="true"></a>y &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">8</span>, <span class="dv">2</span>, <span class="dv">4</span>)</span>
+<span id="cb140-4"><a href="fundamentals-of-r.html#cb140-4" aria-hidden="true"></a></span>
+<span id="cb140-5"><a href="fundamentals-of-r.html#cb140-5" aria-hidden="true"></a><span class="co">## return matrix multiplication of (3 x 2) and (2 x 4) matrix</span></span>
+<span id="cb140-6"><a href="fundamentals-of-r.html#cb140-6" aria-hidden="true"></a>x <span class="op">%*%</span><span class="st"> </span>y</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]    9   19   29   39
+## [2,]   12   26   40   54
+## [3,]   15   33   51   69</code></pre>
+</div>
+</div>
+<div id="lists" class="section level3 hasAnchor" number="3.4.4">
+<h3><span class="header-section-number">3.4.4</span> Lists<a href="fundamentals-of-r.html#lists" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>An R list is an object consisting of an ordered collection of objects known as its components (or elements). There is no particular need for the components to be of the same type (unlike vectors), and, for example, a list could consist of a numeric vector, a logical value, a matrix, a complex vector, a character array, and so on.</p>
+<p>The following command creates a list object called <code>simpsons</code>, with four components: the first two are character strings, the third is an integer, and the fourth component is a numerical vector. Try creating a list as follows:</p>
+<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="fundamentals-of-r.html#cb142-1" aria-hidden="true"></a>simpsons &lt;-<span class="st"> </span><span class="kw">list</span>(</span>
+<span id="cb142-2"><a href="fundamentals-of-r.html#cb142-2" aria-hidden="true"></a>    <span class="dt">father =</span> <span class="st">&quot;Homer&quot;</span>, </span>
+<span id="cb142-3"><a href="fundamentals-of-r.html#cb142-3" aria-hidden="true"></a>    <span class="dt">mother =</span> <span class="st">&quot;Marge&quot;</span>, </span>
+<span id="cb142-4"><a href="fundamentals-of-r.html#cb142-4" aria-hidden="true"></a>    <span class="dt">no_children =</span> <span class="dv">3</span>, </span>
+<span id="cb142-5"><a href="fundamentals-of-r.html#cb142-5" aria-hidden="true"></a>    <span class="dt">child_ages =</span> <span class="kw">c</span>(<span class="dv">10</span>, <span class="dv">8</span>, <span class="dv">1</span>)</span>
+<span id="cb142-6"><a href="fundamentals-of-r.html#cb142-6" aria-hidden="true"></a>)</span></code></pre></div>
+<p>The components of a list are always numbered and may always be referred to as such. Thus with <code>simpsons</code> above, its components may be individually referred to as <code>simpsons[[1]]</code>, <code>simpsons[[2]]</code>, <code>simpsons[[3]]</code> and <code>simpsons[[4]]</code>. Since <code>simpsons[[4]]</code> is a <strong><em>vector</em></strong>, we can access the elements of the vector using the <code>[]</code> notation (i.e. <code>simpsons[[4]][1]</code> is its first element).</p>
+<p>The command <code>length(simpsons)</code> gives the number of components it has, in this case four.</p>
+<p>The components of lists may also be named (here the names are <code>father</code>, <code>mother</code>, <code>no_children</code> and <code>child_ages</code>) and in this case the component may be referred to either by giving the component name as a character string in place of the number in double square brackets i.e. <code>simpsons[["father"]]</code> (note the double-quotes), or, more conveniently, by giving an expression of the form <code>simpsons$father</code> (note no double-quotes, since <code>father</code> is an object contained within <code>simpsons</code>).</p>
+<p>This means that the following will all return the first component of the list <code>simpsons</code>:</p>
+<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="fundamentals-of-r.html#cb143-1" aria-hidden="true"></a>simpsons[[<span class="dv">1</span>]]</span></code></pre></div>
+<pre><code>## [1] &quot;Homer&quot;</code></pre>
+<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="fundamentals-of-r.html#cb145-1" aria-hidden="true"></a>simpsons[[<span class="st">&quot;father&quot;</span>]]</span></code></pre></div>
+<pre><code>## [1] &quot;Homer&quot;</code></pre>
+<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="fundamentals-of-r.html#cb147-1" aria-hidden="true"></a>simpsons<span class="op">$</span>father</span></code></pre></div>
+<pre><code>## [1] &quot;Homer&quot;</code></pre>
+<p>The command <code>names(simpsons)</code> will return a vector of the component names of the list <code>simpsons</code>:</p>
+<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="fundamentals-of-r.html#cb149-1" aria-hidden="true"></a><span class="kw">names</span>(simpsons)</span></code></pre></div>
+<pre><code>## [1] &quot;father&quot;      &quot;mother&quot;      &quot;no_children&quot; &quot;child_ages&quot;</code></pre>
+<p>Note the strange double square bracket notation. We can also subset a list using single square brackets, though the returned object is different. For example, typing</p>
+<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="fundamentals-of-r.html#cb151-1" aria-hidden="true"></a>simpsons[<span class="dv">1</span>]</span></code></pre></div>
+<pre><code>## $father
+## [1] &quot;Homer&quot;</code></pre>
+<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="fundamentals-of-r.html#cb153-1" aria-hidden="true"></a><span class="kw">is.list</span>(simpsons[<span class="dv">1</span>])</span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<p>returns a <code>list</code> object, of length 1, where the first element of the list is called <code>father</code> and is a <code>character</code> vector. Using double square brackets returns the <code>character</code> vector itself i.e.</p>
+<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="fundamentals-of-r.html#cb155-1" aria-hidden="true"></a>simpsons[[<span class="dv">1</span>]]</span></code></pre></div>
+<pre><code>## [1] &quot;Homer&quot;</code></pre>
+<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="fundamentals-of-r.html#cb157-1" aria-hidden="true"></a><span class="kw">is.list</span>(simpsons[[<span class="dv">1</span>]])</span></code></pre></div>
+<pre><code>## [1] FALSE</code></pre>
+<p>Sometimes we might wish to extract certain components of a list, but keep a list structure, for example</p>
+<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="fundamentals-of-r.html#cb159-1" aria-hidden="true"></a>simpsons[<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>)]</span></code></pre></div>
+<pre><code>## $father
+## [1] &quot;Homer&quot;
+## 
+## $no_children
+## [1] 3</code></pre>
+<p>produces a <code>list</code> of length 2, containing two components: the first is a <code>character</code> vector called <code>father</code>, and the second is a <code>numeric</code> vector called <code>no_children</code>.</p>
+<p>Lists can be useful ways of collecting together a wide range of different bits of information that are all related. R naturally uses lists in a variety of situations but most commonly they are produced as a result of a function call. (In fact most custom classes in R are essentially lists, but with specific methods associated with that class e.g. <code>plot</code> or <code>summary</code> functions for example).</p>
+</div>
+<div id="dataframes" class="section level3 hasAnchor" number="3.4.5">
+<h3><span class="header-section-number">3.4.5</span> Data frames<a href="fundamentals-of-r.html#dataframes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>A <code>data.frame</code> object is a special type of list where all of the components are in some sense the same size. The simplest form of <code>data.frame</code> consists of a list of vectors all of the same length, but not necessarily of the same type (<code>numeric</code>, <code>character</code> or <code>logical</code>). In this case a <code>data.frame</code> object may be regarded as a matrix with columns for each vector. It can be displayed in a matrix layout, and the data in its rows and columns extracted
+using the matrix subsetting notation (<code>[ROWS, COLS]</code>). (However, because it is also a special type of <code>list</code>, we can also extract columns by using the <code>DFNAME$COLNAME</code> notation, where <code>DFNAME</code> is the name of the <code>data.frame</code> of interest, and <code>COLNAME</code> is the name of a specific column. The <code>[[]]</code> notation also works for <code>data.frame</code> objects.)</p>
+<p>The important difference (to R at least) between a <code>matrix</code> object and a <code>data.frame</code> object that only contains <code>numeric</code> vectors, is that R thinks of the matrix as a single object, but it thinks of the <code>data.frame</code> as several connected, but distinct objects. (To the user it can be hard to distinguish between objects, and the commands <code>is.matrix()</code>, <code>is.list()</code> and <code>is.data.frame()</code> will return <code>TRUE</code> or <code>FALSE</code> depending on whether an object is a <code>matrix</code>, a <code>list</code> or <code>data.frame</code> respectively.)</p>
+<p><code>data.frames</code> are very important for statistical analysis, as they frequently fit the form of available data. They are so important in fact that a lot of statistical functions actually expect this, and we devote an entire later practical to reading, summarising, plotting and manipulating data.</p>
+</div>
+</div>
+<div id="save" class="section level2 hasAnchor" number="3.5">
+<h2><span class="header-section-number">3.5</span> Saving outputs<a href="fundamentals-of-r.html#save" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>R allows you to save various things, with regards to inputs we can save:</p>
+<ul>
+<li>the full history of all commands used in the current session—via <code>savehistory()</code>. This creates text files with ‘.Rhistory’ suffixes.</li>
+<li>Individual script files (as text files with ‘.R’ suffixes). We’ve already seen these.</li>
+</ul>
+<p>With regards to outputs we can save:</p>
+<ul>
+<li>the current R workspace—via <code>save.image()</code>. This creates a <strong>binary</strong> file with a ‘.RData’ suffix. This can be reloaded into R using the <code>load()</code> function, and includes all objects in the current workspace.</li>
+<li>A selection of objects—via the <code>save()</code> function. Here we can extract subsets of objects and save them. For example, <code>save(x, y, file = "practical1.RData")</code> will save only the objects <code>x</code> and <code>y</code> into a file called “practical1.RData”. Alternatively a character vector of objects can be supplied e.g. <code>save(list = c("x", "y"), file = "practical1.RData")</code> will do the same thing as the previous command.</li>
+<li>A single object can be saved using <code>saveRDS()</code>. This saves into a binary file with a suffix ‘.rds’. This is really useful for saving single objects, often cleaned <code>data.frame</code> objects, which can be loaded into R without having to recreate from a ‘.csv’ file for example. For example, <code>saveRDS(x, "x.rds")</code> would save the <code>x</code> object into a file called “x.rds”. This can be loaded into a new session via the <code>readRDS()</code> function. Another useful feature is that <code>readRDS()</code> can be used to pass the contents of a .rds file directly into an object of your choice e.g. <code>y &lt;- readRDS("x.rds")</code> will create a new object called <code>y</code>, that contains the contents of the file “x.rds”.</li>
+</ul>
+</div>
+<div id="reading-in-data" class="section level2 hasAnchor" number="3.6">
+<h2><span class="header-section-number">3.6</span> Reading in data<a href="fundamentals-of-r.html#reading-in-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Most data are stored in e.g. Excel files. Although some packages allow Excel files to be read directly into R, it is (in my opinion) much better practice to save the data as a <strong>text file</strong>, since this strips out unnecessary formatting and results in smaller file that can be universally used by any end user. Excel also has lots of other problems; see e.g. <a href="https://nsaunders.wordpress.com/2016/08/25/data-corruption-using-excel-12-years-and-counting/">here</a>.</p>
+<blockquote>
+<p><strong>Aside</strong>: You can save Excel spreadsheets as comma-separated text files using e.g. <em>File &gt; Save As &gt; …</em>, then from the ‘Save as type’ options choose ‘CSV (comma separated)’. There is no need to add a suffix, because Excel will automatically add ‘.csv’ to your file name.</p>
+</blockquote>
+<p>.csv files can be read into R directly as <code>data.frame</code> objects, using the <code>read.csv()</code> function.</p>
+<blockquote>
+<p><strong>Note</strong>: A .csv file is simply a text file where each element is separated by a comma (the delimiter). This can be easily viewed and manipulated in any text editor (such as Notepad). Many R users prefer to use ‘Text – Tab delimited’ data files. In this case each entry is delimited by a tab. In fact, one can use any delimiter one prefers, but I often prefer commas, which are so common they have their own suffix! If you choose the tab-delimited route, you have to be <strong>extra careful</strong> about spaces between words in your spreadsheet, and to read the data file into R you should use <code>read.table()</code> instead of <code>read.csv()</code> (where you can explicitly specify the delimiter as an argument to the function). This is similarly true if using .csv files: one must be careful not to include entries with commas in them.</p>
+</blockquote>
+<blockquote>
+<p><strong>Note</strong>: <code>read.csv()</code> might fail if there are any spaces between words within data cells. If this happens, replace all these spaces by underscores <code>_</code> before saving the spreadsheet in Excel.</p>
+</blockquote>
+<p>In fact, it is good practice to store your data in a much simpler way than many people are used to. Generally, try to avoid spaces between words at all in your data, even in column headers. Underscores are much safer. Try to avoid using long words (since you will have to type them out each time you want to access the corresponding elements), and often I will try to convert as much to lower case as possible (since R is case sensitive, so it speeds up your typing).</p>
+<p>Download a sample data file: <a href="https://exeter-data-analytics.github.io/IntroToR/worms.csv">worms.csv</a>. We can load this into R using the <code>read.csv()</code> function, here storing the resulting <code>data.frame</code> as an R object called <code>worms</code>:</p>
+<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="fundamentals-of-r.html#cb161-1" aria-hidden="true"></a>worms &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;worms.csv&quot;</span>)</span></code></pre></div>
+<blockquote>
+<p>If R can’t find the file, check it’s in the working directory, or pass the full path to <code>read.csv()</code>.</p>
+</blockquote>
+<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="fundamentals-of-r.html#cb162-1" aria-hidden="true"></a><span class="kw">head</span>(worms)</span></code></pre></div>
+<pre><code>##        Field.Name Area Slope Vegetation Soil.pH  Damp Worm.density
+## 1     Nashs Field  3.6    11  Grassland     4.1 FALSE            4
+## 2  Silwood Bottom  5.1     2     Arable     5.2 FALSE            7
+## 3   Nursery Field  2.8     3  Grassland     4.3 FALSE            2
+## 4     Rush Meadow  2.4     5     Meadow     4.9  TRUE            5
+## 5 Gunness Thicket  3.8     0      Scrub     4.2 FALSE            6
+## 6        Oak Mead  3.1     2  Grassland     3.9 FALSE            2</code></pre>
+<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="fundamentals-of-r.html#cb164-1" aria-hidden="true"></a><span class="kw">summary</span>(worms)</span></code></pre></div>
+<pre><code>##   Field.Name             Area           Slope        Vegetation       
+##  Length:20          Min.   :0.800   Min.   : 0.00   Length:20         
+##  Class :character   1st Qu.:2.175   1st Qu.: 0.75   Class :character  
+##  Mode  :character   Median :3.000   Median : 2.00   Mode  :character  
+##                     Mean   :2.990   Mean   : 3.50                     
+##                     3rd Qu.:3.725   3rd Qu.: 5.25                     
+##                     Max.   :5.100   Max.   :11.00                     
+##     Soil.pH         Damp          Worm.density 
+##  Min.   :3.500   Mode :logical   Min.   :0.00  
+##  1st Qu.:4.100   FALSE:14        1st Qu.:2.00  
+##  Median :4.600   TRUE :6         Median :4.00  
+##  Mean   :4.555                   Mean   :4.35  
+##  3rd Qu.:5.000                   3rd Qu.:6.25  
+##  Max.   :5.700                   Max.   :9.00</code></pre>
+<p>Looking at the data we can see a number of things:</p>
+<ul>
+<li>Since the original data had spaces in the column names, these spaces have been replaced by dots.</li>
+<li>Columns that can be converted into numbers in sensible ways are stored as such (e.g. the <code>Area</code> column). You can tell this because the <code>summary()</code> function returns numerical summaries.</li>
+<li>Columns that can be converted into logical objects are stored as such (e.g. the <code>Damp</code> column).</li>
+<li>Columns that can’t be easily converted are stored as <code>factor</code>s (e.g. the <code>Vegetation</code> column). You can tell this because the <code>summary()</code> function returns counts of observations in each group.</li>
+</ul>
+<p>These defaults can be useful sometimes for finding errors. For example, if a column of numbers contains a typo that prevents an entry from being converted to a number, then the whole column will be read in as a <code>factor()</code>. Thus if you spot this you can often track down the typo and correct it. Please see the section on <a href="fundamentals-of-r.html#convert">converting between types</a> for further details on how to manually convert between types.</p>
+<blockquote>
+<p><strong>Important</strong>: it is a good idea to always check and read-in data to ensure each column is in the correct format before progressing any further with your analysis. A common error is that often categorical variables are coded as numbers. For example, a data set might contain numbers <code>0</code> or <code>1</code> to denote e.g. died/survived. In this case R will read the column in as a <code>numeric</code>, when it should be a <code>factor</code>. In this case you would want to manually convert your column to a <code>factor</code> before proceeding.</p>
+</blockquote>
+<p>Objects saved as an <a href="fundamentals-of-r.html#save">‘.rds’ file</a> can be read in and assigned to objects using the <code>readRDS()</code> function e.g.</p>
+<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="fundamentals-of-r.html#cb166-1" aria-hidden="true"></a><span class="co">## save worms data frame as an .rds file</span></span>
+<span id="cb166-2"><a href="fundamentals-of-r.html#cb166-2" aria-hidden="true"></a><span class="kw">saveRDS</span>(worms, <span class="st">&quot;worms.rds&quot;</span>)</span>
+<span id="cb166-3"><a href="fundamentals-of-r.html#cb166-3" aria-hidden="true"></a></span>
+<span id="cb166-4"><a href="fundamentals-of-r.html#cb166-4" aria-hidden="true"></a><span class="co">## read in as a new object</span></span>
+<span id="cb166-5"><a href="fundamentals-of-r.html#cb166-5" aria-hidden="true"></a>worms1 &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class="st">&quot;worms.rds&quot;</span>)</span></code></pre></div>
+<p>Here the new <code>worms1</code> object is identical to the original <code>worms</code> object. I often read in .csv files, clean them up into the correct formats, and then save as an .rds file for further analysis. Since the .rds file stores R objects directly, then reading in the .rds file means I don’t have to do all the cleaning up again.</p>
+<p>Alternative approaches can be found in other packages, and indeed a good package is <code>readr</code>, which is part of the <code>tidyverse</code> suite of packages, which we will introduce in the <a href="https://exeter-data-analytics.github.io/AdVis/index.html">Advanced Visualisation and Data Wrangling tutorials</a>—see <a href="https://github.com/rstudio/cheatsheets/raw/master/data-import.pdf">here</a> for a useful cheat sheet. Some other options can be found <a href="http://www.r-tutor.com/r-introduction/data-frame/data-import">here</a>.</p>
+
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="2">
+<li id="fn2"><p>Some people also use dots, e.g. <code>child.heights</code>, but in general I would avoid this, since dots are often used when working with functions of specific classes such as <code>print.lm()</code><a href="fundamentals-of-r.html#fnref2" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="getting-started-in-r.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="programming-in-r.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": null,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

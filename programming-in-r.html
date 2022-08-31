@@ -1,0 +1,1136 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>4 Programming in R | Introduction to R</title>
+  <meta name="description" content="4 Programming in R | Introduction to R Tutorial" />
+  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="4 Programming in R | Introduction to R" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="4 Programming in R | Introduction to R Tutorial" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="4 Programming in R | Introduction to R" />
+  
+  <meta name="twitter:description" content="4 Programming in R | Introduction to R Tutorial" />
+  
+
+<meta name="author" content="TJ McKinley" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="fundamentals-of-r.html"/>
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script language="javascript"> 
+    function toggle(id) {
+        var ele = document.getElementById("toggleText" + id);
+        var text = document.getElementById("displayText" + id);
+        var buttonText = text.innerHTML.replace("Show: ", "");
+        buttonText = buttonText.replace("Hide: ", "");
+        if(ele.style.display == "block") {
+            ele.style.display = "none";
+            text.innerHTML = "Show: " + buttonText;
+        } else {
+            ele.style.display = "block";
+            text.innerHTML = "Hide: " + buttonText;
+        }
+    } 
+</script>
+
+<script language="javascript">
+    function openCode(evt, codeName, id) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent" + id);
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablinks" + id);
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        document.getElementById(codeName).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
+</script>
+
+<script language="javascript">
+    function hide(id){
+        document.getElementById(id).style.display = "none";
+    }
+</script>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i>Acknowledgements</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#recommended-reading"><i class="fa fa-check"></i>Recommended reading</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#structure-of-this-workshop"><i class="fa fa-check"></i>Structure of this workshop</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#tasks"><i class="fa fa-check"></i>Tasks</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="whatIsR.html"><a href="whatIsR.html"><i class="fa fa-check"></i><b>1</b> What is R?</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="whatIsR.html"><a href="whatIsR.html#installing-r-and-rstudio"><i class="fa fa-check"></i><b>1.1</b> Installing R and RStudio</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="getting-started-in-r.html"><a href="getting-started-in-r.html"><i class="fa fa-check"></i><b>2</b> Getting Started in R</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="getting-started-in-r.html"><a href="getting-started-in-r.html#rstudio"><i class="fa fa-check"></i><b>2.1</b> RStudio</a></li>
+<li class="chapter" data-level="2.2" data-path="getting-started-in-r.html"><a href="getting-started-in-r.html#cheat-sheets"><i class="fa fa-check"></i><b>2.2</b> Cheat Sheets</a></li>
+<li class="chapter" data-level="2.3" data-path="getting-started-in-r.html"><a href="getting-started-in-r.html#setup"><i class="fa fa-check"></i><b>2.3</b> Setting up an R session</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="getting-started-in-r.html"><a href="getting-started-in-r.html#console-pane"><i class="fa fa-check"></i><b>2.3.1</b> Console Pane</a></li>
+<li class="chapter" data-level="2.3.2" data-path="getting-started-in-r.html"><a href="getting-started-in-r.html#script"><i class="fa fa-check"></i><b>2.3.2</b> Script pane and R scripts</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="getting-started-in-r.html"><a href="getting-started-in-r.html#packages"><i class="fa fa-check"></i><b>2.4</b> R packages</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="getting-started-in-r.html"><a href="getting-started-in-r.html#installing-archived-versions-of-a-package"><i class="fa fa-check"></i><b>2.4.1</b> Installing archived versions of a package</a></li>
+<li class="chapter" data-level="2.4.2" data-path="getting-started-in-r.html"><a href="getting-started-in-r.html#development-packages"><i class="fa fa-check"></i><b>2.4.2</b> Development packages</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="fundamentals-of-r.html"><a href="fundamentals-of-r.html"><i class="fa fa-check"></i><b>3</b> Fundamentals of R</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="fundamentals-of-r.html"><a href="fundamentals-of-r.html#variables-in-r"><i class="fa fa-check"></i><b>3.1</b> Variables in R</a></li>
+<li class="chapter" data-level="3.2" data-path="fundamentals-of-r.html"><a href="fundamentals-of-r.html#functions-in-r"><i class="fa fa-check"></i><b>3.2</b> Functions in R</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="fundamentals-of-r.html"><a href="fundamentals-of-r.html#nested"><i class="fa fa-check"></i><b>3.2.1</b> Nesting functions</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="fundamentals-of-r.html"><a href="fundamentals-of-r.html#help"><i class="fa fa-check"></i><b>3.3</b> Help files</a></li>
+<li class="chapter" data-level="3.4" data-path="fundamentals-of-r.html"><a href="fundamentals-of-r.html#objects-in-r"><i class="fa fa-check"></i><b>3.4</b> Objects in R</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="fundamentals-of-r.html"><a href="fundamentals-of-r.html#vectors"><i class="fa fa-check"></i><b>3.4.1</b> Vectors</a></li>
+<li class="chapter" data-level="3.4.2" data-path="fundamentals-of-r.html"><a href="fundamentals-of-r.html#convert"><i class="fa fa-check"></i><b>3.4.2</b> Conversions between object types</a></li>
+<li class="chapter" data-level="3.4.3" data-path="fundamentals-of-r.html"><a href="fundamentals-of-r.html#matrix"><i class="fa fa-check"></i><b>3.4.3</b> Matrices</a></li>
+<li class="chapter" data-level="3.4.4" data-path="fundamentals-of-r.html"><a href="fundamentals-of-r.html#lists"><i class="fa fa-check"></i><b>3.4.4</b> Lists</a></li>
+<li class="chapter" data-level="3.4.5" data-path="fundamentals-of-r.html"><a href="fundamentals-of-r.html#dataframes"><i class="fa fa-check"></i><b>3.4.5</b> Data frames</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="fundamentals-of-r.html"><a href="fundamentals-of-r.html#save"><i class="fa fa-check"></i><b>3.5</b> Saving outputs</a></li>
+<li class="chapter" data-level="3.6" data-path="fundamentals-of-r.html"><a href="fundamentals-of-r.html#reading-in-data"><i class="fa fa-check"></i><b>3.6</b> Reading in data</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="programming-in-r.html"><a href="programming-in-r.html"><i class="fa fa-check"></i><b>4</b> Programming in R</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="programming-in-r.html"><a href="programming-in-r.html#loops"><i class="fa fa-check"></i><b>4.1</b> Loops</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="programming-in-r.html"><a href="programming-in-r.html#for-loops"><i class="fa fa-check"></i><b>4.1.1</b> <code>for</code> loops</a></li>
+<li class="chapter" data-level="4.1.2" data-path="programming-in-r.html"><a href="programming-in-r.html#while-loops"><i class="fa fa-check"></i><b>4.1.2</b> <code>while</code> loops</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="programming-in-r.html"><a href="programming-in-r.html#conditional-statements"><i class="fa fa-check"></i><b>4.2</b> Conditional statements</a></li>
+<li class="chapter" data-level="4.3" data-path="programming-in-r.html"><a href="programming-in-r.html#user-defined-functions"><i class="fa fa-check"></i><b>4.3</b> User defined functions</a></li>
+<li class="chapter" data-level="4.4" data-path="programming-in-r.html"><a href="programming-in-r.html#using-apply-functions"><i class="fa fa-check"></i><b>4.4</b> Using <code>apply()</code> functions</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="programming-in-r.html"><a href="programming-in-r.html#apply"><i class="fa fa-check"></i><b>4.4.1</b> <code>apply()</code></a></li>
+<li class="chapter" data-level="4.4.2" data-path="programming-in-r.html"><a href="programming-in-r.html#lapply-and-sapply"><i class="fa fa-check"></i><b>4.4.2</b> <code>lapply()</code> and <code>sapply()</code></a></li>
+<li class="chapter" data-level="4.4.3" data-path="programming-in-r.html"><a href="programming-in-r.html#tapply"><i class="fa fa-check"></i><b>4.4.3</b> <code>tapply()</code></a></li>
+</ul></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introduction to R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="programming-in-r" class="section level1 hasAnchor" number="4">
+<h1><span class="header-section-number">4</span> Programming in R<a href="programming-in-r.html#programming-in-r" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>The popularity of R is in part due to its fantastic statistical packages and extremely flexible graphical capabilities. It is often easy to forget that it is a fully functional programming language in its own right. In this part of the practical we cover how to implement some standard programming practices, such as <code>for</code> and <code>while</code> loops, conditional <code>if</code> statements and so on.</p>
+<blockquote>
+<p>As previously stated, R is a <strong>high-level</strong> language, and as such does not require the same level of code complexity to work. For example, it is not necessary to differentiate between <code>integer</code>, <code>float</code> and <code>double</code> types for numerical arrays. It is also not necessary to declare objects in advance of using them—you can create objects ‘on-the-fly’, and even change an object type without any memory reallocation. In addition, R has many <a href="https://cran.r-project.org/">packages</a> which provide <strong>functions</strong> to implement a huge number of different algorithms or analyses etc. The cost of this functionality is <strong>speed</strong>. For example, a <code>for</code> loop written in native R code will generally be <strong><em>much</em></strong> slower than an equivalent loop written in C. For simple problems this difference is often practically negligible, and is often counter-balanced against the fact that R code is usually significantly faster to write. For complex, highly computationally demanding algorithms, this difference can be highly significant. Many R functions get around this by virtue of being written in C (or Fortran), and simply providing a user-friendly interface to a fast C executable. We have already seen examples of this for functions such as <code>mean()</code> and <code>sum()</code>.</p>
+</blockquote>
+<p>Often, native R code is very useful to know, and so the following sections inroduce some (hopefully) familiar concepts in the context of R.</p>
+<div id="loops" class="section level2 hasAnchor" number="4.1">
+<h2><span class="header-section-number">4.1</span> Loops<a href="programming-in-r.html#loops" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>R has implementations of both <code>for</code> and <code>while</code> loops. For example,</p>
+<div id="for-loops" class="section level3 hasAnchor" number="4.1.1">
+<h3><span class="header-section-number">4.1.1</span> <code>for</code> loops<a href="programming-in-r.html#for-loops" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="programming-in-r.html#cb167-1" aria-hidden="true"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>){ </span>
+<span id="cb167-2"><a href="programming-in-r.html#cb167-2" aria-hidden="true"></a>    <span class="kw">print</span>(i) </span>
+<span id="cb167-3"><a href="programming-in-r.html#cb167-3" aria-hidden="true"></a>}</span></code></pre></div>
+<pre><code>## [1] 1
+## [1] 2
+## [1] 3
+## [1] 4
+## [1] 5
+## [1] 6
+## [1] 7
+## [1] 8
+## [1] 9
+## [1] 10</code></pre>
+<p>This command creates an object <code>i</code>, which takes the values in the vector <code>1:10</code> in turn, and prints each to the screen. Notice that we wrote this entire loop on a single line. The curly brackets <code>{}</code> delineate the contents of the loop. A more complex example is</p>
+<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="programming-in-r.html#cb169-1" aria-hidden="true"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>) {</span>
+<span id="cb169-2"><a href="programming-in-r.html#cb169-2" aria-hidden="true"></a>    <span class="co">## generate 10 random numbers</span></span>
+<span id="cb169-3"><a href="programming-in-r.html#cb169-3" aria-hidden="true"></a>    <span class="co">## uniformly between 0 and 1</span></span>
+<span id="cb169-4"><a href="programming-in-r.html#cb169-4" aria-hidden="true"></a>    x &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">10</span>)</span>
+<span id="cb169-5"><a href="programming-in-r.html#cb169-5" aria-hidden="true"></a>    </span>
+<span id="cb169-6"><a href="programming-in-r.html#cb169-6" aria-hidden="true"></a>    <span class="co">## calculate the mean</span></span>
+<span id="cb169-7"><a href="programming-in-r.html#cb169-7" aria-hidden="true"></a>    x &lt;-<span class="st"> </span><span class="kw">mean</span>(x)</span>
+<span id="cb169-8"><a href="programming-in-r.html#cb169-8" aria-hidden="true"></a>    </span>
+<span id="cb169-9"><a href="programming-in-r.html#cb169-9" aria-hidden="true"></a>    <span class="co">## print the mean to the screen</span></span>
+<span id="cb169-10"><a href="programming-in-r.html#cb169-10" aria-hidden="true"></a>    <span class="kw">print</span>(x)</span>
+<span id="cb169-11"><a href="programming-in-r.html#cb169-11" aria-hidden="true"></a>}</span></code></pre></div>
+<pre><code>## [1] 0.5455448
+## [1] 0.4690436
+## [1] 0.5321327
+## [1] 0.6748452
+## [1] 0.5085469
+## [1] 0.5547003
+## [1] 0.4563259
+## [1] 0.6409085
+## [1] 0.462969
+## [1] 0.4955541</code></pre>
+<p>Here I’ve included comments in the loop itself. Of course it is also possible to use nested functions to write this more concisely.</p>
+<div class="panel panel-default">
+<div class="panel-heading">
+Task
+</div>
+<div class="panel-body">
+Write the above <code>for</code> loop using nested functions. You should be able to fit the content of the loop on a single line. Why does your code print different values to before?
+</div>
+</div>
+<button id="displayTextunnamed-chunk-91" onclick="javascript:toggle(&#39;unnamed-chunk-91&#39;);">
+Show: Solution
+</button>
+<div id="toggleTextunnamed-chunk-91" style="display: none">
+<div class="panel panel-default">
+<div class="panel-heading panel-heading1">
+Solution
+</div>
+<div class="panel-body">
+<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="programming-in-r.html#cb171-1" aria-hidden="true"></a><span class="co">## the code can be condensed to a single line</span></span>
+<span id="cb171-2"><a href="programming-in-r.html#cb171-2" aria-hidden="true"></a><span class="co">## using nested functions. The answers are different</span></span>
+<span id="cb171-3"><a href="programming-in-r.html#cb171-3" aria-hidden="true"></a><span class="co">## because each line generates a different set of </span></span>
+<span id="cb171-4"><a href="programming-in-r.html#cb171-4" aria-hidden="true"></a><span class="co">## random numbers - the replicate we would need</span></span>
+<span id="cb171-5"><a href="programming-in-r.html#cb171-5" aria-hidden="true"></a><span class="co">## to set the seed</span></span>
+<span id="cb171-6"><a href="programming-in-r.html#cb171-6" aria-hidden="true"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>) { </span>
+<span id="cb171-7"><a href="programming-in-r.html#cb171-7" aria-hidden="true"></a>    <span class="kw">print</span>(<span class="kw">mean</span>(<span class="kw">runif</span>(<span class="dv">10</span>))) </span>
+<span id="cb171-8"><a href="programming-in-r.html#cb171-8" aria-hidden="true"></a>}</span></code></pre></div>
+</div>
+</div>
+</div>
+<blockquote>
+<p><strong>Note</strong>: for single line pieces of code, it is not always necessary to use curly brackets <code>{}</code> to delineate the loop. However, it is a good habit to get into, and saves lots of simple errors. Hence, in this workshop I will insist you always delineate loops and if/else statments using curly brackets. Please let me know if I’ve missed any!</p>
+</blockquote>
+<blockquote>
+<p><strong>Note</strong>: the use of <strong>indentation</strong> to delineate what is inside of the <code>for</code> loop. This is not necessary for R to work, but in my opinion greatly helps the comprehension of the code. Along with comments and spacing, this is a useful habit to get into, and I insist upon it here. Some people prefer to place the leading bracket on a different line to the <code>for</code> statement e.g. something like:</p>
+<pre><code>for(i in 1:10) 
+{
+    x &lt;- runif(10)
+    print(x)
+}</code></pre>
+<p>I would support either approach above, but something like
+```
+for(i in 1:10)
+{
+x &lt;- runif(10)
+print(x)
+}</p>
+</blockquote>
+<pre><code>&gt; is bad programming practice (in my opinion).
+&gt; 
+&gt; For those of you who are used to Python, please note that the indentations are not necessary in R, however for multi-line environments you must enclose all of the environment in curly brackets!
+    
+Loops can also be **nested**:
+
+
+```r
+for(i in 1:3) {
+    for(j in 1:3) { 
+        print(c(i, j))
+    }
+}</code></pre>
+<pre><code>## [1] 1 1
+## [1] 1 2
+## [1] 1 3
+## [1] 2 1
+## [1] 2 2
+## [1] 2 3
+## [1] 3 1
+## [1] 3 2
+## [1] 3 3</code></pre>
+<div class="panel panel-default">
+<div class="panel-heading">
+Task
+</div>
+<div class="panel-body">
+Write a piece of R code, using nested <code>for</code> loops, that transposes a 3 <span class="math inline">\(\times\)</span> 3 matrix. Test it on the matrix <code>x &lt;- matrix(1:9, 3, 3)</code>
+</div>
+</div>
+<button id="displayTextunnamed-chunk-94" onclick="javascript:toggle(&#39;unnamed-chunk-94&#39;);">
+Show: Solution
+</button>
+<div id="toggleTextunnamed-chunk-94" style="display: none">
+<div class="panel panel-default">
+<div class="panel-heading panel-heading1">
+Solution
+</div>
+<div class="panel-body">
+<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb175-1"><a href="programming-in-r.html#cb175-1" aria-hidden="true"></a><span class="co">## create x matrix</span></span>
+<span id="cb175-2"><a href="programming-in-r.html#cb175-2" aria-hidden="true"></a>x &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">9</span>, <span class="dv">3</span>, <span class="dv">3</span>)</span>
+<span id="cb175-3"><a href="programming-in-r.html#cb175-3" aria-hidden="true"></a>x</span>
+<span id="cb175-4"><a href="programming-in-r.html#cb175-4" aria-hidden="true"></a></span>
+<span id="cb175-5"><a href="programming-in-r.html#cb175-5" aria-hidden="true"></a><span class="co">## there are lots of ways to do this</span></span>
+<span id="cb175-6"><a href="programming-in-r.html#cb175-6" aria-hidden="true"></a><span class="co">## I have created a dummy matrix, populated it</span></span>
+<span id="cb175-7"><a href="programming-in-r.html#cb175-7" aria-hidden="true"></a><span class="co">## and then saved over the original</span></span>
+<span id="cb175-8"><a href="programming-in-r.html#cb175-8" aria-hidden="true"></a>xt &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">0</span>, <span class="dv">3</span>, <span class="dv">3</span>)</span>
+<span id="cb175-9"><a href="programming-in-r.html#cb175-9" aria-hidden="true"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>) {</span>
+<span id="cb175-10"><a href="programming-in-r.html#cb175-10" aria-hidden="true"></a>    <span class="cf">for</span>(j <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>) {</span>
+<span id="cb175-11"><a href="programming-in-r.html#cb175-11" aria-hidden="true"></a>        xt[i, j] &lt;-<span class="st"> </span>x[j, i]</span>
+<span id="cb175-12"><a href="programming-in-r.html#cb175-12" aria-hidden="true"></a>    }</span>
+<span id="cb175-13"><a href="programming-in-r.html#cb175-13" aria-hidden="true"></a>}</span>
+<span id="cb175-14"><a href="programming-in-r.html#cb175-14" aria-hidden="true"></a>x &lt;-<span class="st"> </span>xt</span>
+<span id="cb175-15"><a href="programming-in-r.html#cb175-15" aria-hidden="true"></a><span class="kw">rm</span>(xt)</span>
+<span id="cb175-16"><a href="programming-in-r.html#cb175-16" aria-hidden="true"></a>x</span></code></pre></div>
+</div>
+</div>
+</div>
+<blockquote>
+<p><strong>Note</strong>: <code>for</code> loops in R can loop over any type of vector, not just sequential indices. For example,</p>
+<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb176-1"><a href="programming-in-r.html#cb176-1" aria-hidden="true"></a>letters[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>]</span></code></pre></div>
+<pre><code>## [1] &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; &quot;e&quot;</code></pre>
+<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="programming-in-r.html#cb178-1" aria-hidden="true"></a><span class="cf">for</span>(i <span class="cf">in</span> letters[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>]) {</span>
+<span id="cb178-2"><a href="programming-in-r.html#cb178-2" aria-hidden="true"></a>  <span class="kw">print</span>(i)</span>
+<span id="cb178-3"><a href="programming-in-r.html#cb178-3" aria-hidden="true"></a>}</span></code></pre></div>
+<pre><code>## [1] &quot;a&quot;
+## [1] &quot;b&quot;
+## [1] &quot;c&quot;
+## [1] &quot;d&quot;
+## [1] &quot;e&quot;</code></pre>
+</blockquote>
+</div>
+<div id="while-loops" class="section level3 hasAnchor" number="4.1.2">
+<h3><span class="header-section-number">4.1.2</span> <code>while</code> loops<a href="programming-in-r.html#while-loops" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>R’s <code>while</code> statement works in a similar way. The loop continues until some logical statement is met. For example,</p>
+<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="programming-in-r.html#cb180-1" aria-hidden="true"></a>i &lt;-<span class="st"> </span><span class="dv">1</span></span>
+<span id="cb180-2"><a href="programming-in-r.html#cb180-2" aria-hidden="true"></a><span class="cf">while</span>(i <span class="op">&lt;</span><span class="st"> </span><span class="dv">5</span>){</span>
+<span id="cb180-3"><a href="programming-in-r.html#cb180-3" aria-hidden="true"></a>    <span class="kw">print</span>(i)</span>
+<span id="cb180-4"><a href="programming-in-r.html#cb180-4" aria-hidden="true"></a>    i &lt;-<span class="st"> </span>i <span class="op">+</span><span class="st"> </span><span class="dv">1</span></span>
+<span id="cb180-5"><a href="programming-in-r.html#cb180-5" aria-hidden="true"></a>}</span></code></pre></div>
+<pre><code>## [1] 1
+## [1] 2
+## [1] 3
+## [1] 4</code></pre>
+<blockquote>
+<p><strong>Note</strong>: R doesn’t have a <code>++</code> operator like C. In addition notice that the <code>i</code> variable had to be initialised in advance of the loop, so that the <code>while</code> statement could be evaluated. The <code>i</code> variable is then incremented during the loop.</p>
+</blockquote>
+<blockquote>
+<p><strong>Warning</strong>: a common coding error is to create <strong>infinite</strong> loops. You must take care to ensure that the loop will eventually end. For example, the following code will produce an infinite loop. Why?</p>
+<pre><code>i &lt;- 1
+while(i &lt; 5) { 
+   print(i) 
+ }</code></pre>
+</blockquote>
+<div class="panel panel-default">
+<div class="panel-heading">
+Task
+</div>
+<div class="panel-body">
+Write a <code>while</code> loop that generates a uniform random number between 0 and 1 (use the <code>runif()</code> function), until a number of &gt; 0.9 is obtained.
+</div>
+</div>
+<button id="displayTextunnamed-chunk-98" onclick="javascript:toggle(&#39;unnamed-chunk-98&#39;);">
+Show: Solution
+</button>
+<div id="toggleTextunnamed-chunk-98" style="display: none">
+<div class="panel panel-default">
+<div class="panel-heading panel-heading1">
+Solution
+</div>
+<div class="panel-body">
+<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb183-1"><a href="programming-in-r.html#cb183-1" aria-hidden="true"></a><span class="co">## set initial value to arbitrary value to enable</span></span>
+<span id="cb183-2"><a href="programming-in-r.html#cb183-2" aria-hidden="true"></a><span class="co">## while loop to initialise</span></span>
+<span id="cb183-3"><a href="programming-in-r.html#cb183-3" aria-hidden="true"></a>x &lt;-<span class="st"> </span><span class="dv">0</span></span>
+<span id="cb183-4"><a href="programming-in-r.html#cb183-4" aria-hidden="true"></a><span class="cf">while</span>(x <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.9</span>) {</span>
+<span id="cb183-5"><a href="programming-in-r.html#cb183-5" aria-hidden="true"></a>    x &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">1</span>)</span>
+<span id="cb183-6"><a href="programming-in-r.html#cb183-6" aria-hidden="true"></a>}</span>
+<span id="cb183-7"><a href="programming-in-r.html#cb183-7" aria-hidden="true"></a>x</span></code></pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="conditional-statements" class="section level2 hasAnchor" number="4.2">
+<h2><span class="header-section-number">4.2</span> Conditional statements<a href="programming-in-r.html#conditional-statements" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>R also supports conditional statements, such as <code>if</code> and <code>else</code>. These help the code to change its path depending on whether a condition is true or false. For example:</p>
+<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="programming-in-r.html#cb184-1" aria-hidden="true"></a>y &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">1</span>)</span>
+<span id="cb184-2"><a href="programming-in-r.html#cb184-2" aria-hidden="true"></a><span class="cf">if</span>(y <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.5</span>) {</span>
+<span id="cb184-3"><a href="programming-in-r.html#cb184-3" aria-hidden="true"></a>    <span class="kw">print</span>(<span class="st">&quot;y is &lt; 0.5&quot;</span>)</span>
+<span id="cb184-4"><a href="programming-in-r.html#cb184-4" aria-hidden="true"></a>} <span class="cf">else</span> {</span>
+<span id="cb184-5"><a href="programming-in-r.html#cb184-5" aria-hidden="true"></a>    <span class="kw">print</span>(<span class="st">&quot;y is &gt;= 0.5&quot;</span>)</span>
+<span id="cb184-6"><a href="programming-in-r.html#cb184-6" aria-hidden="true"></a>}</span></code></pre></div>
+<pre><code>## [1] &quot;y is &lt; 0.5&quot;</code></pre>
+<blockquote>
+<p><strong>Note</strong>: that the <code>else</code> statement starts on the same line as the closing bracket <code>}</code> from the preceding <code>if</code> statement.</p>
+</blockquote>
+<p>Conditional statements can also be <strong>nested</strong>.</p>
+<div class="panel panel-default">
+<div class="panel-heading">
+Task
+</div>
+<div class="panel-body">
+Generate two uniform random numbers between 0 and 1, called <code>x</code> and <code>y</code>. Write a nested <code>if</code>/<code>else</code> statement that prints out whether <code>x</code> is &gt; 0.5, and then whether <code>y</code> is &gt; 0.5.
+</div>
+</div>
+<button id="displayTextunnamed-chunk-101" onclick="javascript:toggle(&#39;unnamed-chunk-101&#39;);">
+Show: Solution
+</button>
+<div id="toggleTextunnamed-chunk-101" style="display: none">
+<div class="panel panel-default">
+<div class="panel-heading panel-heading1">
+Solution
+</div>
+<div class="panel-body">
+<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="programming-in-r.html#cb186-1" aria-hidden="true"></a><span class="co">## generate random numbers</span></span>
+<span id="cb186-2"><a href="programming-in-r.html#cb186-2" aria-hidden="true"></a>x &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">1</span>)</span>
+<span id="cb186-3"><a href="programming-in-r.html#cb186-3" aria-hidden="true"></a>y &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">1</span>)</span>
+<span id="cb186-4"><a href="programming-in-r.html#cb186-4" aria-hidden="true"></a>x</span>
+<span id="cb186-5"><a href="programming-in-r.html#cb186-5" aria-hidden="true"></a>y</span>
+<span id="cb186-6"><a href="programming-in-r.html#cb186-6" aria-hidden="true"></a><span class="cf">if</span>(x <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.5</span>) {</span>
+<span id="cb186-7"><a href="programming-in-r.html#cb186-7" aria-hidden="true"></a>    <span class="kw">print</span>(<span class="st">&quot;x &gt; 0.5&quot;</span>)</span>
+<span id="cb186-8"><a href="programming-in-r.html#cb186-8" aria-hidden="true"></a>    <span class="cf">if</span>(y <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.5</span>) {</span>
+<span id="cb186-9"><a href="programming-in-r.html#cb186-9" aria-hidden="true"></a>        <span class="kw">print</span>(<span class="st">&quot;y &lt; 0.5&quot;</span>)</span>
+<span id="cb186-10"><a href="programming-in-r.html#cb186-10" aria-hidden="true"></a>    } <span class="cf">else</span> {</span>
+<span id="cb186-11"><a href="programming-in-r.html#cb186-11" aria-hidden="true"></a>        <span class="kw">print</span>(<span class="st">&quot;y &gt; 0.5&quot;</span>)</span>
+<span id="cb186-12"><a href="programming-in-r.html#cb186-12" aria-hidden="true"></a>    }</span>
+<span id="cb186-13"><a href="programming-in-r.html#cb186-13" aria-hidden="true"></a>} <span class="cf">else</span> {</span>
+<span id="cb186-14"><a href="programming-in-r.html#cb186-14" aria-hidden="true"></a>    <span class="kw">print</span>(<span class="st">&quot;x &lt; 0.5&quot;</span>)</span>
+<span id="cb186-15"><a href="programming-in-r.html#cb186-15" aria-hidden="true"></a>    <span class="cf">if</span>(y <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.5</span>) {</span>
+<span id="cb186-16"><a href="programming-in-r.html#cb186-16" aria-hidden="true"></a>        <span class="kw">print</span>(<span class="st">&quot;y &lt; 0.5&quot;</span>)</span>
+<span id="cb186-17"><a href="programming-in-r.html#cb186-17" aria-hidden="true"></a>    } <span class="cf">else</span> {</span>
+<span id="cb186-18"><a href="programming-in-r.html#cb186-18" aria-hidden="true"></a>        <span class="kw">print</span>(<span class="st">&quot;y &gt; 0.5&quot;</span>)</span>
+<span id="cb186-19"><a href="programming-in-r.html#cb186-19" aria-hidden="true"></a>    }</span>
+<span id="cb186-20"><a href="programming-in-r.html#cb186-20" aria-hidden="true"></a>}</span></code></pre></div>
+</div>
+</div>
+</div>
+<p>R also supports an <code>ifelse</code> function, that can be applied <strong>element-wise</strong> to vectors and matrices. This is useful if you want to return an object the same size as the one you are testing. For example,</p>
+<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb187-1"><a href="programming-in-r.html#cb187-1" aria-hidden="true"></a>x &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">6</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb187-2"><a href="programming-in-r.html#cb187-2" aria-hidden="true"></a>x</span></code></pre></div>
+<pre><code>## [1] 0.5009349 0.8786042 0.9173392 0.5871057 0.5337919 0.2404480</code></pre>
+<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="programming-in-r.html#cb189-1" aria-hidden="true"></a><span class="kw">ifelse</span>(x <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.5</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>)</span></code></pre></div>
+<pre><code>## [1]  TRUE  TRUE  TRUE  TRUE  TRUE FALSE</code></pre>
+</div>
+<div id="user-defined-functions" class="section level2 hasAnchor" number="4.3">
+<h2><span class="header-section-number">4.3</span> User defined functions<a href="programming-in-r.html#user-defined-functions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>R also allows you define your own <code>functions</code>, that take a set of arguments and return some output. For example,</p>
+<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="programming-in-r.html#cb191-1" aria-hidden="true"></a><span class="co">## define a function that takes a number and returns whether</span></span>
+<span id="cb191-2"><a href="programming-in-r.html#cb191-2" aria-hidden="true"></a><span class="co">## the number is greater than, less than or equal to 0</span></span>
+<span id="cb191-3"><a href="programming-in-r.html#cb191-3" aria-hidden="true"></a>sign_num &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</span>
+<span id="cb191-4"><a href="programming-in-r.html#cb191-4" aria-hidden="true"></a>    <span class="cf">if</span>(x <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>) {</span>
+<span id="cb191-5"><a href="programming-in-r.html#cb191-5" aria-hidden="true"></a>        <span class="kw">print</span>(<span class="st">&quot;x is less than 0&quot;</span>)</span>
+<span id="cb191-6"><a href="programming-in-r.html#cb191-6" aria-hidden="true"></a>    } <span class="cf">else</span> {</span>
+<span id="cb191-7"><a href="programming-in-r.html#cb191-7" aria-hidden="true"></a>        <span class="cf">if</span>(x <span class="op">==</span><span class="st"> </span><span class="dv">0</span>) {</span>
+<span id="cb191-8"><a href="programming-in-r.html#cb191-8" aria-hidden="true"></a>            <span class="kw">print</span>(<span class="st">&quot;x is equal to zero&quot;</span>)</span>
+<span id="cb191-9"><a href="programming-in-r.html#cb191-9" aria-hidden="true"></a>        } <span class="cf">else</span> {</span>
+<span id="cb191-10"><a href="programming-in-r.html#cb191-10" aria-hidden="true"></a>            <span class="kw">print</span>(<span class="st">&quot;x is greater than 0&quot;</span>)</span>
+<span id="cb191-11"><a href="programming-in-r.html#cb191-11" aria-hidden="true"></a>        }</span>
+<span id="cb191-12"><a href="programming-in-r.html#cb191-12" aria-hidden="true"></a>    }</span>
+<span id="cb191-13"><a href="programming-in-r.html#cb191-13" aria-hidden="true"></a>}</span></code></pre></div>
+<p>This piece of code is broken down as follows:</p>
+<ul>
+<li>The <code>function(x)</code> part defines a <code>function</code> object that takes an argument <code>x</code>. Whatever variables are defined here are <strong>local</strong> variables, i.e. they only exist within the function, and are destroyed once the function exits.</li>
+<li>The first set of curly brackets then denote which lines of code are part of the function.</li>
+<li>The function then takes the local variable <code>x</code>, and using a series of nested <code>if</code>/<code>else</code> loops, prints out whether the number is greater than, less than or equal to zero.</li>
+<li>When the code hits the final curly bracket, the function exits.</li>
+<li>The function is stored (using the assignment operator <code>&lt;-</code>) into an object called <code>sign_num</code>.</li>
+</ul>
+<p>We can then use this function by simply passing values to it:</p>
+<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="programming-in-r.html#cb192-1" aria-hidden="true"></a><span class="kw">sign_num</span>(<span class="dv">1</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;x is greater than 0&quot;</code></pre>
+<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="programming-in-r.html#cb194-1" aria-hidden="true"></a><span class="kw">sign_num</span>(<span class="op">-</span><span class="dv">1</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;x is less than 0&quot;</code></pre>
+<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="programming-in-r.html#cb196-1" aria-hidden="true"></a><span class="kw">sign_num</span>(<span class="dv">0</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;x is equal to zero&quot;</code></pre>
+<blockquote>
+<p><strong>Note</strong>: By default, an R function returns the final line as its output. In the example above, no object was present on the final line, so R returned nothing. A useful habit to get into is to use explicit <code>return()</code> statements to denote what object is returned from a function.</p>
+</blockquote>
+<p>The following code returns the <strong>absolute value</strong> of <code>x</code>, as well as printing information on whether the original <code>x</code> was greater than, less than or equal to zero:</p>
+<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="programming-in-r.html#cb198-1" aria-hidden="true"></a><span class="co">## define a function that takes a number and returns whether</span></span>
+<span id="cb198-2"><a href="programming-in-r.html#cb198-2" aria-hidden="true"></a><span class="co">## the number is greater than, less than or equal to 0</span></span>
+<span id="cb198-3"><a href="programming-in-r.html#cb198-3" aria-hidden="true"></a>sign_num &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</span>
+<span id="cb198-4"><a href="programming-in-r.html#cb198-4" aria-hidden="true"></a>    <span class="cf">if</span>(x <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>) {</span>
+<span id="cb198-5"><a href="programming-in-r.html#cb198-5" aria-hidden="true"></a>        <span class="kw">print</span>(<span class="st">&quot;x is less than 0&quot;</span>)</span>
+<span id="cb198-6"><a href="programming-in-r.html#cb198-6" aria-hidden="true"></a>    } <span class="cf">else</span> {</span>
+<span id="cb198-7"><a href="programming-in-r.html#cb198-7" aria-hidden="true"></a>        <span class="cf">if</span>(x <span class="op">==</span><span class="st"> </span><span class="dv">0</span>) {</span>
+<span id="cb198-8"><a href="programming-in-r.html#cb198-8" aria-hidden="true"></a>            <span class="kw">print</span>(<span class="st">&quot;x is equal to zero&quot;</span>)</span>
+<span id="cb198-9"><a href="programming-in-r.html#cb198-9" aria-hidden="true"></a>        } <span class="cf">else</span> {</span>
+<span id="cb198-10"><a href="programming-in-r.html#cb198-10" aria-hidden="true"></a>            <span class="kw">print</span>(<span class="st">&quot;x is greater than 0&quot;</span>)</span>
+<span id="cb198-11"><a href="programming-in-r.html#cb198-11" aria-hidden="true"></a>        }</span>
+<span id="cb198-12"><a href="programming-in-r.html#cb198-12" aria-hidden="true"></a>    }</span>
+<span id="cb198-13"><a href="programming-in-r.html#cb198-13" aria-hidden="true"></a>    <span class="kw">return</span>(<span class="kw">ifelse</span>(x <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>, <span class="op">-</span>x, x))</span>
+<span id="cb198-14"><a href="programming-in-r.html#cb198-14" aria-hidden="true"></a>}</span>
+<span id="cb198-15"><a href="programming-in-r.html#cb198-15" aria-hidden="true"></a><span class="kw">sign_num</span>(<span class="op">-</span><span class="dv">1</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;x is less than 0&quot;</code></pre>
+<pre><code>## [1] 1</code></pre>
+<blockquote>
+<p><strong>Aside</strong>: A really useful function in R is called <code>paste()</code>. This allows us to concatenate objects into strings, which is particularly useful for printing to the screen. For example:</p>
+<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="programming-in-r.html#cb201-1" aria-hidden="true"></a>x &lt;-<span class="st"> </span><span class="dv">10</span></span>
+<span id="cb201-2"><a href="programming-in-r.html#cb201-2" aria-hidden="true"></a><span class="kw">paste</span>(<span class="st">&quot;The variable x is&quot;</span>, x)</span></code></pre></div>
+<pre><code>## [1] &quot;The variable x is 10&quot;</code></pre>
+<p>We can see that this has taken the value of <code>x</code> (which is 10), and created a character vector of length 1 containing the concatenated string <code>"The variable x is 10"</code>. Notice by default that <code>paste()</code> inserts a space between the arguments it’s concatenating, this can be suppressed using the <code>sep</code> argument, or by using the <code>paste0()</code> function e.g. note the difference between the first function and the latter two (which are equivalent) below:</p>
+<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="programming-in-r.html#cb203-1" aria-hidden="true"></a><span class="kw">paste</span>(<span class="st">&quot;x =&quot;</span>, <span class="dv">1</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;x = 1&quot;</code></pre>
+<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb205-1"><a href="programming-in-r.html#cb205-1" aria-hidden="true"></a><span class="kw">paste</span>(<span class="st">&quot;x =&quot;</span>, <span class="dv">1</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;x =1&quot;</code></pre>
+<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb207-1"><a href="programming-in-r.html#cb207-1" aria-hidden="true"></a><span class="kw">paste0</span>(<span class="st">&quot;x =&quot;</span>, <span class="dv">1</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;x =1&quot;</code></pre>
+</blockquote>
+<div class="panel panel-default">
+<div class="panel-heading">
+Task
+</div>
+<div class="panel-body">
+<p>Try the following pieces of code. What do they do?</p>
+<ol style="list-style-type: decimal">
+<li><code>paste("Here is a number:", 1:10)</code>.</li>
+<li><code>paste(1:10, collapse = " + ")</code>.</li>
+<li><code>paste("Here are some numbers:", paste(1:10, collapse = ", "))</code>.</li>
+<li><code>x &lt;- 1:10;</code>
+<code>paste("The sum of the first", length(x),</code>
+<code>"numbers is given by", paste(1:10, collapse = " + "),</code>
+<code>"=", sum(x))</code>
+</div>
+</div></li>
+</ol>
+<button id="displayTextunnamed-chunk-109" onclick="javascript:toggle(&#39;unnamed-chunk-109&#39;);">
+Show: Solution
+</button>
+<div id="toggleTextunnamed-chunk-109" style="display: none">
+<div class="panel panel-default">
+<div class="panel-heading panel-heading1">
+Solution
+</div>
+<div class="panel-body">
+<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="programming-in-r.html#cb209-1" aria-hidden="true"></a><span class="co">## 1. This creates a character vector of length 10 where each</span></span>
+<span id="cb209-2"><a href="programming-in-r.html#cb209-2" aria-hidden="true"></a><span class="co">## element is the result of pasting &quot;Here is the number:&quot; </span></span>
+<span id="cb209-3"><a href="programming-in-r.html#cb209-3" aria-hidden="true"></a><span class="co">## with each number 1 to 10 respectively</span></span>
+<span id="cb209-4"><a href="programming-in-r.html#cb209-4" aria-hidden="true"></a><span class="kw">paste</span>(<span class="st">&quot;Here is a number:&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)</span>
+<span id="cb209-5"><a href="programming-in-r.html#cb209-5" aria-hidden="true"></a></span>
+<span id="cb209-6"><a href="programming-in-r.html#cb209-6" aria-hidden="true"></a><span class="co">## 2. This creates a character vector of length 1 that </span></span>
+<span id="cb209-7"><a href="programming-in-r.html#cb209-7" aria-hidden="true"></a><span class="co">## has the numbers 1 to 10 separated by &quot;+&quot; signs</span></span>
+<span id="cb209-8"><a href="programming-in-r.html#cb209-8" aria-hidden="true"></a><span class="kw">paste</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dt">collapse =</span> <span class="st">&quot; + &quot;</span>)</span>
+<span id="cb209-9"><a href="programming-in-r.html#cb209-9" aria-hidden="true"></a></span>
+<span id="cb209-10"><a href="programming-in-r.html#cb209-10" aria-hidden="true"></a><span class="co">## 3. This creates a character vector of length 1 that </span></span>
+<span id="cb209-11"><a href="programming-in-r.html#cb209-11" aria-hidden="true"></a><span class="co">## prints a message followed by the vector separated</span></span>
+<span id="cb209-12"><a href="programming-in-r.html#cb209-12" aria-hidden="true"></a><span class="co">## by commas (uses nested functions)</span></span>
+<span id="cb209-13"><a href="programming-in-r.html#cb209-13" aria-hidden="true"></a><span class="kw">paste</span>(<span class="st">&quot;Here are some numbers:&quot;</span>, <span class="kw">paste</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dt">collapse =</span> <span class="st">&quot;, &quot;</span>))</span>
+<span id="cb209-14"><a href="programming-in-r.html#cb209-14" aria-hidden="true"></a></span>
+<span id="cb209-15"><a href="programming-in-r.html#cb209-15" aria-hidden="true"></a><span class="co">## 4. This creates a long string which concatenates</span></span>
+<span id="cb209-16"><a href="programming-in-r.html#cb209-16" aria-hidden="true"></a><span class="co">## various functions of a vector (length, sum etc.)</span></span>
+<span id="cb209-17"><a href="programming-in-r.html#cb209-17" aria-hidden="true"></a><span class="co">## together to form a description of adding numbers</span></span>
+<span id="cb209-18"><a href="programming-in-r.html#cb209-18" aria-hidden="true"></a><span class="co">## together. Uses nested functions.</span></span>
+<span id="cb209-19"><a href="programming-in-r.html#cb209-19" aria-hidden="true"></a>x &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span></span>
+<span id="cb209-20"><a href="programming-in-r.html#cb209-20" aria-hidden="true"></a><span class="kw">paste</span>(<span class="st">&quot;The sum of the first&quot;</span>, <span class="kw">length</span>(x), <span class="st">&quot;positive integers is given by&quot;</span>, </span>
+<span id="cb209-21"><a href="programming-in-r.html#cb209-21" aria-hidden="true"></a>      <span class="kw">paste</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dt">collapse =</span> <span class="st">&quot; + &quot;</span>), <span class="st">&quot;=&quot;</span>, <span class="kw">sum</span>(x))</span></code></pre></div>
+</div>
+</div>
+</div>
+<p>Outputs from R functions can be passed into other objects e.g.</p>
+<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb210-1"><a href="programming-in-r.html#cb210-1" aria-hidden="true"></a>y &lt;-<span class="st"> </span><span class="fl">-1.3</span></span>
+<span id="cb210-2"><a href="programming-in-r.html#cb210-2" aria-hidden="true"></a>absy &lt;-<span class="st"> </span><span class="kw">sign_num</span>(y)</span>
+<span id="cb210-3"><a href="programming-in-r.html#cb210-3" aria-hidden="true"></a>y</span>
+<span id="cb210-4"><a href="programming-in-r.html#cb210-4" aria-hidden="true"></a>absy</span></code></pre></div>
+<pre><code>## [1] &quot;x is less than 0&quot;
+## [1] -1.3
+## [1] 1.3</code></pre>
+<p>Here we pass a variable <code>y</code> to our function, and because R creates a <strong>local variable</strong> inside the function, the original value of <code>y</code> remains unchanged once the function has been run. The absolute value is calculated and then passed into a new variable <code>absy</code>. R also allows variables to be overwritten, hence the following code overwrites <code>y</code> with its absolute value.</p>
+<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb212-1"><a href="programming-in-r.html#cb212-1" aria-hidden="true"></a>y &lt;-<span class="st"> </span><span class="kw">sign_num</span>(y)</span>
+<span id="cb212-2"><a href="programming-in-r.html#cb212-2" aria-hidden="true"></a>y</span></code></pre></div>
+<pre><code>## [1] &quot;x is less than 0&quot;
+## [1] 1.3</code></pre>
+<p>If you wish to exit an R function earlier than the final line, perhaps due to some conditional statement, then the <code>return()</code> function can be used to do this e.g.</p>
+<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb214-1"><a href="programming-in-r.html#cb214-1" aria-hidden="true"></a>whoknows &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</span>
+<span id="cb214-2"><a href="programming-in-r.html#cb214-2" aria-hidden="true"></a>    <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">2</span><span class="op">:</span>x) {</span>
+<span id="cb214-3"><a href="programming-in-r.html#cb214-3" aria-hidden="true"></a>        <span class="cf">if</span>(x <span class="op">%%</span><span class="st"> </span>i <span class="op">==</span><span class="st"> </span><span class="dv">0</span>){ </span>
+<span id="cb214-4"><a href="programming-in-r.html#cb214-4" aria-hidden="true"></a>            <span class="kw">return</span>(i) </span>
+<span id="cb214-5"><a href="programming-in-r.html#cb214-5" aria-hidden="true"></a>        }</span>
+<span id="cb214-6"><a href="programming-in-r.html#cb214-6" aria-hidden="true"></a>    }</span>
+<span id="cb214-7"><a href="programming-in-r.html#cb214-7" aria-hidden="true"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb215-1"><a href="programming-in-r.html#cb215-1" aria-hidden="true"></a><span class="kw">whoknows</span>(<span class="dv">10</span>)</span></code></pre></div>
+<pre><code>## [1] 2</code></pre>
+<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb217-1"><a href="programming-in-r.html#cb217-1" aria-hidden="true"></a><span class="kw">whoknows</span>(<span class="dv">17</span>)</span></code></pre></div>
+<pre><code>## [1] 17</code></pre>
+<div class="panel panel-default">
+<div class="panel-heading">
+Task
+</div>
+<div class="panel-body">
+What is the <code>whoknows</code> function defined in the above piece of code doing?
+</div>
+</div>
+<button id="displayTextunnamed-chunk-115" onclick="javascript:toggle(&#39;unnamed-chunk-115&#39;);">
+Show: Solution
+</button>
+<div id="toggleTextunnamed-chunk-115" style="display: none">
+<div class="panel panel-default">
+<div class="panel-heading panel-heading1">
+Solution
+</div>
+<div class="panel-body">
+It is taking a number and printing out the first number &gt; 1 that divides <code>x</code> to leave a whole number.
+</div>
+</div>
+</div>
+<p>The <code>stop()</code> function is useful as a way of stopping the code if some condition is breached. It takes a character argument that it prints to the screen if it is run.</p>
+<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb219-1"><a href="programming-in-r.html#cb219-1" aria-hidden="true"></a>whoknows &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</span>
+<span id="cb219-2"><a href="programming-in-r.html#cb219-2" aria-hidden="true"></a>    <span class="cf">if</span>(<span class="kw">length</span>(x) <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>) {</span>
+<span id="cb219-3"><a href="programming-in-r.html#cb219-3" aria-hidden="true"></a>        <span class="kw">stop</span>(<span class="st">&quot;x argument needs to be of length 1&quot;</span>)</span>
+<span id="cb219-4"><a href="programming-in-r.html#cb219-4" aria-hidden="true"></a>    }</span>
+<span id="cb219-5"><a href="programming-in-r.html#cb219-5" aria-hidden="true"></a>    <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">2</span><span class="op">:</span>x) {</span>
+<span id="cb219-6"><a href="programming-in-r.html#cb219-6" aria-hidden="true"></a>        <span class="cf">if</span>(x <span class="op">%%</span><span class="st"> </span>i <span class="op">==</span><span class="st"> </span><span class="dv">0</span>) {</span>
+<span id="cb219-7"><a href="programming-in-r.html#cb219-7" aria-hidden="true"></a>            <span class="kw">return</span>(i) </span>
+<span id="cb219-8"><a href="programming-in-r.html#cb219-8" aria-hidden="true"></a>        }</span>
+<span id="cb219-9"><a href="programming-in-r.html#cb219-9" aria-hidden="true"></a>    }</span>
+<span id="cb219-10"><a href="programming-in-r.html#cb219-10" aria-hidden="true"></a>    <span class="kw">return</span>(<span class="ot">NULL</span>)</span>
+<span id="cb219-11"><a href="programming-in-r.html#cb219-11" aria-hidden="true"></a>}</span>
+<span id="cb219-12"><a href="programming-in-r.html#cb219-12" aria-hidden="true"></a><span class="kw">whoknows</span>(<span class="dv">10</span>)</span></code></pre></div>
+<pre><code>## [1] 2</code></pre>
+<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb221-1"><a href="programming-in-r.html#cb221-1" aria-hidden="true"></a><span class="kw">whoknows</span>(<span class="kw">c</span>(<span class="dv">10</span>, <span class="dv">17</span>))</span></code></pre></div>
+<pre><code>## Error in whoknows(c(10, 17)): x argument needs to be of length 1</code></pre>
+<p>There is even a useful <code>stopifnot()</code> function, which takes a conditional statement as an argument and stops the code if the statement is not true. This is particularly useful for checking inputs. Notice that our functions have been quite sloppy so far, and really we should check that the variables that we are entering into the function are of the correct form. A better piece of code is:</p>
+<p><a id="tidyscript"></a></p>
+<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="programming-in-r.html#cb223-1" aria-hidden="true"></a>whoknows &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</span>
+<span id="cb223-2"><a href="programming-in-r.html#cb223-2" aria-hidden="true"></a>    <span class="co">## check `x` variable is present</span></span>
+<span id="cb223-3"><a href="programming-in-r.html#cb223-3" aria-hidden="true"></a>    <span class="kw">stopifnot</span>(<span class="op">!</span><span class="kw">missing</span>(x))</span>
+<span id="cb223-4"><a href="programming-in-r.html#cb223-4" aria-hidden="true"></a>    </span>
+<span id="cb223-5"><a href="programming-in-r.html#cb223-5" aria-hidden="true"></a>    <span class="co">## check `x` is numeric</span></span>
+<span id="cb223-6"><a href="programming-in-r.html#cb223-6" aria-hidden="true"></a>    <span class="kw">stopifnot</span>(<span class="kw">is.numeric</span>(x))</span>
+<span id="cb223-7"><a href="programming-in-r.html#cb223-7" aria-hidden="true"></a>    </span>
+<span id="cb223-8"><a href="programming-in-r.html#cb223-8" aria-hidden="true"></a>    <span class="co">## check `x` is of length one</span></span>
+<span id="cb223-9"><a href="programming-in-r.html#cb223-9" aria-hidden="true"></a>    <span class="kw">stopifnot</span>(<span class="kw">length</span>(x) <span class="op">==</span><span class="st"> </span><span class="dv">1</span>)</span>
+<span id="cb223-10"><a href="programming-in-r.html#cb223-10" aria-hidden="true"></a>    </span>
+<span id="cb223-11"><a href="programming-in-r.html#cb223-11" aria-hidden="true"></a>    <span class="co">## check `x` is a whole number</span></span>
+<span id="cb223-12"><a href="programming-in-r.html#cb223-12" aria-hidden="true"></a>    <span class="kw">stopifnot</span>(x <span class="op">%%</span><span class="st"> </span><span class="dv">1</span> <span class="op">==</span><span class="st"> </span><span class="dv">0</span>)</span>
+<span id="cb223-13"><a href="programming-in-r.html#cb223-13" aria-hidden="true"></a>    </span>
+<span id="cb223-14"><a href="programming-in-r.html#cb223-14" aria-hidden="true"></a>    <span class="co">## check `x` is larger than 1</span></span>
+<span id="cb223-15"><a href="programming-in-r.html#cb223-15" aria-hidden="true"></a>    <span class="kw">stopifnot</span>(x <span class="op">&gt;=</span><span class="st"> </span><span class="dv">2</span>)</span>
+<span id="cb223-16"><a href="programming-in-r.html#cb223-16" aria-hidden="true"></a>    </span>
+<span id="cb223-17"><a href="programming-in-r.html#cb223-17" aria-hidden="true"></a>    <span class="co">## print out the first number &gt; 1 that</span></span>
+<span id="cb223-18"><a href="programming-in-r.html#cb223-18" aria-hidden="true"></a>    <span class="co">## divides x to leave a whole number</span></span>
+<span id="cb223-19"><a href="programming-in-r.html#cb223-19" aria-hidden="true"></a>    <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">2</span><span class="op">:</span>x) {</span>
+<span id="cb223-20"><a href="programming-in-r.html#cb223-20" aria-hidden="true"></a>        <span class="cf">if</span>(x <span class="op">%%</span><span class="st"> </span>i <span class="op">==</span><span class="st"> </span><span class="dv">0</span>) { </span>
+<span id="cb223-21"><a href="programming-in-r.html#cb223-21" aria-hidden="true"></a>            <span class="kw">return</span>(i) </span>
+<span id="cb223-22"><a href="programming-in-r.html#cb223-22" aria-hidden="true"></a>        }</span>
+<span id="cb223-23"><a href="programming-in-r.html#cb223-23" aria-hidden="true"></a>    }</span>
+<span id="cb223-24"><a href="programming-in-r.html#cb223-24" aria-hidden="true"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb224-1"><a href="programming-in-r.html#cb224-1" aria-hidden="true"></a><span class="kw">whoknows</span>()</span></code></pre></div>
+<pre><code>## Error in whoknows(): !missing(x) is not TRUE</code></pre>
+<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="programming-in-r.html#cb226-1" aria-hidden="true"></a><span class="kw">whoknows</span>(<span class="dv">10</span>)</span></code></pre></div>
+<pre><code>## [1] 2</code></pre>
+<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="programming-in-r.html#cb228-1" aria-hidden="true"></a><span class="kw">whoknows</span>(<span class="fl">2.5</span>)</span></code></pre></div>
+<pre><code>## Error in whoknows(2.5): x%%1 == 0 is not TRUE</code></pre>
+<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="programming-in-r.html#cb230-1" aria-hidden="true"></a><span class="kw">whoknows</span>(<span class="op">-</span><span class="dv">1</span>)</span></code></pre></div>
+<pre><code>## Error in whoknows(-1): x &gt;= 2 is not TRUE</code></pre>
+<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb232-1"><a href="programming-in-r.html#cb232-1" aria-hidden="true"></a><span class="kw">whoknows</span>(<span class="st">&quot;bob&quot;</span>)</span></code></pre></div>
+<pre><code>## Error in whoknows(&quot;bob&quot;): is.numeric(x) is not TRUE</code></pre>
+<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb234-1"><a href="programming-in-r.html#cb234-1" aria-hidden="true"></a><span class="kw">whoknows</span>(<span class="kw">c</span>(<span class="dv">10</span>, <span class="dv">17</span>))</span></code></pre></div>
+<pre><code>## Error in whoknows(c(10, 17)): length(x) == 1 is not TRUE</code></pre>
+<div class="panel panel-default">
+<div class="panel-heading">
+Task
+</div>
+<div class="panel-body">
+<p>Write an R function called <code>checkprime</code>, that takes a single argument <code>x</code>, and returns whether <code>x</code> is a <strong>prime number</strong> or not. The function should check whether <code>x</code> is a single positive integer &gt; 2 and return an error if not. [<strong>Hint</strong>: copy the <code>whoknows</code> function into your R script file and use this as the basis of your new function.]</p>
+<p>Use it to check whether the following numbers are primes:</p>
+<ol style="list-style-type: decimal">
+<li>3891</li>
+<li>7103</li>
+<li>7919</li>
+<li>10535
+</div>
+</div></li>
+</ol>
+<button id="displayTextunnamed-chunk-120" onclick="javascript:toggle(&#39;unnamed-chunk-120&#39;);">
+Show: Solution
+</button>
+<div id="toggleTextunnamed-chunk-120" style="display: none">
+<div class="panel panel-default">
+<div class="panel-heading panel-heading1">
+Solution
+</div>
+<div class="panel-body">
+<div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb236-1"><a href="programming-in-r.html#cb236-1" aria-hidden="true"></a><span class="co">## function to check whether x is a prime number</span></span>
+<span id="cb236-2"><a href="programming-in-r.html#cb236-2" aria-hidden="true"></a>checkprime &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</span>
+<span id="cb236-3"><a href="programming-in-r.html#cb236-3" aria-hidden="true"></a>    <span class="co">## check `x` variable is present</span></span>
+<span id="cb236-4"><a href="programming-in-r.html#cb236-4" aria-hidden="true"></a>    <span class="kw">stopifnot</span>(<span class="op">!</span><span class="kw">missing</span>(x))</span>
+<span id="cb236-5"><a href="programming-in-r.html#cb236-5" aria-hidden="true"></a>    </span>
+<span id="cb236-6"><a href="programming-in-r.html#cb236-6" aria-hidden="true"></a>    <span class="co">## check `x` is numeric</span></span>
+<span id="cb236-7"><a href="programming-in-r.html#cb236-7" aria-hidden="true"></a>    <span class="kw">stopifnot</span>(<span class="kw">is.numeric</span>(x))</span>
+<span id="cb236-8"><a href="programming-in-r.html#cb236-8" aria-hidden="true"></a>    </span>
+<span id="cb236-9"><a href="programming-in-r.html#cb236-9" aria-hidden="true"></a>    <span class="co">## check `x` is of length one</span></span>
+<span id="cb236-10"><a href="programming-in-r.html#cb236-10" aria-hidden="true"></a>    <span class="kw">stopifnot</span>(<span class="kw">length</span>(x) <span class="op">==</span><span class="st"> </span><span class="dv">1</span>)</span>
+<span id="cb236-11"><a href="programming-in-r.html#cb236-11" aria-hidden="true"></a>    </span>
+<span id="cb236-12"><a href="programming-in-r.html#cb236-12" aria-hidden="true"></a>    <span class="co">## check `x` is a whole number</span></span>
+<span id="cb236-13"><a href="programming-in-r.html#cb236-13" aria-hidden="true"></a>    <span class="kw">stopifnot</span>(x <span class="op">%%</span><span class="st"> </span><span class="dv">1</span> <span class="op">==</span><span class="st"> </span><span class="dv">0</span>)</span>
+<span id="cb236-14"><a href="programming-in-r.html#cb236-14" aria-hidden="true"></a>    </span>
+<span id="cb236-15"><a href="programming-in-r.html#cb236-15" aria-hidden="true"></a>    <span class="co">## check `x` is larger than 1</span></span>
+<span id="cb236-16"><a href="programming-in-r.html#cb236-16" aria-hidden="true"></a>    <span class="kw">stopifnot</span>(x <span class="op">&gt;=</span><span class="st"> </span><span class="dv">2</span>)</span>
+<span id="cb236-17"><a href="programming-in-r.html#cb236-17" aria-hidden="true"></a>    </span>
+<span id="cb236-18"><a href="programming-in-r.html#cb236-18" aria-hidden="true"></a>    <span class="co">## check whether x can be divided by something</span></span>
+<span id="cb236-19"><a href="programming-in-r.html#cb236-19" aria-hidden="true"></a>    <span class="co">## other than itself to leave a whole number</span></span>
+<span id="cb236-20"><a href="programming-in-r.html#cb236-20" aria-hidden="true"></a>    <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">2</span><span class="op">:</span>x) {</span>
+<span id="cb236-21"><a href="programming-in-r.html#cb236-21" aria-hidden="true"></a>        <span class="cf">if</span>(x <span class="op">%%</span><span class="st"> </span>i <span class="op">==</span><span class="st"> </span><span class="dv">0</span> <span class="op">&amp;</span><span class="st"> </span>i <span class="op">!=</span><span class="st"> </span>x) {</span>
+<span id="cb236-22"><a href="programming-in-r.html#cb236-22" aria-hidden="true"></a>            <span class="kw">return</span>(<span class="kw">paste</span>(x, <span class="st">&quot;is not a prime number&quot;</span>)) </span>
+<span id="cb236-23"><a href="programming-in-r.html#cb236-23" aria-hidden="true"></a>        }</span>
+<span id="cb236-24"><a href="programming-in-r.html#cb236-24" aria-hidden="true"></a>    }</span>
+<span id="cb236-25"><a href="programming-in-r.html#cb236-25" aria-hidden="true"></a>    <span class="kw">return</span>(<span class="kw">paste</span>(x, <span class="st">&quot;is a prime number&quot;</span>))</span>
+<span id="cb236-26"><a href="programming-in-r.html#cb236-26" aria-hidden="true"></a>}</span>
+<span id="cb236-27"><a href="programming-in-r.html#cb236-27" aria-hidden="true"></a><span class="kw">checkprime</span>(<span class="dv">3891</span>)</span>
+<span id="cb236-28"><a href="programming-in-r.html#cb236-28" aria-hidden="true"></a><span class="kw">checkprime</span>(<span class="dv">7103</span>)</span>
+<span id="cb236-29"><a href="programming-in-r.html#cb236-29" aria-hidden="true"></a><span class="kw">checkprime</span>(<span class="dv">7919</span>)</span>
+<span id="cb236-30"><a href="programming-in-r.html#cb236-30" aria-hidden="true"></a><span class="kw">checkprime</span>(<span class="dv">10535</span>)</span></code></pre></div>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+Task
+</div>
+<div class="panel-body">
+<p>Write an R function called <code>allprimes</code>, that takes a single argument <code>x</code>, and returns a vector containing <strong>all prime numbers</strong> from <code>1</code> to <code>x</code>. The function should check whether <code>x</code> is a single positive integer &gt; 2 and return an error if not.</p>
+Use it to return a vector containing all the prime numbers up to 1,000.
+</div>
+</div>
+<button id="displayTextunnamed-chunk-122" onclick="javascript:toggle(&#39;unnamed-chunk-122&#39;);">
+Show: Solution
+</button>
+<div id="toggleTextunnamed-chunk-122" style="display: none">
+<div class="panel panel-default">
+<div class="panel-heading panel-heading1">
+Solution
+</div>
+<div class="panel-body">
+<div class="sourceCode" id="cb237"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb237-1"><a href="programming-in-r.html#cb237-1" aria-hidden="true"></a><span class="co">## function to return all prime numbers up to x</span></span>
+<span id="cb237-2"><a href="programming-in-r.html#cb237-2" aria-hidden="true"></a>allprimes &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</span>
+<span id="cb237-3"><a href="programming-in-r.html#cb237-3" aria-hidden="true"></a>    <span class="co">## check `x` variable is present</span></span>
+<span id="cb237-4"><a href="programming-in-r.html#cb237-4" aria-hidden="true"></a>    <span class="kw">stopifnot</span>(<span class="op">!</span><span class="kw">missing</span>(x))</span>
+<span id="cb237-5"><a href="programming-in-r.html#cb237-5" aria-hidden="true"></a>    </span>
+<span id="cb237-6"><a href="programming-in-r.html#cb237-6" aria-hidden="true"></a>    <span class="co">## check `x` is numeric</span></span>
+<span id="cb237-7"><a href="programming-in-r.html#cb237-7" aria-hidden="true"></a>    <span class="kw">stopifnot</span>(<span class="kw">is.numeric</span>(x))</span>
+<span id="cb237-8"><a href="programming-in-r.html#cb237-8" aria-hidden="true"></a>    </span>
+<span id="cb237-9"><a href="programming-in-r.html#cb237-9" aria-hidden="true"></a>    <span class="co">## check `x` is of length one</span></span>
+<span id="cb237-10"><a href="programming-in-r.html#cb237-10" aria-hidden="true"></a>    <span class="kw">stopifnot</span>(<span class="kw">length</span>(x) <span class="op">==</span><span class="st"> </span><span class="dv">1</span>)</span>
+<span id="cb237-11"><a href="programming-in-r.html#cb237-11" aria-hidden="true"></a>    </span>
+<span id="cb237-12"><a href="programming-in-r.html#cb237-12" aria-hidden="true"></a>    <span class="co">## check `x` is a whole number</span></span>
+<span id="cb237-13"><a href="programming-in-r.html#cb237-13" aria-hidden="true"></a>    <span class="kw">stopifnot</span>(x <span class="op">%%</span><span class="st"> </span><span class="dv">1</span> <span class="op">==</span><span class="st"> </span><span class="dv">0</span>)</span>
+<span id="cb237-14"><a href="programming-in-r.html#cb237-14" aria-hidden="true"></a>    </span>
+<span id="cb237-15"><a href="programming-in-r.html#cb237-15" aria-hidden="true"></a>    <span class="co">## check `x` is larger than 1</span></span>
+<span id="cb237-16"><a href="programming-in-r.html#cb237-16" aria-hidden="true"></a>    <span class="kw">stopifnot</span>(x <span class="op">&gt;=</span><span class="st"> </span><span class="dv">2</span>)</span>
+<span id="cb237-17"><a href="programming-in-r.html#cb237-17" aria-hidden="true"></a>    </span>
+<span id="cb237-18"><a href="programming-in-r.html#cb237-18" aria-hidden="true"></a>    <span class="co">## setup output vector</span></span>
+<span id="cb237-19"><a href="programming-in-r.html#cb237-19" aria-hidden="true"></a>    out &lt;-<span class="st"> </span><span class="dv">1</span></span>
+<span id="cb237-20"><a href="programming-in-r.html#cb237-20" aria-hidden="true"></a>    </span>
+<span id="cb237-21"><a href="programming-in-r.html#cb237-21" aria-hidden="true"></a>    <span class="co">## loop through all numbers from</span></span>
+<span id="cb237-22"><a href="programming-in-r.html#cb237-22" aria-hidden="true"></a>    <span class="co">## 2 to x</span></span>
+<span id="cb237-23"><a href="programming-in-r.html#cb237-23" aria-hidden="true"></a>    <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">2</span><span class="op">:</span>x) {</span>
+<span id="cb237-24"><a href="programming-in-r.html#cb237-24" aria-hidden="true"></a>        <span class="co">## check if i can be divided by something</span></span>
+<span id="cb237-25"><a href="programming-in-r.html#cb237-25" aria-hidden="true"></a>        <span class="co">## other than itself</span></span>
+<span id="cb237-26"><a href="programming-in-r.html#cb237-26" aria-hidden="true"></a>        j &lt;-<span class="st"> </span><span class="dv">2</span></span>
+<span id="cb237-27"><a href="programming-in-r.html#cb237-27" aria-hidden="true"></a>        <span class="cf">while</span>(j <span class="op">&lt;=</span><span class="st"> </span>i) {</span>
+<span id="cb237-28"><a href="programming-in-r.html#cb237-28" aria-hidden="true"></a>            <span class="cf">if</span>(i <span class="op">%%</span><span class="st"> </span>j <span class="op">==</span><span class="st"> </span><span class="dv">0</span> <span class="op">&amp;</span><span class="st"> </span>j <span class="op">!=</span><span class="st"> </span>i) {</span>
+<span id="cb237-29"><a href="programming-in-r.html#cb237-29" aria-hidden="true"></a>                <span class="co">## if i is not a prime number then</span></span>
+<span id="cb237-30"><a href="programming-in-r.html#cb237-30" aria-hidden="true"></a>                <span class="co">## break out of the while loop</span></span>
+<span id="cb237-31"><a href="programming-in-r.html#cb237-31" aria-hidden="true"></a>                j &lt;-<span class="st"> </span>i <span class="op">+</span><span class="st"> </span><span class="dv">10</span></span>
+<span id="cb237-32"><a href="programming-in-r.html#cb237-32" aria-hidden="true"></a>            } </span>
+<span id="cb237-33"><a href="programming-in-r.html#cb237-33" aria-hidden="true"></a>            <span class="co">## increment j</span></span>
+<span id="cb237-34"><a href="programming-in-r.html#cb237-34" aria-hidden="true"></a>            j &lt;-<span class="st"> </span>j <span class="op">+</span><span class="st"> </span><span class="dv">1</span></span>
+<span id="cb237-35"><a href="programming-in-r.html#cb237-35" aria-hidden="true"></a>        }</span>
+<span id="cb237-36"><a href="programming-in-r.html#cb237-36" aria-hidden="true"></a>        <span class="co">## if j == i + 1, then i must be prime</span></span>
+<span id="cb237-37"><a href="programming-in-r.html#cb237-37" aria-hidden="true"></a>        <span class="cf">if</span>(j <span class="op">==</span><span class="st"> </span>(i <span class="op">+</span><span class="st"> </span><span class="dv">1</span>)) {</span>
+<span id="cb237-38"><a href="programming-in-r.html#cb237-38" aria-hidden="true"></a>            <span class="co">## append to output vector</span></span>
+<span id="cb237-39"><a href="programming-in-r.html#cb237-39" aria-hidden="true"></a>            out &lt;-<span class="st"> </span><span class="kw">c</span>(out, i)</span>
+<span id="cb237-40"><a href="programming-in-r.html#cb237-40" aria-hidden="true"></a>        }</span>
+<span id="cb237-41"><a href="programming-in-r.html#cb237-41" aria-hidden="true"></a>    }</span>
+<span id="cb237-42"><a href="programming-in-r.html#cb237-42" aria-hidden="true"></a>    <span class="co">## return vector</span></span>
+<span id="cb237-43"><a href="programming-in-r.html#cb237-43" aria-hidden="true"></a>    <span class="kw">return</span>(out)</span>
+<span id="cb237-44"><a href="programming-in-r.html#cb237-44" aria-hidden="true"></a>}</span>
+<span id="cb237-45"><a href="programming-in-r.html#cb237-45" aria-hidden="true"></a><span class="co">## calculate all primes between 1 and 1,000</span></span>
+<span id="cb237-46"><a href="programming-in-r.html#cb237-46" aria-hidden="true"></a><span class="kw">allprimes</span>(<span class="dv">1000</span>)</span></code></pre></div>
+</div>
+</div>
+</div>
+</div>
+<div id="using-apply-functions" class="section level2 hasAnchor" number="4.4">
+<h2><span class="header-section-number">4.4</span> Using <code>apply()</code> functions<a href="programming-in-r.html#using-apply-functions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>There are several ubiquituous functions that you’ll see used often in R code, I’ll introduce four main ones (though there are others): <code>apply()</code>, <code>lapply()</code>, <code>sapply()</code> and <code>tapply()</code>.</p>
+<p>Their sole <em>raison d’être</em> (as far as I can tell) is to make code more concise. Essentially they allow you to replace the use of a loop with a single line of code that aids legibility. They do not (as far as I’m aware) make the code faster (for that you can see various functions in packages like <a href="https://cran.r-project.org/web/packages/plyr/plyr.pdf"><code>plyr</code></a>).</p>
+<p>For ultimate speed, one always wants to try to use <strong>vectorised</strong> operations in R, but sometimes looping over various margins of an object can be useful, and these functions can help.</p>
+<div id="apply" class="section level3 hasAnchor" number="4.4.1">
+<h3><span class="header-section-number">4.4.1</span> <code>apply()</code><a href="programming-in-r.html#apply" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The <code>apply()</code> function applies a function to either rows or columns of a matrix (in fact it applies to any dimension of an <code>array</code>, but we will restrict ourselves here to <code>matrix</code> types only). For example, consider that we have a matrix <code>x</code> as below:</p>
+<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="programming-in-r.html#cb238-1" aria-hidden="true"></a>x &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">12</span>, <span class="dv">3</span>, <span class="dv">4</span>)</span>
+<span id="cb238-2"><a href="programming-in-r.html#cb238-2" aria-hidden="true"></a>x</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]    1    4    7   10
+## [2,]    2    5    8   11
+## [3,]    3    6    9   12</code></pre>
+<p>Now we might want to calculate the <em>mean</em> say, of each row, in which case we could write a loop:</p>
+<div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb240-1"><a href="programming-in-r.html#cb240-1" aria-hidden="true"></a><span class="co">## set output vector</span></span>
+<span id="cb240-2"><a href="programming-in-r.html#cb240-2" aria-hidden="true"></a>xmn &lt;-<span class="st"> </span><span class="kw">numeric</span>(<span class="kw">nrow</span>(x))</span>
+<span id="cb240-3"><a href="programming-in-r.html#cb240-3" aria-hidden="true"></a></span>
+<span id="cb240-4"><a href="programming-in-r.html#cb240-4" aria-hidden="true"></a><span class="co">## calculate mean for each row</span></span>
+<span id="cb240-5"><a href="programming-in-r.html#cb240-5" aria-hidden="true"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(x)) xmn[i] &lt;-<span class="st"> </span><span class="kw">mean</span>(x[i, ])</span>
+<span id="cb240-6"><a href="programming-in-r.html#cb240-6" aria-hidden="true"></a></span>
+<span id="cb240-7"><a href="programming-in-r.html#cb240-7" aria-hidden="true"></a><span class="co">## print means</span></span>
+<span id="cb240-8"><a href="programming-in-r.html#cb240-8" aria-hidden="true"></a>xmn</span></code></pre></div>
+<pre><code>## [1] 5.5 6.5 7.5</code></pre>
+<p>Note that here we had to set up an output vector (<code>xmn</code>) and then populate it with values. We used <strong><em>vectorised</em></strong> functions (<code>mean()</code>) to calculate the means for each row, but we required a loop to extract each row as a <code>vector</code> (the <code>i</code>th row is <code>x[i, ]</code>). We could do this in a single line using <code>apply()</code>:</p>
+<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="programming-in-r.html#cb242-1" aria-hidden="true"></a>xmn &lt;-<span class="st"> </span><span class="kw">apply</span>(x, <span class="dv">1</span>, mean)</span>
+<span id="cb242-2"><a href="programming-in-r.html#cb242-2" aria-hidden="true"></a>xmn</span></code></pre></div>
+<pre><code>## [1] 5.5 6.5 7.5</code></pre>
+<p>Here the first argument to <code>apply()</code> is the matrix, the second argument determines the <em>margin</em> (<code>1</code> for rows and <code>2</code> for columns), and the third argument determines the function you want to apply to each row/column (<code>mean()</code>), and must take a vector of values as its first argument. To calculate the means of each column of <code>x</code> we can write:</p>
+<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb244-1"><a href="programming-in-r.html#cb244-1" aria-hidden="true"></a>ymns &lt;-<span class="st"> </span><span class="kw">apply</span>(x, <span class="dv">2</span>, mean)</span>
+<span id="cb244-2"><a href="programming-in-r.html#cb244-2" aria-hidden="true"></a>ymns</span></code></pre></div>
+<pre><code>## [1]  2  5  8 11</code></pre>
+<p>We can also use user-defined functions, for example to divide each row by its sum, we could use:</p>
+<div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb246-1"><a href="programming-in-r.html#cb246-1" aria-hidden="true"></a><span class="kw">apply</span>(x, <span class="dv">1</span>, <span class="cf">function</span>(vec) {</span>
+<span id="cb246-2"><a href="programming-in-r.html#cb246-2" aria-hidden="true"></a>    <span class="kw">return</span>(vec <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(vec))</span>
+<span id="cb246-3"><a href="programming-in-r.html#cb246-3" aria-hidden="true"></a>})</span></code></pre></div>
+<pre><code>##            [,1]       [,2] [,3]
+## [1,] 0.04545455 0.07692308  0.1
+## [2,] 0.18181818 0.19230769  0.2
+## [3,] 0.31818182 0.30769231  0.3
+## [4,] 0.45454545 0.42307692  0.4</code></pre>
+<p>Here each row of <code>x</code> is passed into our function as a <strong>local</strong> object called <code>vec</code>, the function then divides each element of <code>vec</code> by its sum and returns the resulting vector. Note that <code>apply()</code> returns an output matrix with dimensions <code>ncol(x)</code> <span class="math inline">\(\times\)</span> <code>nrow(x)</code> here, so we might want to transpose if we want to return in the original dimensions:</p>
+<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="programming-in-r.html#cb248-1" aria-hidden="true"></a><span class="kw">t</span>(<span class="kw">apply</span>(x, <span class="dv">1</span>, <span class="cf">function</span>(vec) {</span>
+<span id="cb248-2"><a href="programming-in-r.html#cb248-2" aria-hidden="true"></a>    <span class="kw">return</span>(vec <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(vec))</span>
+<span id="cb248-3"><a href="programming-in-r.html#cb248-3" aria-hidden="true"></a>}))</span></code></pre></div>
+<pre><code>##            [,1]      [,2]      [,3]      [,4]
+## [1,] 0.04545455 0.1818182 0.3181818 0.4545455
+## [2,] 0.07692308 0.1923077 0.3076923 0.4230769
+## [3,] 0.10000000 0.2000000 0.3000000 0.4000000</code></pre>
+<p>Other arguments can be passed to our user-defined function as extra arguments to apply, as long as the first argument to our user-defined function corresponds to each row/column e.g. to divide each line by a variable <code>n</code> we could:</p>
+<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="programming-in-r.html#cb250-1" aria-hidden="true"></a><span class="kw">t</span>(<span class="kw">apply</span>(x, <span class="dv">1</span>, <span class="cf">function</span>(vec, n) {</span>
+<span id="cb250-2"><a href="programming-in-r.html#cb250-2" aria-hidden="true"></a>    <span class="kw">return</span>(vec <span class="op">/</span><span class="st"> </span>n)</span>
+<span id="cb250-3"><a href="programming-in-r.html#cb250-3" aria-hidden="true"></a>}, <span class="dt">n =</span> <span class="dv">10</span>))</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]  0.1  0.4  0.7  1.0
+## [2,]  0.2  0.5  0.8  1.1
+## [3,]  0.3  0.6  0.9  1.2</code></pre>
+<div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb252-1"><a href="programming-in-r.html#cb252-1" aria-hidden="true"></a><span class="kw">t</span>(<span class="kw">apply</span>(x, <span class="dv">1</span>, <span class="cf">function</span>(vec, n) {</span>
+<span id="cb252-2"><a href="programming-in-r.html#cb252-2" aria-hidden="true"></a>    <span class="kw">return</span>(vec <span class="op">/</span><span class="st"> </span>n)</span>
+<span id="cb252-3"><a href="programming-in-r.html#cb252-3" aria-hidden="true"></a>}, <span class="dt">n =</span> <span class="dv">2</span>))</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]  0.5  2.0  3.5  5.0
+## [2,]  1.0  2.5  4.0  5.5
+## [3,]  1.5  3.0  4.5  6.0</code></pre>
+<p>We can also save our user-defined function as an object and pass it into <code>apply()</code> e.g.</p>
+<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb254-1"><a href="programming-in-r.html#cb254-1" aria-hidden="true"></a>divn &lt;-<span class="st"> </span><span class="cf">function</span>(vec, n) {</span>
+<span id="cb254-2"><a href="programming-in-r.html#cb254-2" aria-hidden="true"></a>    <span class="kw">return</span>(vec <span class="op">/</span><span class="st"> </span>n)</span>
+<span id="cb254-3"><a href="programming-in-r.html#cb254-3" aria-hidden="true"></a>}</span>
+<span id="cb254-4"><a href="programming-in-r.html#cb254-4" aria-hidden="true"></a><span class="kw">t</span>(<span class="kw">apply</span>(x, <span class="dv">1</span>, divn, <span class="dt">n =</span> <span class="dv">10</span>))</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]  0.1  0.4  0.7  1.0
+## [2,]  0.2  0.5  0.8  1.1
+## [3,]  0.3  0.6  0.9  1.2</code></pre>
+<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="programming-in-r.html#cb256-1" aria-hidden="true"></a><span class="kw">t</span>(<span class="kw">apply</span>(x, <span class="dv">1</span>, divn, <span class="dt">n =</span> <span class="dv">2</span>))</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]  0.5  2.0  3.5  5.0
+## [2,]  1.0  2.5  4.0  5.5
+## [3,]  1.5  3.0  4.5  6.0</code></pre>
+<div class="panel panel-default">
+<div class="panel-heading">
+Task
+</div>
+<div class="panel-body">
+Use <code>apply()</code> to return the range of each column of the matrix <code>x</code> defined above. Return as a 2 <span class="math inline">\(\times\)</span> 4 matrix.
+</div>
+</div>
+<button id="displayTextunnamed-chunk-132" onclick="javascript:toggle(&#39;unnamed-chunk-132&#39;);">
+Show: Solution
+</button>
+<div id="toggleTextunnamed-chunk-132" style="display: none">
+<div class="panel panel-default">
+<div class="panel-heading panel-heading1">
+Solution
+</div>
+<div class="panel-body">
+<div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb258-1"><a href="programming-in-r.html#cb258-1" aria-hidden="true"></a><span class="kw">t</span>(<span class="kw">apply</span>(x, <span class="dv">2</span>, range))</span></code></pre></div>
+</div>
+</div>
+</div>
+</div>
+<div id="lapply-and-sapply" class="section level3 hasAnchor" number="4.4.2">
+<h3><span class="header-section-number">4.4.2</span> <code>lapply()</code> and <code>sapply()</code><a href="programming-in-r.html#lapply-and-sapply" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>These functions essentially do the same thing but on lists, so each element of a list is passed to a corresponding function e.g.</p>
+<div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb259-1"><a href="programming-in-r.html#cb259-1" aria-hidden="true"></a>x &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">2</span>), <span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">9</span>, <span class="dv">3</span>, <span class="dv">3</span>))</span>
+<span id="cb259-2"><a href="programming-in-r.html#cb259-2" aria-hidden="true"></a>x</span></code></pre></div>
+<pre><code>## [[1]]
+##      [,1] [,2]
+## [1,]    1    3
+## [2,]    2    4
+## 
+## [[2]]
+##      [,1] [,2] [,3]
+## [1,]    1    4    7
+## [2,]    2    5    8
+## [3,]    3    6    9</code></pre>
+<p>To get the dimensions of each element of the list we could use something like:</p>
+<div class="sourceCode" id="cb261"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb261-1"><a href="programming-in-r.html#cb261-1" aria-hidden="true"></a><span class="kw">lapply</span>(x, dim)</span></code></pre></div>
+<pre><code>## [[1]]
+## [1] 2 2
+## 
+## [[2]]
+## [1] 3 3</code></pre>
+<p>We can see that <code>lapply()</code> returns a list object with the dimensions. The function <code>sapply()</code> is a user-friendly version of <code>lapply()</code> that always returns a simpler object than a list if possible e.g.</p>
+<div class="sourceCode" id="cb263"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb263-1"><a href="programming-in-r.html#cb263-1" aria-hidden="true"></a><span class="kw">sapply</span>(x, dim)</span></code></pre></div>
+<pre><code>##      [,1] [,2]
+## [1,]    2    3
+## [2,]    2    3</code></pre>
+<blockquote>
+<p><strong>Note</strong>: Again, be careful of the format returned by these functions. In this case <code>sapply()</code> returns a 2 <span class="math inline">\(\times\)</span> 2 matrix where the dimensions are returned down the columns. If you are in doubt, check with a trivial example like this one.</p>
+</blockquote>
+</div>
+<div id="tapply" class="section level3 hasAnchor" number="4.4.3">
+<h3><span class="header-section-number">4.4.3</span> <code>tapply()</code><a href="programming-in-r.html#tapply" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>A very useful function is <code>tapply()</code>. This takes three arguments: the first is a vector of values, the second is a <code>factor</code> vector of the same length, and the third is a function. <code>tapply()</code> groups the first vector according to the levels of the second vector (the <code>factor</code>), and then applies the function to these subgroups. For example, R has a <code>datasets</code> package that provides a series of data sets—here we will look at one called <code>chickwts</code>.</p>
+<div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb265-1"><a href="programming-in-r.html#cb265-1" aria-hidden="true"></a><span class="co">## load the datasets package</span></span>
+<span id="cb265-2"><a href="programming-in-r.html#cb265-2" aria-hidden="true"></a><span class="kw">library</span>(datasets)</span>
+<span id="cb265-3"><a href="programming-in-r.html#cb265-3" aria-hidden="true"></a></span>
+<span id="cb265-4"><a href="programming-in-r.html#cb265-4" aria-hidden="true"></a><span class="co">## summarise the chickwts data</span></span>
+<span id="cb265-5"><a href="programming-in-r.html#cb265-5" aria-hidden="true"></a><span class="kw">head</span>(chickwts)</span></code></pre></div>
+<pre><code>##   weight      feed
+## 1    179 horsebean
+## 2    160 horsebean
+## 3    136 horsebean
+## 4    227 horsebean
+## 5    217 horsebean
+## 6    168 horsebean</code></pre>
+<div class="sourceCode" id="cb267"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb267-1"><a href="programming-in-r.html#cb267-1" aria-hidden="true"></a><span class="kw">summary</span>(chickwts)</span></code></pre></div>
+<pre><code>##      weight             feed   
+##  Min.   :108.0   casein   :12  
+##  1st Qu.:204.5   horsebean:10  
+##  Median :258.0   linseed  :12  
+##  Mean   :261.3   meatmeal :11  
+##  3rd Qu.:323.5   soybean  :14  
+##  Max.   :423.0   sunflower:12</code></pre>
+<p>Here we have loaded the <code>chickwts</code> data set, that records chick weights in an experiment, where newly hatched chicks were randomly allocated into six groups, and each group was given a different feed supplement. Their weights in grams after six weeks are given along with feed types. So if we wanted to measure the mean weight at six weeks for chicks fed different diets, we could use:</p>
+<div class="sourceCode" id="cb269"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb269-1"><a href="programming-in-r.html#cb269-1" aria-hidden="true"></a><span class="kw">tapply</span>(chickwts<span class="op">$</span>weight, chickwts<span class="op">$</span>feed, mean)</span></code></pre></div>
+<pre><code>##    casein horsebean   linseed  meatmeal   soybean sunflower 
+##  323.5833  160.2000  218.7500  276.9091  246.4286  328.9167</code></pre>
+<div class="panel panel-default">
+<div class="panel-heading">
+Task
+</div>
+<div class="panel-body">
+The <code>datasets</code> package provides data on from an experiment to compare yields (as measured by dried weight of plants) obtained under a control and two different treatment conditions (stored as the <code>PlantGrowth</code> data set). Summarise this data set and produce an estimate of the mean yield for each experimental group. Generate means and standard deviations for each experimental group.
+</div>
+</div>
+<button id="displayTextunnamed-chunk-139" onclick="javascript:toggle(&#39;unnamed-chunk-139&#39;);">
+Show: Solution
+</button>
+<div id="toggleTextunnamed-chunk-139" style="display: none">
+<div class="panel panel-default">
+<div class="panel-heading panel-heading1">
+Solution
+</div>
+<div class="panel-body">
+<div class="sourceCode" id="cb271"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb271-1"><a href="programming-in-r.html#cb271-1" aria-hidden="true"></a><span class="co">## summarise data</span></span>
+<span id="cb271-2"><a href="programming-in-r.html#cb271-2" aria-hidden="true"></a><span class="kw">summary</span>(PlantGrowth)</span>
+<span id="cb271-3"><a href="programming-in-r.html#cb271-3" aria-hidden="true"></a></span>
+<span id="cb271-4"><a href="programming-in-r.html#cb271-4" aria-hidden="true"></a><span class="co">## generate mean yields per experimental group</span></span>
+<span id="cb271-5"><a href="programming-in-r.html#cb271-5" aria-hidden="true"></a><span class="kw">tapply</span>(PlantGrowth<span class="op">$</span>weight, PlantGrowth<span class="op">$</span>group, mean)</span>
+<span id="cb271-6"><a href="programming-in-r.html#cb271-6" aria-hidden="true"></a></span>
+<span id="cb271-7"><a href="programming-in-r.html#cb271-7" aria-hidden="true"></a><span class="co">## generate mean and SD yields per experimental group</span></span>
+<span id="cb271-8"><a href="programming-in-r.html#cb271-8" aria-hidden="true"></a><span class="kw">tapply</span>(PlantGrowth<span class="op">$</span>weight, PlantGrowth<span class="op">$</span>group, <span class="cf">function</span>(x) {</span>
+<span id="cb271-9"><a href="programming-in-r.html#cb271-9" aria-hidden="true"></a>    <span class="kw">c</span>(<span class="kw">mean</span>(x), <span class="kw">sd</span>(x))</span>
+<span id="cb271-10"><a href="programming-in-r.html#cb271-10" aria-hidden="true"></a>})</span></code></pre></div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+
+
+
+
+
+
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="fundamentals-of-r.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": null,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

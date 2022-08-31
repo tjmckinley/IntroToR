@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>2 Getting Started in R | Introduction to R</title>
+  <meta name="description" content="2 Getting Started in R | Introduction to R Tutorial" />
+  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="2 Getting Started in R | Introduction to R" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="2 Getting Started in R | Introduction to R Tutorial" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="2 Getting Started in R | Introduction to R" />
+  
+  <meta name="twitter:description" content="2 Getting Started in R | Introduction to R Tutorial" />
+  
+
+<meta name="author" content="TJ McKinley" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="whatIsR.html"/>
+<link rel="next" href="fundamentals-of-r.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script language="javascript"> 
+    function toggle(id) {
+        var ele = document.getElementById("toggleText" + id);
+        var text = document.getElementById("displayText" + id);
+        var buttonText = text.innerHTML.replace("Show: ", "");
+        buttonText = buttonText.replace("Hide: ", "");
+        if(ele.style.display == "block") {
+            ele.style.display = "none";
+            text.innerHTML = "Show: " + buttonText;
+        } else {
+            ele.style.display = "block";
+            text.innerHTML = "Hide: " + buttonText;
+        }
+    } 
+</script>
+
+<script language="javascript">
+    function openCode(evt, codeName, id) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent" + id);
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablinks" + id);
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        document.getElementById(codeName).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
+</script>
+
+<script language="javascript">
+    function hide(id){
+        document.getElementById(id).style.display = "none";
+    }
+</script>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i>Acknowledgements</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#recommended-reading"><i class="fa fa-check"></i>Recommended reading</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#structure-of-this-workshop"><i class="fa fa-check"></i>Structure of this workshop</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#tasks"><i class="fa fa-check"></i>Tasks</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="whatIsR.html"><a href="whatIsR.html"><i class="fa fa-check"></i><b>1</b> What is R?</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="whatIsR.html"><a href="whatIsR.html#installing-r-and-rstudio"><i class="fa fa-check"></i><b>1.1</b> Installing R and RStudio</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="getting-started-in-r.html"><a href="getting-started-in-r.html"><i class="fa fa-check"></i><b>2</b> Getting Started in R</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="getting-started-in-r.html"><a href="getting-started-in-r.html#rstudio"><i class="fa fa-check"></i><b>2.1</b> RStudio</a></li>
+<li class="chapter" data-level="2.2" data-path="getting-started-in-r.html"><a href="getting-started-in-r.html#cheat-sheets"><i class="fa fa-check"></i><b>2.2</b> Cheat Sheets</a></li>
+<li class="chapter" data-level="2.3" data-path="getting-started-in-r.html"><a href="getting-started-in-r.html#setup"><i class="fa fa-check"></i><b>2.3</b> Setting up an R session</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="getting-started-in-r.html"><a href="getting-started-in-r.html#console-pane"><i class="fa fa-check"></i><b>2.3.1</b> Console Pane</a></li>
+<li class="chapter" data-level="2.3.2" data-path="getting-started-in-r.html"><a href="getting-started-in-r.html#script"><i class="fa fa-check"></i><b>2.3.2</b> Script pane and R scripts</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="getting-started-in-r.html"><a href="getting-started-in-r.html#packages"><i class="fa fa-check"></i><b>2.4</b> R packages</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="getting-started-in-r.html"><a href="getting-started-in-r.html#installing-archived-versions-of-a-package"><i class="fa fa-check"></i><b>2.4.1</b> Installing archived versions of a package</a></li>
+<li class="chapter" data-level="2.4.2" data-path="getting-started-in-r.html"><a href="getting-started-in-r.html#development-packages"><i class="fa fa-check"></i><b>2.4.2</b> Development packages</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="fundamentals-of-r.html"><a href="fundamentals-of-r.html"><i class="fa fa-check"></i><b>3</b> Fundamentals of R</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="fundamentals-of-r.html"><a href="fundamentals-of-r.html#variables-in-r"><i class="fa fa-check"></i><b>3.1</b> Variables in R</a></li>
+<li class="chapter" data-level="3.2" data-path="fundamentals-of-r.html"><a href="fundamentals-of-r.html#functions-in-r"><i class="fa fa-check"></i><b>3.2</b> Functions in R</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="fundamentals-of-r.html"><a href="fundamentals-of-r.html#nested"><i class="fa fa-check"></i><b>3.2.1</b> Nesting functions</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="fundamentals-of-r.html"><a href="fundamentals-of-r.html#help"><i class="fa fa-check"></i><b>3.3</b> Help files</a></li>
+<li class="chapter" data-level="3.4" data-path="fundamentals-of-r.html"><a href="fundamentals-of-r.html#objects-in-r"><i class="fa fa-check"></i><b>3.4</b> Objects in R</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="fundamentals-of-r.html"><a href="fundamentals-of-r.html#vectors"><i class="fa fa-check"></i><b>3.4.1</b> Vectors</a></li>
+<li class="chapter" data-level="3.4.2" data-path="fundamentals-of-r.html"><a href="fundamentals-of-r.html#convert"><i class="fa fa-check"></i><b>3.4.2</b> Conversions between object types</a></li>
+<li class="chapter" data-level="3.4.3" data-path="fundamentals-of-r.html"><a href="fundamentals-of-r.html#matrix"><i class="fa fa-check"></i><b>3.4.3</b> Matrices</a></li>
+<li class="chapter" data-level="3.4.4" data-path="fundamentals-of-r.html"><a href="fundamentals-of-r.html#lists"><i class="fa fa-check"></i><b>3.4.4</b> Lists</a></li>
+<li class="chapter" data-level="3.4.5" data-path="fundamentals-of-r.html"><a href="fundamentals-of-r.html#dataframes"><i class="fa fa-check"></i><b>3.4.5</b> Data frames</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="fundamentals-of-r.html"><a href="fundamentals-of-r.html#save"><i class="fa fa-check"></i><b>3.5</b> Saving outputs</a></li>
+<li class="chapter" data-level="3.6" data-path="fundamentals-of-r.html"><a href="fundamentals-of-r.html#reading-in-data"><i class="fa fa-check"></i><b>3.6</b> Reading in data</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="programming-in-r.html"><a href="programming-in-r.html"><i class="fa fa-check"></i><b>4</b> Programming in R</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="programming-in-r.html"><a href="programming-in-r.html#loops"><i class="fa fa-check"></i><b>4.1</b> Loops</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="programming-in-r.html"><a href="programming-in-r.html#for-loops"><i class="fa fa-check"></i><b>4.1.1</b> <code>for</code> loops</a></li>
+<li class="chapter" data-level="4.1.2" data-path="programming-in-r.html"><a href="programming-in-r.html#while-loops"><i class="fa fa-check"></i><b>4.1.2</b> <code>while</code> loops</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="programming-in-r.html"><a href="programming-in-r.html#conditional-statements"><i class="fa fa-check"></i><b>4.2</b> Conditional statements</a></li>
+<li class="chapter" data-level="4.3" data-path="programming-in-r.html"><a href="programming-in-r.html#user-defined-functions"><i class="fa fa-check"></i><b>4.3</b> User defined functions</a></li>
+<li class="chapter" data-level="4.4" data-path="programming-in-r.html"><a href="programming-in-r.html#using-apply-functions"><i class="fa fa-check"></i><b>4.4</b> Using <code>apply()</code> functions</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="programming-in-r.html"><a href="programming-in-r.html#apply"><i class="fa fa-check"></i><b>4.4.1</b> <code>apply()</code></a></li>
+<li class="chapter" data-level="4.4.2" data-path="programming-in-r.html"><a href="programming-in-r.html#lapply-and-sapply"><i class="fa fa-check"></i><b>4.4.2</b> <code>lapply()</code> and <code>sapply()</code></a></li>
+<li class="chapter" data-level="4.4.3" data-path="programming-in-r.html"><a href="programming-in-r.html#tapply"><i class="fa fa-check"></i><b>4.4.3</b> <code>tapply()</code></a></li>
+</ul></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introduction to R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="getting-started-in-r" class="section level1 hasAnchor" number="2">
+<h1><span class="header-section-number">2</span> Getting Started in R<a href="getting-started-in-r.html#getting-started-in-r" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>R is an <strong>object-orientated</strong> programming language. This means that you create objects, and give them names. You can then <strong>do things</strong> to those objects: you can perform calculations, statistical tests, make tables or draw plots. Objects can be single numbers, characters, vectors of numbers, matrices, multi-dimensional arrays, lists containing different objects and so on.</p>
+<p>Whilst R provides its own development environment, we will use a fantastic IDE<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> provided by RStudio. This is free to download, provides some neat features, and crucially, looks the same on all operating systems!</p>
+<div id="rstudio" class="section level2 hasAnchor" number="2.1">
+<h2><span class="header-section-number">2.1</span> RStudio<a href="getting-started-in-r.html#rstudio" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:rstudio"></span>
+<img src="images/rstudio.png" alt="RStudio window" width="60%" />
+<p class="caption">
+Figure 2.1: RStudio window
+</p>
+</div>
+<p>The RStudio window should look something like Figure <a href="getting-started-in-r.html#fig:rstudio">2.1</a>. It consists of:</p>
+<ul>
+<li><strong>Script pane</strong> (top-left): this is essentially RStudio’s built-in text editor. It has all the usual features one would expect: syntax highlighting, automatic indentation, bracket matching, line highlighting and numbering and so on. You can open any type of text file in here, not just R scripts. (You might have to go to <em>File &gt; New File &gt; R Script</em> to open a new R script if you don’t have one already open.)</li>
+<li><strong>Console pane</strong> (bottom-left): This is where you run R commands and view outputs.</li>
+<li><strong>Workspace/history pane</strong> (top-right): this shows a list of all of the objects and variables that you create during a session or a history of all of the commands that have been sent to the command window during the session.</li>
+<li><strong>Plot/help pane</strong> (bottom-right): this shows any plots that you create or any help files that you access.</li>
+</ul>
+<p>You can alter the size of the various panes by clicking and dragging the grey bar in between each window to suit your needs. You can also change their arrangement by going to <em>Tools &gt; Global Options</em>, and then selecting the <em>Pane Layout</em> option.</p>
+</div>
+<div id="cheat-sheets" class="section level2 hasAnchor" number="2.2">
+<h2><span class="header-section-number">2.2</span> Cheat Sheets<a href="getting-started-in-r.html#cheat-sheets" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The helpful folks at RStudio also produce a series of excellent Cheat Sheets, available <a href="https://www.rstudio.com/resources/cheatsheets/">here</a>. Please note, these are updated semi-regularly as new packages are added or existing packages updated. Note also that these cheat sheets focus on the use of RStudio, and a small number of subset of packages that are developed by RStudio (e.g. <code>tidyverse</code>, <code>shiny</code> and <code>rmarkdown</code>). For example, a nice Cheat Sheet for RStudio itself can be found <a href="https://www.rstudio.com/wp-content/uploads/2016/01/rstudio-IDE-cheatsheet.pdf">here</a>.</p>
+<p>I will provide links to some of these cheat sheets as we progress through the practicals, but please note that they might change over time, and older versions exist online. They are a brilliant resource where applicable.</p>
+</div>
+<div id="setup" class="section level2 hasAnchor" number="2.3">
+<h2><span class="header-section-number">2.3</span> Setting up an R session<a href="getting-started-in-r.html#setup" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>It is worthwhile getting into a workflow when using R. General guidelines I would suggest are:</p>
+<ul>
+<li>Use a different folder for each new project / assignment. This helps to keep all data / script / output files in one self-contained place.</li>
+<li>Set the <strong>Working Directory</strong> for R at the outset of each session to be the folder you’ve specified for the particular assignment you’re working on. This can be done in RStudio by going to <em>Session &gt; Set Working Directory &gt; Choose Directory</em>. This sets the default search path to this folder.</li>
+<li>Always use <a href="getting-started-in-r.html#script"><strong>script files</strong></a> to keep a record of your work, so that it can be reproduced at a later date.</li>
+<li>[<strong>Additional</strong>: I also initialise a <a href="https://git-scm.com/">Git</a> repository in each project folder (unless the project is very small). This allows me to use version control to aid the development of the code as well as to allow me to roll back to earlier versions of the code if necessary. Linking to an online repository such as <a href="https://github.com/">GitHub</a> or <a href="https://bitbucket.org/product">BitBucket</a> also provides an cloud-based backup service, as well as an ability to share code and collaborate. We are aiming to run a Git workshop at some point in the future, so keep your ears to the ground if you’re interested…]</li>
+</ul>
+<p>We will explore the <strong>console</strong> and <strong>script</strong> panes below, dealing with the other panes as and when they arise.</p>
+<div id="console-pane" class="section level3 hasAnchor" number="2.3.1">
+<h3><span class="header-section-number">2.3.1</span> Console Pane<a href="getting-started-in-r.html#console-pane" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The console pane provides a direct interface with R, and looks similar to command line R (in Linux and Macs), and the console pane in R for Windows. You enter commands via the standard prompt <code>&gt;</code>. For example, type the following into the console pane:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="getting-started-in-r.html#cb3-1" aria-hidden="true"></a><span class="dv">10</span> <span class="op">+</span><span class="st"> </span><span class="dv">5</span> <span class="op">*</span><span class="st"> </span><span class="dv">3</span></span></code></pre></div>
+<pre><code>## [1] 25</code></pre>
+<p>You can see here that R has returned a value of 25, illustrating one of R’s key features: that it can be used as an overgrown calculator, simply by entering commands into the prompt. R supports lots of basic mathematical operators, such as those found in Table <a href="getting-started-in-r.html#tab:mathop">2.1</a>.</p>
+<table>
+<caption><span id="tab:mathop">Table 2.1: </span> Basic mathematical operators</caption>
+<thead>
+<tr class="header">
+<th align="center">Symbol</th>
+<th align="center">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><code>+</code></td>
+<td align="center">addition</td>
+</tr>
+<tr class="even">
+<td align="center"><code>-</code></td>
+<td align="center">subtraction</td>
+</tr>
+<tr class="odd">
+<td align="center"><code>*</code></td>
+<td align="center">multiplication</td>
+</tr>
+<tr class="even">
+<td align="center"><code>/</code></td>
+<td align="center">division</td>
+</tr>
+<tr class="odd">
+<td align="center"><code>^</code></td>
+<td align="center">to the power</td>
+</tr>
+<tr class="even">
+<td align="center"><code>%%</code></td>
+<td align="center">the remainder of a division (modulo)</td>
+</tr>
+<tr class="odd">
+<td align="center"><code>%/%</code></td>
+<td align="center">the integer part</td>
+</tr>
+</tbody>
+</table>
+<p>Meanwhile, Table <a href="getting-started-in-r.html#tab:mathfunc">2.2</a> has some other ones you might need. (These are functions: just replace <code>x</code> with a number.)</p>
+<table>
+<caption><span id="tab:mathfunc">Table 2.2: </span> Other useful mathematical functions</caption>
+<colgroup>
+<col width="26%" />
+<col width="73%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Function</th>
+<th align="center">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><code>log(x)</code></td>
+<td align="center"><span class="math inline">\(\log_e(x)\)</span> (or <span class="math inline">\(\ln(x)\)</span>)</td>
+</tr>
+<tr class="even">
+<td align="center"><code>exp(x)</code></td>
+<td align="center"><span class="math inline">\(e^x\)</span></td>
+</tr>
+<tr class="odd">
+<td align="center"><code>log(x, n)</code></td>
+<td align="center"><span class="math inline">\(\log_n(x)\)</span></td>
+</tr>
+<tr class="even">
+<td align="center"><code>log10(x)</code></td>
+<td align="center"><span class="math inline">\(\log_{10}(x)\)</span></td>
+</tr>
+<tr class="odd">
+<td align="center"><code>sqrt(x)</code></td>
+<td align="center"><span class="math inline">\(\sqrt{x}\)</span></td>
+</tr>
+<tr class="even">
+<td align="center"><code>factorial(x)</code></td>
+<td align="center"><span class="math inline">\(x!\)</span></td>
+</tr>
+<tr class="odd">
+<td align="center"><code>choose(n, x)</code></td>
+<td align="center">binomial coefficients: <span class="math inline">\(\frac{n!}{x!(n - x)!}\)</span></td>
+</tr>
+<tr class="even">
+<td align="center"><code>gamma(x)</code></td>
+<td align="center"><span class="math inline">\(\Gamma\left(x\right)\)</span> for continuous <span class="math inline">\(x\)</span> or <span class="math inline">\((x-1)!\)</span> for integer <span class="math inline">\(x\)</span></td>
+</tr>
+<tr class="odd">
+<td align="center"><code>lgamma(x)</code></td>
+<td align="center">natural log of <span class="math inline">\(\Gamma\left(x\right)\)</span></td>
+</tr>
+<tr class="even">
+<td align="center"><code>floor(x)</code></td>
+<td align="center">greatest integer <span class="math inline">\(&lt; x\)</span></td>
+</tr>
+<tr class="odd">
+<td align="center"><code>ceiling(x)</code></td>
+<td align="center">smallest integer <span class="math inline">\(&gt; x\)</span></td>
+</tr>
+<tr class="even">
+<td align="center"><code>trunc(x)</code></td>
+<td align="center">closest integer to <span class="math inline">\(x\)</span> between <span class="math inline">\(x\)</span> and 0 e.g <code>trunc(1.5) = 1</code>, <code>trunc(-1.5) = -1</code> <code>trunc</code> is like <code>floor</code> for positive values and like <code>ceiling</code> for negative values</td>
+</tr>
+<tr class="odd">
+<td align="center"><code>round(x, digits = 0)</code></td>
+<td align="center">round the value of <span class="math inline">\(x\)</span> to an integer</td>
+</tr>
+<tr class="even">
+<td align="center"><code>signif(x, digits = 6)</code></td>
+<td align="center">round <span class="math inline">\(x\)</span> to 6 significant figures</td>
+</tr>
+<tr class="odd">
+<td align="center"><code>cos(x)</code></td>
+<td align="center">cosine of <span class="math inline">\(x\)</span> in radians</td>
+</tr>
+<tr class="even">
+<td align="center"><code>sin(x)</code></td>
+<td align="center">sine of <span class="math inline">\(x\)</span> in radians</td>
+</tr>
+<tr class="odd">
+<td align="center"><code>tan(x)</code></td>
+<td align="center">tangent of <span class="math inline">\(x\)</span> in radians</td>
+</tr>
+<tr class="even">
+<td align="center"><code>acos(x)</code>, <code>asin(x)</code>, <code>atan(x)</code></td>
+<td align="center">inverse trigonometric transformations of real or complex numbers</td>
+</tr>
+<tr class="odd">
+<td align="center"><code>acosh(x)</code>, <code>asinh(x)</code>, <code>atanh(x)</code></td>
+<td align="center">inverse hyperbolic trigonometric transformations on real or complex numbers</td>
+</tr>
+<tr class="even">
+<td align="center"><code>abs(x)</code></td>
+<td align="center">the absolute value of <span class="math inline">\(x\)</span>, ignoring the minus sign if there is one</td>
+</tr>
+</tbody>
+</table>
+<p>R retains a <strong>history</strong> of all the commands you have used in a particular session. You can scroll back through these using the up (↑) and down (↓) arrows whilst in the console pane. (You can even save the history—though we will discuss a better option in the next section.)</p>
+<p>One important thing to note is that unlike a language like C, R does not require the semicolon (<code>;</code>) symbol to denote the end of each command. A carriage return is sufficient. A semicolon can be used to allow multiple commands to be written on the same line if required. For example,</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="getting-started-in-r.html#cb5-1" aria-hidden="true"></a><span class="dv">10</span> <span class="op">+</span><span class="st"> </span><span class="dv">5</span> <span class="op">*</span><span class="st"> </span><span class="dv">3</span>; <span class="kw">sin</span>(<span class="dv">10</span>)</span></code></pre></div>
+<pre><code>## [1] 25
+## [1] -0.5440211</code></pre>
+<p>is equivalent to</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="getting-started-in-r.html#cb7-1" aria-hidden="true"></a><span class="dv">10</span> <span class="op">+</span><span class="st"> </span><span class="dv">5</span> <span class="op">*</span><span class="st"> </span><span class="dv">3</span></span>
+<span id="cb7-2"><a href="getting-started-in-r.html#cb7-2" aria-hidden="true"></a><span class="kw">sin</span>(<span class="dv">10</span>)</span></code></pre></div>
+<pre><code>## [1] 25
+## [1] -0.5440211</code></pre>
+<p>One thing to note is that if a command is incomplete, then R will change the <code>&gt;</code> prompt for a <code>+</code> prompt. For example, typing <code>10 + 5 *</code> into the console pane will result in the <code>+</code> prompt appearing, telling you that the previous line is incomplete i.e.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="getting-started-in-r.html#cb9-1" aria-hidden="true"></a><span class="op">&gt;</span><span class="st"> </span><span class="dv">10</span> <span class="op">+</span><span class="st"> </span><span class="dv">5</span> <span class="op">*</span></span>
+<span id="cb9-2"><a href="getting-started-in-r.html#cb9-2" aria-hidden="true"></a><span class="op">+</span><span class="st"> </span><span class="dv">3</span></span></code></pre></div>
+<pre><code>## [1] 25</code></pre>
+<p>You must either complete the line or hit the <code>Esc</code> key to cancel the command.</p>
+</div>
+<div id="script" class="section level3 hasAnchor" number="2.3.2">
+<h3><span class="header-section-number">2.3.2</span> Script pane and R scripts<a href="getting-started-in-r.html#script" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The console window is the engine room of R, and one can interact directly with it. One key advantage to R is that it <em>records</em> all of the commands that you enter into the console (known as the command <em>history</em>). It is possible to save the command history, or run back through it using the arrow keys. However, a much better approach is to use the <strong>script pane</strong> to write an R script that contains all the commands necessary for a particular project. In fact, one might argue that this is probably one of the most important features of R relative to a point-and-click statistical package such as SPSS.</p>
+<p>Put simply, <strong><em>R scripts are just text files that contain commands to run in R</em></strong>. They are <strong>vitally important</strong> for the following reasons:</p>
+<ul>
+<li>They keep a systematic record of your analysis, which enables you to <strong>reproduce</strong> your work at a later date, or can be passed to collaborators or other users to enable them to replicate your work.</li>
+<li>This record means that you do not have to rely on your memory to figure out <strong>what</strong> you did.</li>
+<li>R scripts allow you to <strong>comment</strong> your code, which means that you also won’t forget <strong>why</strong> you did it.</li>
+<li>In more advanced settings, R scripts can also be run in <strong>batch</strong> mode, which means that you can ping a script off to run remotely on a server somewhere without having to be sat in front of a computer manually entering commands.</li>
+<li>Although programs like SPSS allow <strong>outputs</strong> to be saved, R scripts contain <strong>inputs</strong>, which are much more useful, since it is easier to generate the outputs from the inputs than it is to reconstruct the likely inputs from the outputs.</li>
+<li>In fact, R scripts can be combined with a markup language called ‘markdown’ to generate fully reproducible documents, containing both inputs and outputs. It does this using the fantastic <a href="https://yihui.name/knitr/"><code>knitr</code></a> and <a href="https://rmarkdown.rstudio.com/"><code>rmarkdown</code></a> packages. (In fact this workshop was written using <code>rmarkdown</code> and a package called <a href="https://bookdown.org/yihui/bookdown/"><code>bookdown</code></a>.)</li>
+</ul>
+<p>Some comments:</p>
+<ul>
+<li>RStudio comes with its own text editor, but if you are not using RStudio, then there are plenty of others available.</li>
+<li>R is case-sensitive. If something doesn’t work, it’s often because you have failed to capitalise, or capitalised where you shouldn’t have. <strong>NEVER, EVER, EVER</strong> use Word to edit your R scripts! Word often tries to correct your grammar and is an absolute nightmare to work with when writing code. If you don’t like RStudio’s editor, then lots of lightweight and free text editors exist that you can use. By all means use Word for writing up the work (although we will see even better ways to do this in a later <strong>Literate Programming</strong> workshop), but <strong><em>please</em></strong>, <strong><em>NEVER</em></strong> use it for writing code.</li>
+</ul>
+<p>In RStudio, you can open a new script in R using: <em>File &gt; New File &gt; R Script</em>.</p>
+<p>Type the following into the <strong>script file</strong>:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="getting-started-in-r.html#cb11-1" aria-hidden="true"></a><span class="co">## calculate the hypotenuse from a right-angled triangle</span></span>
+<span id="cb11-2"><a href="getting-started-in-r.html#cb11-2" aria-hidden="true"></a><span class="co">## with the two other sides equal to 3 and 4</span></span>
+<span id="cb11-3"><a href="getting-started-in-r.html#cb11-3" aria-hidden="true"></a><span class="kw">sqrt</span>(<span class="dv">3</span><span class="op">^</span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span><span class="dv">4</span><span class="op">^</span><span class="dv">2</span>)</span></code></pre></div>
+<p>Notice that nothing has happened. All you’ve done is write some commands into a text window. However, if you highlight these lines and then hit the <code>Run</code> button in the top right-hand corner of the script pane (or, in Windows certainly, press <code>Ctrl-Enter</code>), then RStudio runs these lines in the console pane. (Alternatively, you can manually copy-and-paste these lines into the console window.) This should return:</p>
+<pre><code>## [1] 5</code></pre>
+<blockquote>
+<p><strong>Note</strong>: notice that the <code>#</code> symbol here denotes a <strong>comment</strong>, such that any text after the <code>#</code> is ignored (up to the end of the current line). I have used a double hash here <code>##</code>, though this is simply because I’ve written this practical using <a href="http://rmarkdown.rstudio.com/">RMarkdown</a> (more on this later), and it seems to typeset better. This is not absolutely necessary though, since anything after the first <code>#</code> is ignored.</p>
+</blockquote>
+<blockquote>
+<p>Comments are <strong><em>vital</em></strong> in code to ensure reproducibility and readability. You should ensure that all code is commented, so that both you and anyone else who wants to use your code is able to decipher it. Even if no one else is going to look at your code, it is still worthwhile to comment it. What seems obvious to you as you write a piece of code, often becomes confusing when you return to it in 6 months time and can’t remember what you did or why you did it…</p>
+</blockquote>
+<p>It is conventional to save R script files using the suffix ‘.R’, though remember that they are simply <strong>text files</strong>, and can be viewed in any text editor. Make sure you have set up a folder to store the code for this practical in, and have changed the <strong>working directory</strong> to this folder (see the <a href="getting-started-in-r.html#setup">setup</a> section), and then save this script file as something like “IntroToR.R”.</p>
+<blockquote>
+<p>Make sure you save your script file regularly to prevent data loss!</p>
+</blockquote>
+<div id="legible" class="section level4 hasAnchor" number="2.3.2.1">
+<h4><span class="header-section-number">2.3.2.1</span> Notes on legibility<a href="getting-started-in-r.html#legible" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p><strong>NOTE</strong>: that I use spaces within the code to make it clearer. R does not require this, but again I think it is good practice to think about how to make you code legible. Different coders have different preferences, but personally I prefer <code>plot(Worm.density ~ Vegetation, data = worms)</code> over <code>plot(Worm.density~Vegetation,data=worms)</code>. As <a href="http://style.tidyverse.org/">Hadley Wickham</a> says: “Good coding style is like correct punctuation: you can manage without it, butitsuremakesthingseasiertoread.”</p>
+<p>Note that different coders prefer different styles—there is no universal agreement. However, it’s worth getting into the habit of writing your code neatly and with a thought towards legibility. A guide that is similar to my own is the <code>tidyverse</code> guide <a href="http://style.tidyverse.org/">here</a>. (Note that unlike Python, R does not require specific indentation. Instead it uses curly brackets to group lines of code together. However, indentation is still key to good legibility. An example of a tidy R script is given e.g. <a href="programming-in-r.html#tidyscript">here</a>.)</p>
+<p>I tend to use script files to keep a record of all commands that need to be reproduced, but I often enter commands directly into the console window when I’m testing or visualising things. Try to keep redundant code out of your script files. In this workshop I expect you to use script files from the outset! Make sure the code is legible and commented.</p>
+</div>
+</div>
+</div>
+<div id="packages" class="section level2 hasAnchor" number="2.4">
+<h2><span class="header-section-number">2.4</span> R packages<a href="getting-started-in-r.html#packages" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>R has hundreds of add-on <strong>packages</strong> that provide functionality for a wide range of techniques. These repositories are growing all of the time; some packages become redundant and are removed, others are updated, some are superceded or incorporated into others, and completely new ones appear regularly. A key part of becoming proficient with R is learning how to install and update packages.</p>
+<blockquote>
+<p><strong>Note</strong>: R packages can be thought of in a similar way to Matlab toolboxes or Python libraries.</p>
+</blockquote>
+<p>The principal R package repository can be found on <a href="https://cran.r-project.org/">CRAN</a> (the Comprehensive R Archive Network). Another popular repository, predominantly aimed at bioinformatics packages, is <a href="https://www.bioconductor.org/">Bioconductor</a>, though installation of packages through Bioconductor is more difficult than through CRAN, so we will focus on the latter only here.</p>
+<p>Some packages are included as part of R’s base package. To load a package, you can use the <code>library()</code> function, passing the name of the required package (quotes are not necessary for this function). For example, to load the <code>tidyr</code> package, type:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="getting-started-in-r.html#cb13-1" aria-hidden="true"></a><span class="kw">library</span>(tidyr)</span></code></pre></div>
+<p>If this doesn’t return any error, then the package is loaded and you are now able to use any function in <code>tidyr</code> in your R code. R packages must contain help files and documentation in order to be included on CRAN. For example, the documentation for the <code>tidyr</code> package can be found <a href="https://cran.r-project.org/web/packages/tidyr/">here</a>, through the <em>Reference Manual</em> link, plus some vignettes through the <em>Vignettes</em> link.</p>
+<p>If it’s not installed, then you will need to install it:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="getting-started-in-r.html#cb14-1" aria-hidden="true"></a><span class="kw">install.packages</span>(<span class="st">&quot;tidyr&quot;</span>)</span></code></pre></div>
+<blockquote>
+<p>This will ask that you select a repository—choosing one close-to-home is a good idea. It might also ask you to set up a local R library in your user directory. This is a good idea, so I would just accept the default if it asks.</p>
+</blockquote>
+<p>If it installs without any errors, then you can load the library using <code>library(tidyr)</code> as above.</p>
+<blockquote>
+<p><strong>Note</strong>: You only have to install a package <strong>once</strong> (unless you update R). You have to <strong>load</strong> the library once during each session. I prefer to enter all my calls to <code>library()</code> at the top of my script file, so I can quickly see which packages are required for my script to run.</p>
+</blockquote>
+<blockquote>
+<p><strong>Note</strong>: you can also install a package from a local ZIP file, simply download the ‘Package Source’ from CRAN, and then type:</p>
+</blockquote>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="getting-started-in-r.html#cb15-1" aria-hidden="true"></a><span class="kw">install.packages</span>(<span class="st">&quot;PATH/TO/PACKAGENAME&quot;</span>, <span class="dt">repos =</span> <span class="ot">NULL</span>)</span></code></pre></div>
+<p>where <code>PATH/TO/PACKAGENAME</code> is the path to the package source file (be careful to get the path in the correct format—Windows users might have to use <code>\</code> instead of <code>/</code>). The <code>repos = NULL</code> argument tells R to look for the file locally, and not online.</p>
+<div id="installing-archived-versions-of-a-package" class="section level3 hasAnchor" number="2.4.1">
+<h3><span class="header-section-number">2.4.1</span> Installing archived versions of a package<a href="getting-started-in-r.html#installing-archived-versions-of-a-package" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Sometimes R packages are not updated as quickly as R itself, and occasionally you might need to install an older version of a package. A really useful package to install is called <a href="https://cran.r-project.org/web/packages/devtools/index.html"><code>devtools</code></a>. This provides functions to install R packages directly from CRAN archives, which can be found by going to <a href="https://cran.r-project.org/">https://cran.r-project.org/</a>, and clicking on the <em>Packages</em> link followed by the <em>Archived</em> link. This provides a list of older versions of a package, which can be installed using the <code>install_version()</code> function in <code>devtools</code>.</p>
+<p>For example, I recently had an issue with a package <a href="https://cran.r-project.org/web/packages/cowplot/"><code>cowplot</code></a> not existing for my version of R, returning the following error message:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="getting-started-in-r.html#cb16-1" aria-hidden="true"></a><span class="kw">install.packages</span>(<span class="st">&quot;cowplot&quot;</span>)</span></code></pre></div>
+<pre><code>Installing package into ‘/home/tj/R/x86_64-pc-linux-gnu-library/3.2’
+(as ‘lib’ is unspecified)
+Warning in install.packages :
+  package ‘cowplot’ is not available (for R version 3.2.3)</code></pre>
+<p>I solved this by finding an older version of the package on CRAN (by clicking on <em>Packages</em> then <em>Archived</em>):</p>
+<p><img src="images/cowplot.png" width="60%" style="display: block; margin: auto;" /></p>
+<p>I noted the version number, and then used a function from <code>devtools</code> called <code>install_version()</code> as follows:</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="getting-started-in-r.html#cb18-1" aria-hidden="true"></a><span class="kw">library</span>(devtools)</span>
+<span id="cb18-2"><a href="getting-started-in-r.html#cb18-2" aria-hidden="true"></a><span class="kw">install_version</span>(<span class="st">&quot;cowplot&quot;</span>, <span class="dt">version =</span> <span class="st">&quot;0.6.3&quot;</span>, <span class="dt">repos =</span> <span class="st">&quot;https://cran.r-project.org/&quot;</span>)</span></code></pre></div>
+</div>
+<div id="development-packages" class="section level3 hasAnchor" number="2.4.2">
+<h3><span class="header-section-number">2.4.2</span> Development packages<a href="getting-started-in-r.html#development-packages" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>In order to upload a package to CRAN, the package must pass a series of tests. The versions you find on CRAN are the <strong>stable</strong> versions (i.e. they have passed these tests and work well with the current version of R). However, developers often keep the latest <strong>development</strong> version of their package on an online repository such as <a href="https://github.com/">GitHub</a>. Development packages usually contain the most up-to-date functions, but are likely to contain more bugs—use them at your own risk! In addition, some packages simply aren’t available on CRAN—there is no requirement to upload in this way.</p>
+<p>For example, the <code>gganimate</code> package is only available on GitHub, the source code can be found <a href="https://github.com/dgrtwo/gganimate">here</a>. It can be installed using <code>devtools</code> as follows (<strong>don’t run the code now</strong>):</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="getting-started-in-r.html#cb19-1" aria-hidden="true"></a><span class="kw">install_github</span>(<span class="st">&quot;dgrtwo/gganimate&quot;</span>)</span></code></pre></div>
+<p>Note the syntax <code>DEVELOPER/PACKAGENAME</code>—this can be found from the address of the repository e.g. <a href="https://github.com/dgrtwo/gganimate">https://github.com/dgrtwo/gganimate</a>.</p>
+
+</div>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="1">
+<li id="fn1"><p>Integrated Desktop Environment<a href="getting-started-in-r.html#fnref1" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="whatIsR.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="fundamentals-of-r.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": null,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
